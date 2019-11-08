@@ -1,15 +1,140 @@
 <!doctype html>
 <html>
-
+    <h1>简化了一些功能，也许不是很懂怎样去实现，但是不影响学习，把他当作成一个挑战，你应该爱上挑战</h1></hr>
     ("|     1.Input record                                 |\n");//输入学生数据</br>
     ("|     2.Caculate total and average score of every course  |\n");//计算每门成绩的总分和平均分</br>
-    ("|     3.Choose descending or ascending order        |\n");//可以按照升降序显示数据</br>
+    ("|     3.Choose descending or ascending order        |\n");//可以按照升降序显示数据,其中自己选择升序还是降序后显示对应的数据</br>
     ("|     4.Sort in ascending order by number           |\n");//按照学号排序</br>
-    ("|     5.Sort in dictionary order by number          |\n");//根据学生姓名的第一位ASCLL码值进行排序</br>
-    ("|     6.Search by number                            |\n");//按照学号查找</br>
-    ("|     7.Search by name                              |\n");//按照姓名排序</br>
-    ("|     8.Statistic analysis                          |\n");//数据分析，可自定义数据分析格式</br>
-    ("|     9.List record                                 |\n");//列表显示所有学生信息</br>
+    ("|     5.Search by number                            |\n");//按照学号查找</br>
+    ("|     6.List record                                 |\n");//列表显示所有学生信息</br>
     ("|     0.Exit                                        |\n");//退出</br>
+  
+
+C文件</br>
+------------------------------</br>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+
+#define N 30
+#define M 3
+struct student
+{
+    char num[10];//学号
+    char name[10];//学生姓名
+    int score[M];//学生考试成绩   
+} stu1[N];
     
+int main()
+{
+    int exit = 1,choice;
+    while(exit)
+    {
+        choice = Menu();
+        switch(choice)
+        {
+            //可以根据功能的选择指定对应的case
+        }
+    }
+    system("pause");
+    return 0;
+}
+int Menu()
+{
+    int order;
+    system("cls");
+    printf("\t\t╭═════════■□■□═══╮\n");
+    printf("\t\t│学生成绩管理系统         \n");
+    printf("\t\t╰═══■□■□══════════╯\n");
+    printf("\n");
+    printf(" ----------------------Menu-------------------------------\n");
+    printf("|     1.Input record                                 |\n");
+    printf("|     2.Caculate total and average score of every course  |\n");
+    printf("|     3.Choose descending or ascending order        |\n");
+    printf("|     4.Sort in ascending order by number           |\n");
+    printf("|     5.Search by number                            |\n");
+    printf("|     6.List record                                 |\n");
+    printf("|     0.Exit                                        |\n");
+    printf(" ---------------------------------------------------------\n");
+    printf("请输入你的选择:");
+    while(scanf("%d",&order)<0||order>9)
+    {
+        printf("你的选择菜单有误，请重新选择\n");
+        system("pause");
+        fflush(stdin);//清空缓冲区
+    }
+    return order;
+}    
+------------------------------</br>
+
+java和C#的朋友们可以单独建一个文件夹来放置java文件或者是cs文件</br>
+java类---放置了你要操作的一个学生属性：</br>
+------------------------------</br>
+
+public class StudentBean {
+
+    private String name;
+    private String number;
+    private int[] score;
+
+    public StudentBean(){}
+
+    public StudentBean(String name,String number,int[] score){
+        this.name = name;
+        this.number = number;
+        this.score = score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public int[] getScore() {
+        return score;
+    }
+
+    public void setScore(int[] score) {
+        this.score = score;
+    }
+}
+
+------------------------------</br>
+
+C#类:</br>
+------------------------------</br>
+ class Bean
+{
+    private string name;
+    private string number;
+    private int[] score;
+
+    public Bean() {  }
+
+    public Bean(string name, string number, int[] score)
+    {
+        this.name = name;
+        this.number = number;
+        this.score = score;
+    }
+
+    public string Name { get => name; set => name = value; }
+    public string Number { get => number; set => number = value; }
+    public int[] Score { get => score; set => score = value; }
+}
+------------------------------</br>
+
+
 </html>
