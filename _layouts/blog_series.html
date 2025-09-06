@@ -1,0 +1,293 @@
+---
+layout: default
+---
+
+<main class="main-content fadeInDown delay_075s">
+  <header class="series-header">
+    <h1>{{ page.title | default: page.series_name | capitalize }} 系列</h1>
+    {% if page.description %}
+      <p class="series-description">{{ page.description }}</p>
+    {% endif %}
+  </header>
+  
+  <div class="series-content">
+    {{ content }}
+    
+    <!-- 动态文章列表容器 -->
+    <div class="articles-section">
+      <h2>系列文章</h2>
+      <div class="articles-container" data-dynamic-series="{{ page.series_name | default: page.title | downcase }}">
+        <div class="dynamic-loading">
+          <div class="loading-spinner"></div>
+          <span>正在加载文章列表...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <nav class="series-navigation">
+    <p>
+      <a href="{{ site.baseurl }}/blog/">← 返回博客</a> | 
+      <a href="{{ site.baseurl }}/">← 返回首页</a>
+    </p>
+  </nav>
+  
+  <!-- 动态加载脚本 -->
+  <script src="{{ site.baseurl }}/assets/js/dynamic-loader.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 初始化动态加载器
+      const loader = new DynamicBlogLoader({
+        baseUrl: '{{ site.baseurl }}',
+        blogPath: '/blog/'
+      });
+      loader.init();
+      
+      // 获取当前系列名称
+      const seriesName = getSeriesName();
+      
+      // 加载系列文章
+      loadSeriesArticles(seriesName, loader);
+      
+      // 设置自动刷新
+      setupAutoRefresh(seriesName, loader);
+    });
+    
+    function getSeriesName() {
+      // 从URL路径获取系列名称
+      const pathParts = window.location.pathname.split('/').filter(part => part);
+      return pathParts[1] || '{{ page.series_name | default: page.title | downcase }}';
+    }
+    
+    async function loadSeriesArticles(seriesName, loader) {
+      const container = document.querySelector('[data-dynamic-series]');
+      if (!container) return;
+      
+      try {
+        // 获取博客数据
+        const blogData = await loader.fetchBlogData();
+        const series = blogData.find(s => s.name === seriesName);
+        
+        if (!series || !series.files || series.files.length === 0) {
+          container.innerHTML = `
+            <div class="no-articles">
+              <p>该系列暂无文章</p>
+              <p class="help-text">在 <code>/blog/${seriesName}/</code> 目录下添加 Markdown 或 HTML 文件即可自动显示</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // 渲染文章列表
+        renderArticlesList(container, series);
+        
+      } catch (error) {
+        console.error('Failed to load series articles:', error);
+        container.innerHTML = `
+          <div class="error-message">
+            <p>⚠️ 加载文章列表失败</p>
+            <button onclick="location.reload()" class="retry-button">重试</button>
+          </div>
+        `;
+      }
+    }
+    
+    function renderArticlesList(container, series) {
+      const articlesHtml = series.files.map(file => {
+        const fileName = file.name.replace(/\.(md|html)$/, '');
+        const displayName = formatFileName(fileName);
+        const fileType = file.type || (file.name.endsWith('.md') ? 'markdown' : 'html');
+        const fileIcon = fileType === 'markdown' ? '📝' : '🌐';
+        
+        return `
+          <article class="article-item">
+            <div class="article-icon">${fileIcon}</div>
+            <div class="article-content">
+              <h3 class="article-title">
+                <a href="${file.url}">${displayName}</a>
+              </h3>
+              <div class="article-meta">
+                <span class="file-type-badge file-type-${fileType}">${fileType.toUpperCase()}</span>
+                <span class="file-name">${file.name}</span>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+      
+      container.innerHTML = `
+        <div class="articles-list">
+          ${articlesHtml}
+        </div>
+        <div class="articles-summary">
+          <p>共 <strong>${series.files.length}</strong> 篇文章</p>
+        </div>
+      `;
+    }
+    
+    function formatFileName(fileName) {
+      return fileName
+        .replace(/-/g, ' ')
+        .replace(/_/g, ' ')
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    }
+    
+    function setupAutoRefresh(seriesName, loader) {
+      // 每30秒检查一次内容更新
+      setInterval(async () => {
+        try {
+          loader.clearCache();
+          await loadSeriesArticles(seriesName, loader);
+        } catch (error) {
+          console.log('Auto refresh failed:', error);
+        }
+      }, 30000);
+    }
+  </script>
+  
+  <style>
+    .series-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .series-description {
+      font-size: 1.1em;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .articles-section {
+      margin: 3rem 0;
+    }
+    
+    .articles-section h2 {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .article-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .article-item:hover {
+      border-color: #ddd;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .article-icon {
+      font-size: 1.5em;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .article-content {
+      flex: 1;
+    }
+    
+    .article-title {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.2em;
+    }
+    
+    .article-title a {
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .article-title a:hover {
+      color: #2d72d9;
+      text-decoration: underline;
+    }
+    
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9em;
+      color: #888;
+    }
+    
+    .file-name {
+      font-family: monospace;
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    
+    .articles-summary {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+      color: #666;
+    }
+    
+    .no-articles, .error-message {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #666;
+    }
+    
+    .help-text {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 1rem;
+    }
+    
+    .help-text code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    
+    .retry-button {
+      background: #2d72d9;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    
+    .retry-button:hover {
+      background: #1e5bb8;
+    }
+    
+    .series-navigation {
+      margin-top: 3rem;
+      text-align: center;
+      border-top: 1px solid #eee;
+      padding-top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .article-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .article-icon {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+      
+      .article-meta {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</main>

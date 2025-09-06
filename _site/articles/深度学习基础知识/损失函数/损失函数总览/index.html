@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>损失函数总览</title>
+  <meta name="description" content="">
+  <link rel="canonical" href="http://0.0.0.0:4000/articles/深度学习基础知识/损失函数/损失函数总览/">
+  <link href="/assets/css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i%7CNoto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
+  
+  <!-- Enhanced Prism.js for comprehensive syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+  
+  <!-- MathJax for math formulas -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- Mermaid for diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      themeVariables: {
+        primaryColor: '#2d72d9',
+        primaryTextColor: '#333',
+        primaryBorderColor: '#2d72d9',
+        lineColor: '#666'
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="page" class="site">
+    <div class="inner">
+      <header class="site-header">
+        <p class="site-title"><a class="logo-text" href="/">成都犀牛</a></p>
+        <nav class="site-navigation">
+          <div class="site-navigation-wrap">
+            <ul class="menu">
+              <li class="menu-item"><a href="/">Home</a></li>
+              <li class="menu-item"><a href="/personal/">Personal</a></li>
+              <li class="menu-item"><a href="/articles/">Articles</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      
+      <main class="main-content fadeInDown delay_075s">
+        <article class="post markdown-content">
+          <header class="post-header">
+            <h1 class="post-title">损失函数总览</h1>
+            
+            
+            
+          </header>
+          <div class="post-content">
+            <ol>
+  <li><strong>均方误差（MSE, Mean Squared Error）</strong>：
+    <ul>
+      <li>公式：($\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$)</li>
+      <li>适用于回归问题，衡量预测值与真实值之间的平方差。</li>
+    </ul>
+  </li>
+  <li><strong>平均绝对误差（MAE, Mean Absolute Error）</strong>：
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>公式：($\frac{1}{n} \sum_{i=1}^{n}</td>
+              <td>y_i - \hat{y}_i</td>
+              <td>$)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>适用于回归问题，衡量预测值与真实值之间的绝对差。</li>
+    </ul>
+  </li>
+  <li><strong>Huber损失（Huber Loss）</strong>：
+    <ul>
+      <li>公式：($\frac{1}{n} \sum_{i=1}^{n} L_\ (y_i, \hat{y}_i)$)</li>
+      <li>其中 ($L_\ (y_i, \hat{y}_i) = \begin{cases} 
+\frac{1}{2} (y_i - \hat{y}_i)^2 &amp; \text{if } |y_i - \hat{y}_i| \leq \ <br />
+\ (|y_i - \hat{y}_i| - \frac{1}{2} ) &amp; \text{otherwise} 
+\end{cases}$)</li>
+      <li>结合了MSE和MAE的优点，适用于回归问题，能够对异常值有较好的鲁棒性。</li>
+    </ul>
+  </li>
+  <li><strong>Kullback-Leibler散度（KL Divergence）</strong>：
+    <ul>
+      <li>公式：($\sum_{i=1}^{n} p(x_i) \log \frac{p(x_i)}{q(x_i)}$)</li>
+      <li>适用于衡量两个概率分布之间的差异，常用于生成模型和概率模型中。</li>
+    </ul>
+  </li>
+  <li><strong>交叉熵损失（Cross-Entropy Loss）</strong>：
+    <ul>
+      <li>公式：($-\sum_{i=1}^{n} y_i \log(\hat{y}_i)$)</li>
+      <li>适用于分类问题，尤其是二分类和多分类问题，用于衡量分类模型输出概率与真实标签的差异。</li>
+    </ul>
+  </li>
+  <li><strong>对数损失（Log Loss）</strong>：
+    <ul>
+      <li>公式：($-\frac{1}{n} \sum_{i=1}^{n} \left( y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right)$)</li>
+      <li>常用于二分类问题，类似于交叉熵损失，通常用于<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>Logistic
+</pre></td></tr></tbody></table></code>回归。</li>
+    </ul>
+  </li>
+  <li><strong>对比损失（Contrastive Loss）</strong>：
+    <ul>
+      <li>适用于度量学习任务，用于衡量一对样本的相似度或不相似度。</li>
+    </ul>
+  </li>
+  <li><strong>Triplet损失（Triplet Loss）</strong>：
+    <ul>
+      <li>适用于深度度量学习，用于训练模型在样本空间中区分正负样本。</li>
+    </ul>
+  </li>
+</ol>
+
+          </div>
+          <footer class="post-footer">
+            <div class="post-navigation">
+              <a href="/articles/" class="nav-link">← 返回文章列表</a>
+              <a href="/" class="nav-link">返回首页 →</a>
+            </div>
+          </footer>
+        </article>
+      </main>
+      
+      <footer class="site-footer">
+        <div class="offsite-links">
+          &copy; Scriptor all rights reserved. Theme by [JustGoodThemes](https://www.justgoodthemes.com).
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  <!-- Enhanced Prism.js with all plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+  
+  <script src="/assets/js/plugins.js"></script>
+  <script src="/assets/js/custom.js"></script>
+  
+  <style>
+    /* Enhanced styles for markdown content */
+    .markdown-content {
+      line-height: 1.8;
+    }
+    
+    .markdown-content pre {
+      position: relative;
+      margin: 1.5em 0;
+      border-radius: 8px;
+      overflow: visible;
+    }
+    
+    .markdown-content pre[class*="language-"] {
+      padding: 1em;
+      margin: 1.5em 0;
+      background: #2d3748;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .markdown-content code[class*="language-"] {
+      font-size: 0.9em;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    }
+    
+    .markdown-content :not(pre) > code {
+      background: #f1f5f9;
+      color: #e53e3e;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+    
+    .markdown-content blockquote {
+      border-left: 4px solid #2d72d9;
+      margin: 1.5em 0;
+      padding: 0.5em 1em;
+      background: #f8f9fa;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .markdown-content table {
+      width: 100%;
+      margin: 1.5em 0;
+      border-collapse: collapse;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .markdown-content th,
+    .markdown-content td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .markdown-content th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    
+    .markdown-content tr:hover {
+      background: #f1f5f9;
+    }
+    
+    /* Math formulas */
+    .MathJax {
+      font-size: 1.1em !important;
+    }
+    
+    /* Mermaid diagrams */
+    .mermaid {
+      text-align: center;
+      margin: 2em 0;
+    }
+    
+    .post-tags {
+      margin: 15px 0;
+    }
+    .tag {
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-size: 0.85em;
+      margin-right: 8px;
+    }
+    .post-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    .nav-link {
+      color: #2d72d9;
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid #2d72d9;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      background: #2d72d9;
+      color: white;
+    }
+    
+    /* Code block enhancements */
+    .line-numbers .line-numbers-rows {
+      border-right: 1px solid #4a5568 !important;
+    }
+    
+    .toolbar {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      z-index: 10;
+    }
+    
+    .toolbar .toolbar-item button {
+      background: #4a5568;
+      border: none;
+      color: white;
+      padding: 0.25em 0.5em;
+      border-radius: 3px;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    
+    .toolbar .toolbar-item button:hover {
+      background: #2d3748;
+    }
+    
+    @media (max-width: 600px) {
+      .post-navigation {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .markdown-content pre[class*="language-"] {
+        margin: 1em -20px;
+        border-radius: 0;
+      }
+      
+      .markdown-content table {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</body>
+</html>

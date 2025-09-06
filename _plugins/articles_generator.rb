@@ -1,0 +1,323 @@
+require 'fileutils'
+require 'yaml'
+require 'find'
+
+Jekyll::Hooks.register :site, :post_write do |site|
+  # 扫描articles目录下的所有markdown文件，为它们创建对应的HTML页面
+  articles_dir = File.join(site.source, 'articles')
+  
+  if Dir.exist?(articles_dir)
+    Find.find(articles_dir) do |path|
+      next unless File.file?(path) && path.end_with?('.md')
+      
+      # 计算相对路径
+      relative_path = Pathname.new(path).relative_path_from(Pathname.new(articles_dir)).to_s
+      relative_path_without_ext = relative_path.gsub(/\.md$/, '')
+      
+      # 创建目标目录
+      output_dir = File.join(site.dest, 'articles', File.dirname(relative_path_without_ext))
+      FileUtils.mkdir_p(output_dir)
+      
+      # 创建一个目录形式的路径（如 /articles/path/to/file/index.html）
+      final_output_dir = File.join(output_dir, File.basename(relative_path_without_ext))
+      FileUtils.mkdir_p(final_output_dir)
+      output_file = File.join(final_output_dir, 'index.html')
+      
+      # 读取markdown文件
+      markdown_content = File.read(path)
+      
+      # 解析front matter
+      if markdown_content.start_with?('---')
+        parts = markdown_content.split('---', 3)
+        if parts.length >= 3
+          begin
+            front_matter = YAML.safe_load(parts[1]) || {}
+            content = parts[2].strip
+          rescue => e
+            puts "Warning: Failed to parse YAML in #{path}: #{e.message}"
+            front_matter = {}
+            content = markdown_content
+          end
+        else
+          front_matter = {}
+          content = markdown_content
+        end
+      else
+        front_matter = {}
+        content = markdown_content
+      end
+      
+      # 使用Jekyll的markdown转换器
+      converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
+      html_content = converter.convert(content)
+      
+      # 生成完整的HTML页面
+      title = front_matter['title'] || File.basename(relative_path_without_ext).gsub(/[-_]/, ' ').split.map(&:capitalize).join(' ')
+      description = front_matter['description'] || ''
+      
+      full_html = <<~HTML
+        <!DOCTYPE html>
+        <html lang="zh-CN">
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>#{title}</title>
+          <meta name="description" content="#{description}">
+          <link rel="canonical" href="#{site.config['url']}#{site.baseurl}/articles/#{relative_path_without_ext}/">
+          <link href="#{site.baseurl}/assets/css/style.css" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i%7CNoto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
+          
+          <!-- Enhanced Prism.js for comprehensive syntax highlighting -->
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+          
+          <!-- MathJax for math formulas -->
+          <script>
+            window.MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+                displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
+                processEscapes: true,
+                processEnvironments: true
+              },
+              options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+              }
+            };
+          </script>
+          <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+          <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          
+          <!-- Mermaid for diagrams -->
+          <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+          <script>
+            mermaid.initialize({
+              startOnLoad: true,
+              theme: 'default',
+              themeVariables: {
+                primaryColor: '#2d72d9',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#2d72d9',
+                lineColor: '#666'
+              }
+            });
+          </script>
+        </head>
+        <body>
+          <div id="page" class="site">
+            <div class="inner">
+              <header class="site-header">
+                <p class="site-title"><a class="logo-text" href="#{site.baseurl}/">#{site.config['title']}</a></p>
+                <nav class="site-navigation">
+                  <div class="site-navigation-wrap">
+                    <ul class="menu">
+                      <li class="menu-item"><a href="#{site.baseurl}/">Home</a></li>
+                      <li class="menu-item"><a href="#{site.baseurl}/personal/">Personal</a></li>
+                      <li class="menu-item"><a href="#{site.baseurl}/articles/">Articles</a></li>
+                    </ul>
+                  </div>
+                </nav>
+              </header>
+              
+              <main class="main-content fadeInDown delay_075s">
+                <article class="post markdown-content">
+                  <header class="post-header">
+                    <h1 class="post-title">#{title}</h1>
+                    #{description.empty? ? '' : "<p class=\"post-description\">#{description}</p>"}
+                    #{front_matter['date'] ? "<time class=\"post-date\">#{front_matter['date']}</time>" : ''}
+                    #{front_matter['tags'] && !front_matter['tags'].empty? ? "<div class=\"post-tags\">#{front_matter['tags'].map { |tag| "<span class=\"tag\">#{tag}</span>" }.join(' ')}</div>" : ''}
+                  </header>
+                  <div class="post-content">
+                    #{html_content}
+                  </div>
+                  <footer class="post-footer">
+                    <div class="post-navigation">
+                      <a href="#{site.baseurl}/articles/" class="nav-link">← 返回文章列表</a>
+                      <a href="#{site.baseurl}/" class="nav-link">返回首页 →</a>
+                    </div>
+                  </footer>
+                </article>
+              </main>
+              
+              <footer class="site-footer">
+                <div class="offsite-links">
+                  #{site.config['footer'] && site.config['footer']['content'] ? site.config['footer']['content'] : ''}
+                </div>
+              </footer>
+            </div>
+          </div>
+          
+          <!-- Enhanced Prism.js with all plugins -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+          
+          <script src="#{site.baseurl}/assets/js/plugins.js"></script>
+          <script src="#{site.baseurl}/assets/js/custom.js"></script>
+          
+          <style>
+            /* Enhanced styles for markdown content */
+            .markdown-content {
+              line-height: 1.8;
+            }
+            
+            .markdown-content pre {
+              position: relative;
+              margin: 1.5em 0;
+              border-radius: 8px;
+              overflow: visible;
+            }
+            
+            .markdown-content pre[class*="language-"] {
+              padding: 1em;
+              margin: 1.5em 0;
+              background: #2d3748;
+              border-radius: 8px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            
+            .markdown-content code[class*="language-"] {
+              font-size: 0.9em;
+              font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            }
+            
+            .markdown-content :not(pre) > code {
+              background: #f1f5f9;
+              color: #e53e3e;
+              padding: 0.1em 0.3em;
+              border-radius: 3px;
+              font-size: 0.85em;
+            }
+            
+            .markdown-content blockquote {
+              border-left: 4px solid #2d72d9;
+              margin: 1.5em 0;
+              padding: 0.5em 1em;
+              background: #f8f9fa;
+              border-radius: 0 4px 4px 0;
+            }
+            
+            .markdown-content table {
+              width: 100%;
+              margin: 1.5em 0;
+              border-collapse: collapse;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              border-radius: 8px;
+              overflow: hidden;
+            }
+            
+            .markdown-content th,
+            .markdown-content td {
+              padding: 12px 15px;
+              text-align: left;
+              border-bottom: 1px solid #e2e8f0;
+            }
+            
+            .markdown-content th {
+              background: #f8f9fa;
+              font-weight: 600;
+              color: #2d3748;
+            }
+            
+            .markdown-content tr:hover {
+              background: #f1f5f9;
+            }
+            
+            /* Math formulas */
+            .MathJax {
+              font-size: 1.1em !important;
+            }
+            
+            /* Mermaid diagrams */
+            .mermaid {
+              text-align: center;
+              margin: 2em 0;
+            }
+            
+            .post-tags {
+              margin: 15px 0;
+            }
+            .tag {
+              background: #e3f2fd;
+              color: #1976d2;
+              padding: 4px 8px;
+              border-radius: 3px;
+              font-size: 0.85em;
+              margin-right: 8px;
+            }
+            .post-navigation {
+              display: flex;
+              justify-content: space-between;
+              margin-top: 30px;
+              padding-top: 20px;
+              border-top: 1px solid #eee;
+            }
+            .nav-link {
+              color: #2d72d9;
+              text-decoration: none;
+              padding: 8px 16px;
+              border: 1px solid #2d72d9;
+              border-radius: 4px;
+              transition: all 0.3s ease;
+            }
+            .nav-link:hover {
+              background: #2d72d9;
+              color: white;
+            }
+            
+            /* Code block enhancements */
+            .line-numbers .line-numbers-rows {
+              border-right: 1px solid #4a5568 !important;
+            }
+            
+            .toolbar {
+              position: absolute;
+              top: 0.5em;
+              right: 0.5em;
+              z-index: 10;
+            }
+            
+            .toolbar .toolbar-item button {
+              background: #4a5568;
+              border: none;
+              color: white;
+              padding: 0.25em 0.5em;
+              border-radius: 3px;
+              font-size: 0.8em;
+              cursor: pointer;
+            }
+            
+            .toolbar .toolbar-item button:hover {
+              background: #2d3748;
+            }
+            
+            @media (max-width: 600px) {
+              .post-navigation {
+                flex-direction: column;
+                gap: 10px;
+              }
+              
+              .markdown-content pre[class*="language-"] {
+                margin: 1em -20px;
+                border-radius: 0;
+              }
+              
+              .markdown-content table {
+                font-size: 0.9em;
+              }
+            }
+          </style>
+        </body>
+        </html>
+      HTML
+      
+      # 写入HTML文件
+      File.write(output_file, full_html)
+      puts "Generated HTML for article: #{relative_path} -> #{output_file}"
+    end
+  end
+end

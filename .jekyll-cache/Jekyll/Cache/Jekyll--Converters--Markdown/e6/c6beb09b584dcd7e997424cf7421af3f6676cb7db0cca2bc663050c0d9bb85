@@ -1,0 +1,447 @@
+I"{0<main class="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-container">
+        <div class="hero-left">
+          <div class="hero-avatar">
+            <span>📚</span>
+          </div>
+        </div>
+        <div class="hero-right">
+          <h1 class="hero-title">技术文章</h1>
+          <p class="hero-subtitle">探索人工智能与深度学习的实践之路</p>
+          <p class="hero-description">记录学习心得、技术探索和项目实践，分享有价值的技术内容。</p>
+          <div class="hero-actions">
+            <a href="/personal/resume/" class="btn btn-secondary">查看简历</a>
+            <a href="/" class="btn btn-ghost">返回首页</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content-section">
+    <div class="container">
+      <!-- 文章统计信息 -->
+      <div class="stats-container" id="statsContainer">
+        <div class="stat-item">
+          <span class="stat-number" id="totalArticles">-</span>
+          <span class="stat-label">总文章数</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="totalSeries">-</span>
+          <span class="stat-label">系列数</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="lastUpdated">-</span>
+          <span class="stat-label">最后更新</span>
+        </div>
+      </div>
+
+      <!-- 动态文章列表 -->
+      <div id="articlesContainer">
+        <div class="loading">📖 正在加载文章...</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  let articles = [];
+  let categorizedArticles = {};
+  
+  // 获取文章数据
+  async function loadArticles() {
+    try {
+      console.log('🔄 开始检测文章更新...');
+      const response = await fetch('/assets/data/articles.json?t=' + Date.now());
+      
+      if (response.ok) {
+        const newArticles = await response.json();
+        
+        // 检查是否有更新
+        if (JSON.stringify(newArticles) !== JSON.stringify(articles)) {
+          articles = newArticles;
+          console.log(`✅ 动态加载了 ${articles.length} 篇文章`);
+          renderArticles();
+          updateStats();
+        }
+      } else {
+        console.error('❌ 文章数据加载失败:', response.status);
+        document.getElementById('articlesContainer').innerHTML = 
+          '<div class="error">❌ 文章加载失败，请稍后重试</div>';
+      }
+    } catch (error) {
+      console.error('❌ 文章数据加载异常:', error);
+      document.getElementById('articlesContainer').innerHTML = 
+        '<div class="error">❌ 网络连接异常，请检查网络</div>';
+    }
+  }
+  
+  // 按分类组织文章
+  function categorizeArticles() {
+    categorizedArticles = {};
+    
+    articles.forEach(article => {
+      const category = article.category || '未分类';
+      if (!categorizedArticles[category]) {
+        categorizedArticles[category] = [];
+      }
+      categorizedArticles[category].push(article);
+    });
+    
+    // 按文章数量排序分类
+    const sortedCategories = Object.keys(categorizedArticles).sort((a, b) => {
+      return categorizedArticles[b].length - categorizedArticles[a].length;
+    });
+    
+    const sortedCategorizedArticles = {};
+    sortedCategories.forEach(category => {
+      sortedCategorizedArticles[category] = categorizedArticles[category]
+        .sort((a, b) => new Date(b.date) - new Date(a.date)); // 按日期排序
+    });
+    
+    categorizedArticles = sortedCategorizedArticles;
+  }
+  
+  // 渲染文章列表
+  function renderArticles() {
+    categorizeArticles();
+    
+    const container = document.getElementById('articlesContainer');
+    let html = '';
+    
+    if (Object.keys(categorizedArticles).length === 0) {
+      html = '<div class="empty-state">📝 暂无文章，请添加文章到articles文件夹</div>';
+    } else {
+      Object.entries(categorizedArticles).forEach(([category, categoryArticles], index) => {
+        const categoryId = `category-${category.replace(/[^a-zA-Z0-9]/g, '-')}`;
+        const isExpanded = index < 2; // 默认展开前两个分类
+        
+        html += `
+          <div class="article-category" data-category="${category}">
+            <div class="category-header" onclick="toggleCategory('${categoryId}')">
+              <h3 class="category-title">
+                <span class="category-icon">${getCategoryIcon(category)}</span>
+                ${category}
+                <span class="article-count">(${categoryArticles.length})</span>
+              </h3>
+              <span class="toggle-icon ${isExpanded ? 'expanded' : ''}" id="toggle-${categoryId}">▼</span>
+            </div>
+            <div class="category-content ${isExpanded ? 'expanded' : ''}" id="${categoryId}">
+              <div class="articles-grid">
+        `;
+        
+        categoryArticles.forEach(article => {
+          const tags = article.tags && article.tags.length > 0 ? 
+            article.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : '';
+          
+          const excerpt = article.excerpt || article.description || '暂无摘要';
+          const formattedDate = formatDate(article.date);
+          
+          html += `
+            <div class="article-card">
+              <div class="article-header">
+                <h4 class="article-title">
+                  <a href="${article.url}">${article.title}</a>
+                </h4>
+                <div class="article-meta">
+                  <span class="article-date">📅 ${formattedDate}</span>
+                  ${article.reading_time ? `<span class="reading-time">⏱️ ${article.reading_time}</span>` : ''}
+                </div>
+              </div>
+              <div class="article-excerpt">${excerpt}</div>
+              ${tags ? `<div class="article-tags">${tags}</div>` : ''}
+            </div>
+          `;
+        });
+        
+        html += `
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+    
+    container.innerHTML = html;
+  }
+  
+  // 切换分类展开/折叠
+  function toggleCategory(categoryId) {
+    const content = document.getElementById(categoryId);
+    const toggleIcon = document.getElementById(`toggle-${categoryId}`);
+    
+    if (content && toggleIcon) {
+      content.classList.toggle('expanded');
+      toggleIcon.classList.toggle('expanded');
+    }
+  }
+  
+  // 获取分类图标
+  function getCategoryIcon(category) {
+    const iconMap = {
+      '深度学习基础': '🧠',
+      'LLM': '🤖',
+      '项目实践': '🚀',
+      '技术分享': '💡',
+      '学习笔记': '📝',
+      '后端开发': '⚙️',
+      '前端开发': '🎨',
+      '算法': '🔢',
+      '数据库': '🗄️',
+      '未分类': '📂'
+    };
+    return iconMap[category] || '📄';
+  }
+  
+  // 格式化日期
+  function formatDate(dateString) {
+    if (!dateString) return '未知日期';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+  
+  // 更新统计信息
+  function updateStats() {
+    document.getElementById('totalArticles').textContent = articles.length;
+    document.getElementById('totalSeries').textContent = Object.keys(categorizedArticles).length;
+    
+    if (articles.length > 0) {
+      const latestDate = Math.max(...articles.map(a => new Date(a.date).getTime()));
+      document.getElementById('lastUpdated').textContent = formatDate(new Date(latestDate));
+    } else {
+      document.getElementById('lastUpdated').textContent = '暂无';
+    }
+  }
+  
+  // 页面加载时初始化
+  document.addEventListener('DOMContentLoaded', function() {
+    loadArticles();
+    
+    // 定时检测新文章（每30秒检查一次）
+    setInterval(loadArticles, 30000);
+    console.log('⏰ 已启动文章自动检测，每30秒检查一次更新');
+  });
+  
+  // 全局函数，供HTML调用
+  window.toggleCategory = toggleCategory;
+  </script>
+  
+  <style>
+  .stats-container {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .stat-item {
+    background: linear-gradient(135deg, var(--surface-2), var(--surface-3));
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    min-width: 120px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+  }
+  
+  .stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+  }
+  
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+  }
+  
+  .article-category {
+    margin-bottom: var(--space-lg);
+    background: var(--surface-1);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+  }
+  
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    background: linear-gradient(135deg, var(--surface-2), var(--surface-3));
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .category-header:hover {
+    background: linear-gradient(135deg, var(--surface-3), var(--surface-4));
+  }
+  
+  .category-title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 1.25rem;
+    color: var(--text-primary);
+  }
+  
+  .category-icon {
+    font-size: 1.5rem;
+  }
+  
+  .article-count {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+  
+  .toggle-icon {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+  }
+  
+  .toggle-icon.expanded {
+    transform: rotate(180deg);
+  }
+  
+  .category-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .category-content.expanded {
+    max-height: 2000px;
+  }
+  
+  .articles-grid {
+    padding: var(--space-lg);
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .article-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    transition: all 0.3s ease;
+  }
+  
+  .article-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+  }
+  
+  .article-header {
+    margin-bottom: var(--space-sm);
+  }
+  
+  .article-title {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+  
+  .article-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .article-title a:hover {
+    color: var(--primary-color);
+  }
+  
+  .article-meta {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .article-date, .reading-time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+  
+  .article-excerpt {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-sm);
+    font-size: 0.9rem;
+  }
+  
+  .article-tags {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+  }
+  
+  .tag {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+  
+  .loading, .error, .empty-state {
+    text-align: center;
+    padding: var(--space-xl);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+  }
+  
+  .error {
+    color: #e74c3c;
+  }
+  
+  @media (max-width: 768px) {
+    .stats-container {
+      gap: var(--space-sm);
+    }
+    
+    .stat-item {
+      min-width: 100px;
+      padding: var(--space-sm);
+    }
+    
+    .articles-grid {
+      grid-template-columns: 1fr;
+      padding: var(--space-md);
+    }
+    
+    .category-header {
+      padding: var(--space-sm) var(--space-md);
+    }
+    
+    .category-title {
+      font-size: 1.1rem;
+    }
+  }
+  </style>
+</main>
+:ET

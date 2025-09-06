@@ -1,0 +1,86 @@
+I"�<h1 id="量化的核心原理浮点数到整数的映射">量化的核心原理：浮点数到整数的映射</h1>
+
+<p>量化的基本思想是将神经网络中通常使用的浮点数（如FP32，32位浮点数）表示的权重和激活值，映射到低位宽的整数（如INT8，8位整数）表示。这个映射过程需要定义一个<strong>量化函数</strong>和一个<strong>反量化函数</strong>。</p>
+
+<p>最常见的量化方法是<strong>线性均匀量化 (Linear Uniform Quantization)</strong>，它通过一个<strong>缩放因子 (Scale Factor, S)</strong> 和一个<strong>零点 (Zero Point, Z)</strong> 来实现浮点数和整数之间的线性映射。</p>
+
+<h2 id="1-量化参数-s-和-z-的确定">1. 量化参数 (S 和 Z) 的确定</h2>
+
+<p>在进行量化之前，我们需要确定浮点数范围（$F_{min}$,$F_{max}$）和整数范围（$Q_{min}$,$Q_{max}$）。</p>
+
+<ul>
+  <li><strong>整数范围</strong>通常是固定的。例如，对于 8 位无符号整数 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>(UINT8)
+</pre></td></tr></tbody></table></code> $Q_{min}=0$,$Q_{max}=255$；对于 8 位有符号整数 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>(INT8)
+</pre></td></tr></tbody></table></code>，$Q_{min}=-128$,$Q_{max}=127$。</li>
+  <li><strong>浮点数范围</strong>则需要从模型中获取。</li>
+</ul>
+
+<p>一旦确定了浮点数的范围，就可以计算 S 和 Z：</p>
+
+<ul>
+  <li>
+    <p>缩放因子 S (Scale Factor):
+\(S=(Q_{max}−Q_{min})/ (F_{max}−F_{min})\)</p>
+  </li>
+  <li>
+    <p>零点 Z (Zero Point):
+\(Z=Q_{min}−S \\times F_{min}\)</p>
+  </li>
+</ul>
+
+<h2 id="2-量化过程-quantization">2. 量化过程 (Quantization)</h2>
+
+<p>将一个浮点数 FP 量化为整数 Q 的公式：</p>
+
+\[Q=round(S \\times FP+Z)\]
+
+<p>其中 round 表示四舍五入。</p>
+
+<h2 id="3-反量化过程-dequantization">3. 反量化过程 (Dequantization)</h2>
+
+<p>在某些情况下，为了进行计算或输出，需要将整数 Q 反量化回浮点数：</p>
+
+\[FP_{reconstructed}=(Q−Z) \\times S\]
+
+<p><strong>为什么需要零点 Z？</strong></p>
+
+<p>零点的存在是为了确保浮点数 0.0 能够精确地映射到一个整数值，这对于激活函数（如 ReLU，其中大量值为 0）和稀疏权重矩阵非常重要，可以避免量化误差累积。</p>
+
+<h2 id="权重量化运算">权重量化运算</h2>
+
+<p>模型参数（权重）的量化比激活值相对简单，因为权重是固定的。主要有两种策略：</p>
+
+<h3 id="离线量化-ptq---post-training-quantization">离线量化 (PTQ - Post-Training Quantization)</h3>
+
+<p>这是最常见的权重量化方式：</p>
+
+<ol>
+  <li>加载预训练的 FP32 模型</li>
+  <li>计算每个权重张量的最小值和最大值</li>
+  <li>根据范围计算对应的 S 和 Z</li>
+  <li>将每个浮点权重量化为整数</li>
+  <li>存储量化后的模型</li>
+</ol>
+
+<h3 id="在线量化-qat---quantization-aware-training">在线量化 (QAT - Quantization-Aware Training)</h3>
+
+<p>在训练过程中引入量化操作的模拟：</p>
+
+<ol>
+  <li>在训练图中插入伪量化节点</li>
+  <li>执行量化→反量化操作来模拟量化误差</li>
+  <li>模型学习适应量化带来的误差</li>
+  <li>部署时直接进行最终量化</li>
+</ol>
+
+<hr />
+
+<p>📚 <strong>相关文章推荐：</strong></p>
+<ul>
+  <li><a href="/llama-series/">Llama系列大模型解析</a></li>
+  <li><a href="/deepseek-intro/">DeepSeek模型介绍</a></li>
+  <li><a href="/blog/">回到博客首页</a></li>
+</ul>
+:ET

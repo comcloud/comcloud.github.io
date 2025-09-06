@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Llama系列大模型全面解析</title>
+  <meta name="description" content="深入分析从Llama 1到Llama 4的技术演进过程，对比DeepSeek等竞品模型的技术特点">
+  <link rel="canonical" href="http://0.0.0.0:4000/blog/LLM/llama-overview/">
+  <link rel="alternate" type="application/rss+xml" title="成都犀牛 Feed"
+    href="http://0.0.0.0:4000/feed.xml">
+  
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+  
+  <!-- Meta tags for better SEO and social sharing -->
+  <meta property="og:title" content="Llama系列大模型全面解析">
+  <meta property="og:description" content="深入分析从Llama 1到Llama 4的技术演进过程，对比DeepSeek等竞品模型的技术特点">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://0.0.0.0:4000/blog/LLM/llama-overview/">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+  <div id="page" class="site">
+    <header class="site-header">
+  
+  <p class="site-title"><a class="logo-text" href="/">成都犀牛</a></p>
+  
+  <nav class="site-navigation">
+    <div class="site-navigation-wrap">
+      <h2 class="screen-reader-text">Main navigation</h2>
+      <ul class="menu">
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="/">Home</a>
+        </li>
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="/personal/">Personal</a>
+        </li>
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="/articles/">Articles</a>
+        </li>
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="https://github.com/comcloud">comcloud</a>
+        </li>
+        
+      </ul><!-- .menu -->
+      <button id="menu-close" class="menu-toggle"><span class="screen-reader-text">Close Menu</span><span
+          class="icon-close" aria-hidden="true"></span></button>
+    </div><!-- .site-navigation-wrap -->
+  </nav><!-- .site-navigation -->
+  <button id="menu-open" class="menu-toggle"><span class="screen-reader-text">Open Menu</span><span class="icon-menu" aria-hidden="true"></span></button>
+</header>
+
+
+    <main class="site-main">
+      <main class="main-content fadeInDown delay_075s">
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Llama系列大模型全面解析</h1>
+      
+      <p class="post-description">深入分析从Llama 1到Llama 4的技术演进过程，对比DeepSeek等竞品模型的技术特点</p>
+      
+      
+      <div class="post-meta">
+        <time class="post-date">August 4, 2024</time>
+      </div>
+      
+      
+    </header><!-- .post-header -->
+    
+    <div class="post-content">
+      <h1 id="llama系列大模型">Llama系列大模型</h1>
+
+<blockquote>
+  <p>梳理了从Llama 1到Llama 4的技术演进过程；对比了DeepSeek</p>
+</blockquote>
+
+<h2 id="llama系列发展概述">Llama系列发展概述</h2>
+
+<p>Meta的Llama系列大模型自2023年初首次亮相以来，已成为开源大语言模型领域最具影响力的产品线之一。这一系列模型以其<strong>高效架构</strong>、<strong>开源策略</strong>和<strong>持续创新</strong>在学术界和工业界广受关注。从最初的Llama 1到最新发布的Llama 4，Meta通过不断迭代优化，逐步提升了模型在多语言处理、多模态理解和推理能力等方面的表现。</p>
+
+<p>Llama系列的发展轨迹反映了近年来大型语言模型技术的快速演进。2023年2月，Meta以”意外泄露核心资料”为由开源了Llama 1大模型，在那个GPT-3.5统治一切的时代，首次让开发者接触到可用的开源大模型。随后的Llama 2在2023年7月发布，性能追平GPT-3.5并大幅领先于其他开源模型，成为当时最炙手可热的大模型基础。2024年4月推出的Llama 3成为全球首个能与GPT-4对标的开源大模型，标志着Llama系列的巅峰时期。</p>
+
+<p>然而，2024年底DeepSeek-V3的横空出世彻底改变了行业格局，其优异的性能和巧妙的技术架构让Llama在开源界的领先地位受到挑战。作为回应，Meta于2025年4月发布了Llama 4，这一代模型大量借鉴了DeepSeek模型的架构和训练思路，并在此基础上进行了创新和优化，被视为”<strong>被DeepSeek揍醒之后的绝地反击</strong>“。</p>
+
+<p><em>表：Llama系列主要版本发布时间与技术定位</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>模型版本</strong></th>
+      <th><strong>发布时间</strong></th>
+      <th><strong>技术定位</strong></th>
+      <th><strong>主要创新</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Llama 1</td>
+      <td>2023年2月</td>
+      <td>基础语言模型</td>
+      <td>引入<strong>RMSNorm</strong>、<strong>SwiGLU</strong>激活函数和旋转位置嵌入(<strong>RoPE</strong>)</td>
+    </tr>
+    <tr>
+      <td>Llama 2</td>
+      <td>2023年7月</td>
+      <td>高性能开源模型</td>
+      <td>分组查询注意力(<strong>GQA</strong>)机制，完全开源支持商用</td>
+    </tr>
+    <tr>
+      <td>Llama 3</td>
+      <td>2024年4月</td>
+      <td>多语言/多任务模型</td>
+      <td>扩展词汇量，<strong>优化分词器</strong>，改进推理能力</td>
+    </tr>
+    <tr>
+      <td>Llama 3.1</td>
+      <td>2024年底</td>
+      <td>优化版本</td>
+      <td>优化训练数据质量，扩展上下文长度</td>
+    </tr>
+    <tr>
+      <td>Llama 4</td>
+      <td>2025年4月</td>
+      <td>多模态MoE模型</td>
+      <td>混合专家架构（<strong>MoE</strong>），原生<strong>多模态支持</strong>，超长上下文</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Llama系列的成功不仅体现在技术层面，其<strong>开源策略</strong>也极大地推动了AI应用的普及。自Llama 2起，Meta提供开源权重和代码，显著降低了中小企业的使用门槛。这种开放态度催生了大量基于Llama的衍生模型和应用，形成了一个充满活力的生态系统。例如，哈工大SCIR实验室的”华佗”医疗大模型就是在Llama 2基础上微调得到的专业领域模型。</p>
+
+<p>随着Llama 4的发布，Meta进一步巩固了其在开源大模型领域的地位。Llama 4系列包含三个版本：面向边缘设备的轻量级Scout(170亿激活参数)、高性能多模态的Maverick(170亿激活参数/4000亿总参数)，以及仍在训练中的超大规模Behemoth(2880亿激活参数/2万亿总参数)。这一代模型首次全面采用混合专家架构(MoE)，显著提升了计算效率和性能，成为”第一个开源的主流多模态MoE大模型”。</p>
+
+<h2 id="llama-1与llama-2开源大模型的奠基之作">Llama 1与Llama 2：开源大模型的奠基之作</h2>
+
+<p><strong>Llama 1</strong>作为Meta推出的首款开源大型语言模型，于2023年初意外泄露后迅速引起业界广泛关注。在那个由GPT-3.5主导的时代，Llama 1的出现在某种程度上打破了闭源模型的技术垄断，首次为研究社区提供了可自由使用的高质量语言模型基准。从技术架构来看，Llama 1基于Transformer解码器结构，引入了多项创新设计，包括<strong>RMSNorm层归一化</strong>、<strong>SwiGLU激活函数</strong>和<strong>旋转位置嵌入(RoPE)</strong>，这些技术在后继版本中得到了保留和发展。</p>
+
+<p>Llama 1的核心价值在于其开源特性，虽然最初Meta声称是”意外泄露”，但后来业界普遍认为这可能是扎克伯格精心策划的战略举措。在元宇宙项目遭遇挫折后，Meta通过Llama系列成功实现了技术路线的转型，重新确立了在AI领域的领导地位。Llama 1的发布为后续版本奠定了技术基础，同时也展示了开源大模型的潜力，为中小企业和研究机构提供了接触先进AI技术的机会。</p>
+
+<p><strong>Llama 2</strong>于2023年7月正式发布，标志着Meta在开源大模型战略上的重大升级。这一代模型在性能上宣称追平GPT-3.5，大幅领先于当时的其他开源模型，并首次完全开放权重支持商业用途。Llama 2引入了<strong>分组查询注意力(GQA)</strong>机制，这一创新显著提升了大模型的训练效率，解决了传统多头注意力机制在参数量增大时面临的计算资源瓶颈问题。</p>
+
+<p>Llama 2提供了7B和70B两种参数规模的版本，满足了不同应用场景的需求。其开源策略产生了深远影响，推动了AI应用的普及化进程。基于Llama 2构建的各类应用项目数量激增，覆盖医疗、教育、客服等多个领域，形成了一个多样化的生态系统。</p>
+
+<p><em>表：Llama 1与Llama 2主要技术参数对比</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>技术特性</strong></th>
+      <th><strong>Llama 1</strong></th>
+      <th><strong>Llama 2</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>发布时间</td>
+      <td>2023年2月</td>
+      <td>2023年7月</td>
+    </tr>
+    <tr>
+      <td>架构基础</td>
+      <td>Transformer解码器</td>
+      <td>Transformer解码器+GQA</td>
+    </tr>
+    <tr>
+      <td>关键技术</td>
+      <td>RMSNorm, SwiGLU, RoPE</td>
+      <td>保留Llama1技术+分组查询注意力</td>
+    </tr>
+    <tr>
+      <td>开源程度</td>
+      <td>有限开源</td>
+      <td>完全开源，支持商用</td>
+    </tr>
+    <tr>
+      <td>参数规模</td>
+      <td>未公开详细数据</td>
+      <td>7B和70B两个版本</td>
+    </tr>
+    <tr>
+      <td>主要应用</td>
+      <td>研究基准</td>
+      <td>广泛商业应用</td>
+    </tr>
+    <tr>
+      <td>性能定位</td>
+      <td>基础语言模型</td>
+      <td>对标GPT-3.5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>从技术演进角度看，Llama 2在Llama 1的基础上进行了多方面优化。除了引入GQA机制外，模型在训练数据质量、分词效率和上下文处理能力上都有所提升。这些改进使得Llama 2在保持较高性能的同时，大幅降低了推理阶段的资源消耗，增强了模型的实用性和部署灵活性。值得一提的是，Llama 2的开源策略直接影响了整个AI行业的格局，促使更多企业加入开源阵营，加速了AI技术的民主化进程。</p>
+
+<p>Llama 2的成功不仅体现在技术层面，其<strong>商业模式</strong>的创新同样值得关注。通过提供商业友好的开源许可，Meta成功吸引了大量开发者和企业用户，构建了围绕Llama技术的庞大生态系统。这种策略不仅扩大了Meta的技术影响力，还为其后续的AI产品和服务奠定了用户基础。从某种意义上说，Llama 2的发布是大模型发展的分水岭，标志着开源模型开始成为闭源产品的重要竞争对手。</p>
+
+<h2 id="llama-3与31多语言与多任务能力的飞跃">Llama 3与3.1：多语言与多任务能力的飞跃</h2>
+
+<p><strong>Llama 3</strong>于2024年4月发布，代表了Meta在开源大模型技术上的又一次重大突破。这一代模型被定位为全球首个能与GPT-4对标的开源大模型，在多项基准测试中展现出接近顶级闭源模型的性能。Llama 3延续了前代的Transformer解码器架构，但在模型规模、训练数据和架构优化上进行了全面升级，提供了8B和70B两种参数规模的版本。</p>
+
+<p>Llama 3的核心创新之一是其<strong>扩展的词汇量</strong>和<strong>优化的分词器</strong>，这使得模型能够支持更多语言，显著提升了多语言处理能力。与前代相比，Llama 3在非英语语言任务上的表现有了明显改善，为全球化应用奠定了基础。同时，模型采用了更高效的上下文处理机制，优化了长文本的理解和生成能力，使其在文档摘要、代码生成等需要长序列处理的任务中表现更为出色。</p>
+
+<p>在技术细节上，Llama 3保留了前代成功的<strong>RMSNorm</strong>和<strong>SwiGLU</strong>设计，并进一步优化了<strong>旋转位置嵌入(RoPE)</strong>的实现方式。这些改进共同提升了模型的训练稳定性和推理效率。特别值得注意的是，Llama 3在数学计算和代码生成等复杂推理任务上的能力显著增强，使其成为开发者和研究人员的强大工具。据Meta官方介绍，Llama 3的训练数据规模和质量都有大幅提升，涵盖了更广泛的领域和语言，这为模型的强大泛化能力提供了基础。</p>
+
+<p><strong>Llama 3.1</strong>作为Llama 3的优化版本，于2024年底发布。这一版本没有对基础架构进行重大调整，而是集中优化了<strong>训练数据质量</strong>和<strong>上下文长度</strong>支持。Llama 3.1通过精细化的数据筛选和增强技术，提升了模型在特定任务上的表现，同时扩展了对更多语言的支持，进一步巩固了其作为多语言通用模型的地位。</p>
+
+<p><em>表：Llama 3系列主要技术特性与改进</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>技术特性</strong></th>
+      <th><strong>Llama 3</strong></th>
+      <th><strong>Llama 3.1</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>发布时间</td>
+      <td>2024年4月</td>
+      <td>2024年底</td>
+    </tr>
+    <tr>
+      <td>参数规模</td>
+      <td>8B/70B</td>
+      <td>同Llama 3</td>
+    </tr>
+    <tr>
+      <td>主要创新</td>
+      <td>扩展词汇量，优化分词器</td>
+      <td>优化训练数据质量</td>
+    </tr>
+    <tr>
+      <td>多语言支持</td>
+      <td>显著提升</td>
+      <td>进一步扩展</td>
+    </tr>
+    <tr>
+      <td>上下文长度</td>
+      <td>优化处理机制</td>
+      <td>显著扩展</td>
+    </tr>
+    <tr>
+      <td>推理能力</td>
+      <td>数学/代码生成增强</td>
+      <td>持续优化</td>
+    </tr>
+    <tr>
+      <td>架构变化</td>
+      <td>基础架构延续前代</td>
+      <td>无重大调整</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>从应用角度看，Llama 3系列在多个领域展现出强大潜力。在<strong>自然语言处理</strong>方面，模型可用于对话系统、文本生成和情感分析等任务；在多模态领域，基于Llama 3.1的视觉语言模型(如英伟达的LlamaNemotron Nano VL)已能够支持多页文档的视觉-文本分析。这些应用展示了Llama系列向多功能、多模态方向发展的趋势。</p>
+
+<p>Llama 3.1的一个有趣应用案例是其与英伟达合作开发的<strong>多模态版本</strong>，该模型能够处理图像和文本的联合输入，实现跨模态的理解和生成。这一发展方向为后续Llama 4的多模态能力奠定了基础，也反映了行业对通用人工智能的追求。然而，Llama 3系列在中文支持方面仍存在不足，这为DeepSeek等专注于中文市场的竞争者提供了机会。</p>
+
+<p>值得注意的是，Llama 3系列也面临一些<strong>争议和挑战</strong>。据报道，Llama 3.1被发现能近乎完整复制受版权保护的书籍内容(如《哈利波特》)，引发了法律风险方面的担忧。同时，Meta使用”Books3”数据集训练模型的行为也面临多起版权诉讼，潜在赔偿金额高达数十亿美元。这些问题反映了大型语言模型在数据使用和版权合规方面面临的普遍挑战，也是整个行业需要共同解决的问题。</p>
+
+<p>从技术演进的角度看，Llama 3系列代表了Meta在打造通用语言模型道路上的重要里程碑。尽管在发布时堪称开源模型的巅峰，但随着DeepSeek-V3在2024年底的横空出世，Llama系列首次感受到了来自其他开源项目的实质性竞争压力。这一竞争态势直接促使Meta加速了Llama 4的研发，推动了混合专家架构等创新技术的采用，为开源大模型的发展注入了新的活力。</p>
+
+<h2 id="llama-4多模态moe架构的革命性突破">Llama 4：多模态MoE架构的革命性突破</h2>
+
+<p><strong>Llama 4</strong>作为Meta于2025年4月推出的最新一代开源大模型，代表了当前开源多模态语言模型的技术巅峰。这一代模型首次全面采用<strong>混合专家架构(MoE)</strong>，成为”第一个开源的主流多模态MoE大模型”。Llama 4系列包含三个不同规格的版本：轻量级的Scout(激活参数170亿，总参数1090亿)、高性能的Maverick(激活参数170亿，总参数4000亿)以及仍在训练中的超大规模Behemoth(激活参数2880亿，总参数2万亿)。</p>
+
+<p>Llama 4最引人注目的创新是其<strong>原生多模态支持</strong>能力。不同于前代专注于文本处理的架构，Llama 4从设计之初就考虑了文本、图像、音频和视频等多种模态数据的联合处理。通过<strong>早期融合(Early Fusion)</strong>技术，Llama 4能够将不同模态的token无缝整合到统一的模型框架中，实现真正的跨模态理解和生成。这一技术突破使Llama 4在企业知识管理、多语言写作和多媒体内容生成等应用场景中展现出巨大潜力。</p>
+
+<h3 id="混合专家架构moe设计">混合专家架构(MoE)设计</h3>
+
+<p>Llama 4全面转向MoE架构，这与Llama 3坚持的密集模型(Dense Model)形成鲜明对比。MoE的核心思想是通过<strong>稀疏激活机制</strong>，在大规模参数中仅激活部分”专家”来处理特定任务，从而在保持高性能的同时显著降低计算成本。Llama 4的MoE实现包含几个关键设计：</p>
+
+<ul>
+  <li>
+    <p><strong>专家分布策略</strong>：Meta在专家数量和单专家规模之间进行了精心权衡。小型模型(如Scout)采用较少专家(16个)，而大模型(如Maverick)使用更多专家(128个)，但总激活参数量保持稳定(170亿)。这种设计既保证了模型容量，又控制了计算开销。</p>
+  </li>
+  <li>
+    <p><strong>动态路由机制</strong>：Llama 4沿用了类似DeepSeek或Mixtral的<strong>动态路由策略</strong>，通过门控网络(Gating Network)根据输入特征选择激活哪些专家。这种智能路由机制是MoE效率的关键，它确保模型在推理时仅需计算一小部分参数，大幅降低了能耗和延迟。</p>
+  </li>
+  <li>
+    <p><strong>多模态专家分工</strong>：MoE架构天然适合多模态任务。Llama 4可能为不同模态(文本、图像等)设计了专用专家，例如文本专家负责语言生成，视觉专家处理图像特征提取。这种分工协作的方式既提高了处理效率，也增强了模型对复杂输入的适应性。</p>
+  </li>
+</ul>
+
+<p><em>表：Llama 4三个版本的主要参数对比</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>参数指标</strong></th>
+      <th><strong>Llama 4 Scout</strong></th>
+      <th><strong>Llama 4 Maverick</strong></th>
+      <th><strong>Llama 4 Behemoth</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>激活参数</td>
+      <td>170亿</td>
+      <td>170亿</td>
+      <td>2880亿(训练中)</td>
+    </tr>
+    <tr>
+      <td>总参数</td>
+      <td>1090亿</td>
+      <td>4000亿</td>
+      <td>2万亿(训练中)</td>
+    </tr>
+    <tr>
+      <td>专家数量</td>
+      <td>16个</td>
+      <td>128个</td>
+      <td>16个</td>
+    </tr>
+    <tr>
+      <td>上下文窗口</td>
+      <td>1000万token</td>
+      <td>256K token</td>
+      <td>未公布</td>
+    </tr>
+    <tr>
+      <td>部署需求</td>
+      <td>单块H100 GPU</td>
+      <td>8卡H100(640G显存)</td>
+      <td>超算级设施</td>
+    </tr>
+    <tr>
+      <td>主要特点</td>
+      <td>超长上下文支持</td>
+      <td>多模态全能型</td>
+      <td>教师模型/知识蒸馏</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="多模态实现机制">多模态实现机制</h3>
+
+<p>Llama 4的多模态能力建立在<strong>MetaCLIP</strong>技术基础上，这是一种由Meta开发的先进语言-图像预训练模型。与OpenAI的CLIP不同，MetaCLIP不依赖复杂的架构调整，而是通过优化数据筛选和训练过程来提升性能。MetaCLIP采用原始数据池和元数据对训练样本进行精细筛选和平衡，确保数据集在语义分布上更加均匀和高质量。在零样本ImageNet分类任务中，MetaCLIP的准确率达到70.8%，超过了CLIP的68.3%。</p>
+
+<p>Llama 4的多模态处理采用了<strong>交错注意力层</strong>(Interleaved Attention Layer)设计，这一创新借鉴了Flamingo架构的思路。该技术通过交错self-attention和cross-attention来构建匹配感知编码器，能够同时学习图像本身的局部特征及其配对图像的相似性。具体实现上，每个注意力块包含N个注意力模块，根据输入类型动态选择自注意力(处理单模态特征)或交叉注意力(处理跨模态关联)。这种设计减轻了解码器负担，使整个多模态处理流程更加高效。</p>
+
+<h3 id="超长上下文支持技术">超长上下文支持技术</h3>
+
+<p>Llama 4 Scout版本支持高达<strong>1000万token</strong>的上下文窗口，这一数字远超行业主流水平(如DeepSeek的128K)。实现这一突破的关键技术包括：</p>
+
+<ul>
+  <li>
+    <p><strong>iRoPE扩展技术</strong>：Llama 4采用了推理时间温度缩放(Inference Time Temperature Scaling)，即iRoPE技术，以支持超长序列的位置编码。这种方法能够在推理阶段动态调整位置编码的”温度”参数，有效扩展模型的上下文处理能力。</p>
+  </li>
+  <li>
+    <p><strong>分层记忆结构</strong>：模型可能引入了分层记忆机制，将上下文分为短期和长期记忆，动态管理token的存储和访问。这种设计模仿了人类的记忆系统，提高了长序列处理的效率。</p>
+  </li>
+  <li>
+    <p><strong>数据压缩优化</strong>：通过更高效的分词器(Llama 3已使用128K词汇表)，Llama 4进一步压缩了输入表示，减少了内存占用。同时，模型可能采用了特定的张量压缩算法来降低长上下文的存储开销。</p>
+  </li>
+</ul>
+
+<p>值得注意的是，Llama 4不同版本在上下文长度上采取了差异化策略。Scout版本专注于超长上下文(1000万token)，而性能更强的Maverick版本反而缩短到256K(DeepSeek V3的2倍)</p>
+
+    </div><!-- .post-content -->
+    
+    
+    <footer class="post-footer">
+      <div class="post-tags">
+        <span class="tags-label">Tags:</span>
+        
+        <a href="/tags#llm" class="tag-link">LLM</a>, 
+        
+        <a href="/tags#llama" class="tag-link">Llama</a>, 
+        
+        <a href="/tags#%E5%A4%A7%E6%A8%A1%E5%9E%8B" class="tag-link">大模型</a>, 
+        
+        <a href="/tags#%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90" class="tag-link">技术分析</a>
+        
+      </div>
+    </footer>
+    
+  </article><!-- .post -->
+</main><!-- .site-main -->
+    </main>
+    <footer class="site-footer">
+  <div class="offsite-links">
+    
+      
+<a href="https://twitter.com/" target="_blank" rel="noopener">
+  <span class="fa-twitter" aria-hidden="true"></span>
+  <span class="screen-reader-text">Twitter</span>
+</a>
+
+<a href="https://github.com/" target="_blank" rel="noopener">
+  <span class="fa-github" aria-hidden="true"></span>
+  <span class="screen-reader-text">GitHub</span>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" rel="noopener">
+  <span class="fa-instagram" aria-hidden="true"></span>
+  <span class="screen-reader-text">Instagram</span>
+</a>
+
+<a href="https://www.linkedin.com/" target="_blank" rel="noopener">
+  <span class="fa-linkedin" aria-hidden="true"></span>
+  <span class="screen-reader-text">LinkedIn</span>
+</a>
+
+    
+  </div><!-- .offsite-links -->
+  <div class="footer-bottom">
+    <div class="site-info">
+      <p>© Scriptor all rights reserved. Theme by <a href="https://www.justgoodthemes.com">JustGoodThemes</a>.</p>
+
+    </div><!-- .site-info -->
+    <a href="#page" id="back-to-top" class="back-to-top"><span class="screen-reader-text">Back to the top </span>&#8593;</a>
+  </div><!-- .footer-bottom -->
+</footer><!-- .site-footer -->
+
+  </div><!-- .site -->
+
+  <!-- Scripts -->
+  
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+  
+  <script src="/assets/js/plugins.js"></script>
+  <script src="/assets/js/custom.js"></script>
+
+</body>
+</html>

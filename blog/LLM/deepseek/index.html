@@ -1,0 +1,73 @@
+---
+layout: blog_series
+title: DeepSeek Series
+series_name: deepseek
+description: DeepSeek 是一系列由 DeepSeek 开发的大型语言模型，具有强大的代码生成和理解能力。
+---
+
+<div class="series-intro">
+  <p>DeepSeek 模型在自然语言处理和代码生成方面表现出色，是当前最先进的开源大语言模型之一。</p>
+  
+  <h3>主要特点</h3>
+  <ul>
+    <li> 🚀 <strong>高性能</strong>：在多项基准测试中表现优异</li>
+    <li> 💻 <strong>代码专长</strong>：特别擅长代码生成和理解</li>
+    <li> 🌐 <strong>多语言支持</strong>：支持多种编程语言和自然语言</li>
+    <li> 🔓 <strong>开源友好</strong>：提供开源版本供研究使用</li>
+  </ul>
+</div>
+
+<div class="post-content">
+  <div id="articles-container">
+    <div class="post-list" id="articles-list">
+      <!-- 动态内容将在这里加载 -->
+    </div>
+  </div>
+  
+  <p><a href="{{ site.baseurl }}/blog/"> Back to Blog</a> | <a href="{{ site.baseurl }}/"> Back to Home</a></p>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 获取当前系列名称
+    const seriesName = window.location.pathname.split('/')[2];
+    loadArticles(seriesName);
+  });
+  
+  function loadArticles(seriesName) {
+    const articlesList = document.getElementById('articles-list');
+    
+    // 模拟从API获取数据
+    // 在实际应用中，这里应该是一个真实的API调用
+    let articlesData = [];
+    
+    if (seriesName === 'deepseek') {
+      articlesData = [
+        {
+          title: "intro",
+          url: "{{ site.baseurl }}/blog/deepseek/intro/",
+          type: "Markdown"
+        }
+      ];
+    }
+    
+    articlesList.innerHTML = '';
+    
+    articlesData.forEach(article => {
+      const articleElement = document.createElement('article');
+      articleElement.className = 'post';
+      articleElement.innerHTML = `
+        <div class="post-thumbnail">
+          <div class="placeholder-image">${article.type}</div>
+        </div>
+        <div class="post-content">
+          <h2><a href="${article.url}">${article.title}</a></h2>
+          <p>${article.type} format article</p>
+          <p class="read-more"><a href="${article.url}" class="read-more-link">Continue reading &rarr;</a></p>
+        </div>
+      `;
+      articlesList.appendChild(articleElement);
+    });
+  }
+</script>
+</main>

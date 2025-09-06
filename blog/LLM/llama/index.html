@@ -1,0 +1,151 @@
+---
+layout: default
+title: Llama Series
+---
+
+<main class="main-content fadeInDown delay_075s">
+  <h1>Llama Series</h1>
+  
+  <div class="post-content">
+    <p>系列介绍：Llama 是由 Meta 开发的一系列大型语言模型，包括 Llama1、Llama2、Llama3 等多个版本。</p>
+    
+    <div id="articles-container">
+      <div class="post-list" id="articles-list">
+        <!-- 动态内容将在这里加载 -->
+      </div>
+    </div>
+    
+    <p><a href="{{ site.baseurl }}/blog/">← Back to Blog</a> | <a href="{{ site.baseurl }}/">← Back to Home</a></p>
+  </div>
+  
+  <script src="{{ site.baseurl }}/assets/js/dynamic-loader.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取当前系列路径
+      const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
+      const seriesPath = pathSegments.slice(1).join('/'); // 移除blog部分，获取相对路径
+      
+      loadArticles(seriesPath);
+    });
+    
+    async function loadArticles(seriesPath) {
+      const articlesList = document.getElementById('articles-list');
+      
+      try {
+        // 显示加载状态
+        articlesList.innerHTML = '<div class="dynamic-loading"><div class="loading-spinner"></div><span>正在加载文章...</span></div>';
+        
+        // 获取博客数据
+        const response = await fetch('{{ site.baseurl }}/assets/blog-data.json');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        const blogData = await response.json();
+        
+        // 查找匹配的系列
+        let seriesData = null;
+        for (const series of blogData) {
+          if (series.path === seriesPath || series.name === seriesPath) {
+            seriesData = series;
+            break;
+          }
+        }
+        
+        if (!seriesData) {
+          articlesList.innerHTML = '<p>未找到该系列的文章。</p>';
+          return;
+        }
+        
+        // 渲染文章列表
+        renderArticles(articlesList, seriesData.files || []);
+      } catch (error) {
+        console.error('Failed to load articles:', error);
+        articlesList.innerHTML = '<p>加载文章失败，请刷新页面重试。</p>';
+      }
+    }
+    
+    function renderArticles(container, files) {
+      if (!files || files.length === 0) {
+        container.innerHTML = '<p>该系列暂无文章。</p>';
+        return;
+      }
+      
+      container.innerHTML = '';
+      
+      files.forEach(file => {
+        const articleElement = document.createElement('article');
+        articleElement.className = 'post';
+        
+        const fileName = file.name.replace(/\.(md|html)$/, '').replace(/-/g, ' ');
+        const displayName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+        const fileType = file.type || (file.name.endsWith('.md') ? 'md' : 'html');
+        const badge = `<span class="file-type-badge file-type-${fileType}">${fileType}</span>`;
+        
+        articleElement.innerHTML = `
+          <div class="post-thumbnail">
+            <div class="placeholder-image">${fileType.toUpperCase()}</div>
+          </div>
+          <div class="post-content">
+            <h2><a href="${file.url}">${displayName}</a></h2>
+            <p>文件类型: ${fileType}</p>
+            <p class="read-more"><a href="${file.url}" class="read-more-link">Continue reading &rarr;</a></p>
+          </div>
+        `;
+        container.appendChild(articleElement);
+      });
+    }
+  </script>
+  
+  <style>
+    .file-type-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.7em;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-left: 5px;
+    }
+    
+    .file-type-md {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+    
+    .file-type-html {
+      background: #fff3e0;
+      color: #f57c00;
+    }
+    
+    .placeholder-image {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    
+    .dynamic-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: #666;
+    }
+    
+    .loading-spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #333;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</main>

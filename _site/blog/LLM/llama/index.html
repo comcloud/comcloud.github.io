@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Llama Series</title>
+  <meta name="description" content="会当水击三千里，自信人生二百年">
+  <link rel="canonical" href="http://0.0.0.0:4000/blog/LLM/llama/">
+  <link rel="alternate" type="application/rss+xml" title="成都犀牛 Feed"
+    href="http://0.0.0.0:4000/feed.xml">
+  
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+  
+  <!-- Meta tags for better SEO and social sharing -->
+  <meta property="og:title" content="Llama Series">
+  <meta property="og:description" content="会当水击三千里，自信人生二百年">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://0.0.0.0:4000/blog/LLM/llama/">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+  <div id="page" class="site">
+    <header class="site-header">
+  
+  <p class="site-title"><a class="logo-text" href="/">成都犀牛</a></p>
+  
+  <nav class="site-navigation">
+    <div class="site-navigation-wrap">
+      <h2 class="screen-reader-text">Main navigation</h2>
+      <ul class="menu">
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="/">Home</a>
+        </li>
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="/personal/">Personal</a>
+        </li>
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="/articles/">Articles</a>
+        </li>
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="https://github.com/comcloud">comcloud</a>
+        </li>
+        
+      </ul><!-- .menu -->
+      <button id="menu-close" class="menu-toggle"><span class="screen-reader-text">Close Menu</span><span
+          class="icon-close" aria-hidden="true"></span></button>
+    </div><!-- .site-navigation-wrap -->
+  </nav><!-- .site-navigation -->
+  <button id="menu-open" class="menu-toggle"><span class="screen-reader-text">Open Menu</span><span class="icon-menu" aria-hidden="true"></span></button>
+</header>
+
+
+    <main class="site-main">
+      <main class="main-content fadeInDown delay_075s">
+  <h1>Llama Series</h1>
+  
+  <div class="post-content">
+    <p>系列介绍：Llama 是由 Meta 开发的一系列大型语言模型，包括 Llama1、Llama2、Llama3 等多个版本。</p>
+    
+    <div id="articles-container">
+      <div class="post-list" id="articles-list">
+        <!-- 动态内容将在这里加载 -->
+      </div>
+    </div>
+    
+    <p><a href="/blog/">← Back to Blog</a> | <a href="/">← Back to Home</a></p>
+  </div>
+  
+  <script src="/assets/js/dynamic-loader.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取当前系列路径
+      const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
+      const seriesPath = pathSegments.slice(1).join('/'); // 移除blog部分，获取相对路径
+      
+      loadArticles(seriesPath);
+    });
+    
+    async function loadArticles(seriesPath) {
+      const articlesList = document.getElementById('articles-list');
+      
+      try {
+        // 显示加载状态
+        articlesList.innerHTML = '<div class="dynamic-loading"><div class="loading-spinner"></div><span>正在加载文章...</span></div>';
+        
+        // 获取博客数据
+        const response = await fetch('/assets/blog-data.json');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        const blogData = await response.json();
+        
+        // 查找匹配的系列
+        let seriesData = null;
+        for (const series of blogData) {
+          if (series.path === seriesPath || series.name === seriesPath) {
+            seriesData = series;
+            break;
+          }
+        }
+        
+        if (!seriesData) {
+          articlesList.innerHTML = '<p>未找到该系列的文章。</p>';
+          return;
+        }
+        
+        // 渲染文章列表
+        renderArticles(articlesList, seriesData.files || []);
+      } catch (error) {
+        console.error('Failed to load articles:', error);
+        articlesList.innerHTML = '<p>加载文章失败，请刷新页面重试。</p>';
+      }
+    }
+    
+    function renderArticles(container, files) {
+      if (!files || files.length === 0) {
+        container.innerHTML = '<p>该系列暂无文章。</p>';
+        return;
+      }
+      
+      container.innerHTML = '';
+      
+      files.forEach(file => {
+        const articleElement = document.createElement('article');
+        articleElement.className = 'post';
+        
+        const fileName = file.name.replace(/\.(md|html)$/, '').replace(/-/g, ' ');
+        const displayName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+        const fileType = file.type || (file.name.endsWith('.md') ? 'md' : 'html');
+        const badge = `<span class="file-type-badge file-type-${fileType}">${fileType}</span>`;
+        
+        articleElement.innerHTML = `
+          <div class="post-thumbnail">
+            <div class="placeholder-image">${fileType.toUpperCase()}</div>
+          </div>
+          <div class="post-content">
+            <h2><a href="${file.url}">${displayName}</a></h2>
+            <p>文件类型: ${fileType}</p>
+            <p class="read-more"><a href="${file.url}" class="read-more-link">Continue reading &rarr;</a></p>
+          </div>
+        `;
+        container.appendChild(articleElement);
+      });
+    }
+  </script>
+  
+  <style>
+    .file-type-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.7em;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-left: 5px;
+    }
+    
+    .file-type-md {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+    
+    .file-type-html {
+      background: #fff3e0;
+      color: #f57c00;
+    }
+    
+    .placeholder-image {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    
+    .dynamic-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: #666;
+    }
+    
+    .loading-spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #333;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</main>
+    </main>
+    <footer class="site-footer">
+  <div class="offsite-links">
+    
+      
+<a href="https://twitter.com/" target="_blank" rel="noopener">
+  <span class="fa-twitter" aria-hidden="true"></span>
+  <span class="screen-reader-text">Twitter</span>
+</a>
+
+<a href="https://github.com/" target="_blank" rel="noopener">
+  <span class="fa-github" aria-hidden="true"></span>
+  <span class="screen-reader-text">GitHub</span>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" rel="noopener">
+  <span class="fa-instagram" aria-hidden="true"></span>
+  <span class="screen-reader-text">Instagram</span>
+</a>
+
+<a href="https://www.linkedin.com/" target="_blank" rel="noopener">
+  <span class="fa-linkedin" aria-hidden="true"></span>
+  <span class="screen-reader-text">LinkedIn</span>
+</a>
+
+    
+  </div><!-- .offsite-links -->
+  <div class="footer-bottom">
+    <div class="site-info">
+      <p>© Scriptor all rights reserved. Theme by <a href="https://www.justgoodthemes.com">JustGoodThemes</a>.</p>
+
+    </div><!-- .site-info -->
+    <a href="#page" id="back-to-top" class="back-to-top"><span class="screen-reader-text">Back to the top </span>&#8593;</a>
+  </div><!-- .footer-bottom -->
+</footer><!-- .site-footer -->
+
+  </div><!-- .site -->
+
+  <!-- Scripts -->
+  
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+  
+  <script src="/assets/js/plugins.js"></script>
+  <script src="/assets/js/custom.js"></script>
+
+</body>
+</html>

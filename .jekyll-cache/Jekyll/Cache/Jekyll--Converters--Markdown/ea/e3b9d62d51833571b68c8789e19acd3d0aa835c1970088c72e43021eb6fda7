@@ -1,0 +1,136 @@
+I"�,<blockquote>
+  <p><strong>MAE（Mean Absolute Error，平均绝对误差）</strong>是回归任务中常用的一种评价指标，用于衡量模型预测值与真实值之间的差异。它反映了预测结果的平均偏差大小，越小的MAE值表示模型的预测性能越好。</p>
+</blockquote>
+
+<h3 id="1-公式">1. <strong>公式</strong></h3>
+<p>MAE的计算公式如下：</p>
+
+\[MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|\]
+
+<ul>
+  <li>( $n$ ) 是样本数量（即数据点的个数）。</li>
+  <li>($ y_i$ ) 是第 ($ i$ ) 个样本的真实值（目标值）。</li>
+  <li>( $\hat{y}_i $) 是第 ($ i$ ) 个样本的预测值。</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>($</td>
+          <td>y_i - \hat{y}_i</td>
+          <td>$) 表示第 ($ i$ ) 个样本的<strong>绝对误差</strong>，即真实值与预测值之间的差的绝对值。</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="2-mae的特点">2. <strong>MAE的特点</strong></h3>
+<blockquote>
+  <p><strong>对异常值敏感性较低</strong>：与其他误差度量（如MSE）相比，MAE对异常值（outliers）不是特别敏感，因为它使用的是<strong>绝对误差</strong>而不是平方误差。</p>
+
+  <ul>
+    <li>在 MSE 中，误差的平方使得大误差对最终结果有更大的影响，而在 MAE 中，每个误差都是线性的。</li>
+  </ul>
+</blockquote>
+
+<h3 id="3-与mse的对比">3. <strong>与MSE的对比</strong></h3>
+<ul>
+  <li>MSE 更容易受到较大的错误（离群点）的影响，因为误差的平方会放大大的误差。这使得 MSE 在处理有异常值的数据时可能不如 MAE 稳定。</li>
+  <li>MSE 在梯度下降等优化过程中常被使用，因为其<strong>平方误差更容易求导</strong>。</li>
+  <li>MAE在$y_i = \hat{y}_i$处不可导</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span>
+
+<span class="c1"># 生成正常数据
+</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 生成50个样本点
+</span><span class="n">y_true</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># 真实值为线性关系
+# 添加一定的噪声来模拟回归中的散点
+</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">x</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 加入标准差为2的噪声
+</span>
+<span class="c1"># 生成线性回归模型
+</span><span class="n">model</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">'epsilon_insensitive'</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="c1"># 没有离群点的数据拟合
+</span><span class="n">y_pred_no_outliers</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_true</span><span class="p">).</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">mae_no_outliers</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred_no_outliers</span><span class="p">)</span>
+
+<span class="c1"># 添加离群点
+</span><span class="n">y_with_outliers</span> <span class="o">=</span> <span class="n">y_true</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">y_with_outliers</span><span class="p">[</span><span class="mi">45</span><span class="p">:]</span> <span class="o">=</span> <span class="n">y_with_outliers</span><span class="p">[</span><span class="mi">45</span><span class="p">:]</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 添加一些离群点
+</span>
+<span class="c1"># 使用带有离群点的数据进行拟合
+</span><span class="n">y_pred_with_outliers</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_with_outliers</span><span class="p">).</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">mae_with_outliers</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_with_outliers</span><span class="p">,</span> <span class="n">y_pred_with_outliers</span><span class="p">)</span>
+
+<span class="c1"># 绘制结果
+</span><span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># 绘制没有离群点的数据拟合结果
+</span><span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'True Values'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred_no_outliers</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s">'Linear Fit (No Outliers), MAE = </span><span class="si">{</span><span class="n">mae_no_outliers</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+<span class="c1"># 绘制带有离群点的数据拟合结果
+</span><span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">45</span><span class="p">:],</span> <span class="n">y_with_outliers</span><span class="p">[</span><span class="mi">45</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Outliers'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred_with_outliers</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'orange'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s">'Linear Fit (With Outliers), MAE = </span><span class="si">{</span><span class="n">mae_with_outliers</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+<span class="c1"># 图形装饰
+</span><span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Effect of Outliers on Linear Regression Fit'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'X'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Y'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

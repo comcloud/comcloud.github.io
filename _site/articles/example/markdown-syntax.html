@@ -1,0 +1,449 @@
+<h1 id="完整markdown语法示例">完整Markdown语法示例</h1>
+
+<p>这是一个展示所有支持的Markdown语法功能的示例文档。</p>
+
+<h2 id="1-基础文本格式">1. 基础文本格式</h2>
+
+<p>这是 <strong>粗体文本</strong> 和 <em>斜体文本</em>，还有 <del>删除线文本</del>。</p>
+
+<p>你也可以使用 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>行内代码
+</pre></td></tr></tbody></table></code> 来突出显示代码片段。</p>
+
+<h2 id="2-数学公式">2. 数学公式</h2>
+
+<h3 id="行内数学公式">行内数学公式</h3>
+
+<p>这是一个行内数学公式：$E = mc^2$，爱因斯坦的质能方程。</p>
+
+<p>傅里叶变换的定义：$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt$</p>
+
+<h3 id="块级数学公式">块级数学公式</h3>
+
+<p>贝叶斯定理：</p>
+
+\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]
+
+<p>神经网络的前向传播：</p>
+
+\[\begin{align}
+z^{(l)} &amp;= W^{(l)}a^{(l-1)} + b^{(l)} \\
+a^{(l)} &amp;= \sigma(z^{(l)})
+\end{align}\]
+
+<p>矩阵求导：</p>
+
+\[\frac{\partial}{\partial W} \|XW - Y\|^2_F = 2X^T(XW - Y)\]
+
+<h2 id="3-代码块">3. 代码块</h2>
+
+<h3 id="python代码">Python代码</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="k">def</span> <span class="nf">neural_network_forward</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
+    <span class="s">"""
+    神经网络前向传播
+    """</span>
+    <span class="c1"># 第一层
+</span>    <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W1</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>  <span class="c1"># 激活函数
+</span>    
+    <span class="c1"># 第二层
+</span>    <span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">W2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z2</span><span class="p">))</span>  <span class="c1"># Sigmoid激活函数
+</span>    
+    <span class="k">return</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span>
+
+<span class="c1"># 生成示例数据
+</span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"数据形状: X=</span><span class="si">{</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="s">, y=</span><span class="si">{</span><span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="javascript代码">JavaScript代码</h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+</pre></td><td class="rouge-code"><pre><span class="c1">// 深度学习框架的简单实现</span>
+<span class="kd">class</span> <span class="nx">NeuralNetwork</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">layers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">layers</span> <span class="o">=</span> <span class="nx">layers</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">weights</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">initializeWeights</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">biases</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">initializeBiases</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="nx">initializeWeights</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">weights</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">weight</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">layers</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+                <span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">map</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nb">Array</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">layers</span><span class="p">[</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                    <span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+                    <span class="p">.</span><span class="nx">map</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">);</span>
+            <span class="nx">weights</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">weight</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">weights</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="nx">forward</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">activation</span> <span class="o">=</span> <span class="nx">input</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">weights</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">activation</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">matrixMultiply</span><span class="p">(</span><span class="nx">activation</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">weights</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+            <span class="nx">activation</span> <span class="o">=</span> <span class="nx">activation</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">sigmoid</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">activation</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="nx">sigmoid</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">exp</span><span class="p">(</span><span class="o">-</span><span class="nx">x</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 使用示例</span>
+<span class="kd">const</span> <span class="nx">nn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NeuralNetwork</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">nn</span><span class="p">.</span><span class="nx">forward</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">预测结果:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="shell脚本">Shell脚本</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="rouge-code"><pre><span class="c">#!/bin/bash</span>
+
+<span class="c"># 深度学习环境设置脚本</span>
+setup_dl_environment<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> <span class="s2">"正在设置深度学习环境..."</span>
+    
+    <span class="c"># 创建虚拟环境</span>
+    python <span class="nt">-m</span> venv venv
+    <span class="nb">source </span>venv/bin/activate
+    
+    <span class="c"># 安装依赖</span>
+    pip <span class="nb">install</span> <span class="nt">--upgrade</span> pip
+    pip <span class="nb">install </span>torch torchvision torchaudio
+    pip <span class="nb">install </span>tensorflow
+    pip <span class="nb">install </span>numpy pandas matplotlib seaborn
+    pip <span class="nb">install </span>jupyter notebook
+    
+    <span class="nb">echo</span> <span class="s2">"环境设置完成！"</span>
+<span class="o">}</span>
+
+<span class="c"># GPU检查</span>
+check_gpu<span class="o">()</span> <span class="o">{</span>
+    <span class="k">if </span><span class="nb">command</span> <span class="nt">-v</span> nvidia-smi &amp;&gt; /dev/null<span class="p">;</span> <span class="k">then
+        </span><span class="nb">echo</span> <span class="s2">"GPU信息:"</span>
+        nvidia-smi <span class="nt">--query-gpu</span><span class="o">=</span>name,memory.total <span class="nt">--format</span><span class="o">=</span>csv
+    <span class="k">else
+        </span><span class="nb">echo</span> <span class="s2">"未检测到NVIDIA GPU"</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+setup_dl_environment
+check_gpu
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="4-表格">4. 表格</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>模型</th>
+      <th>参数量</th>
+      <th>训练数据</th>
+      <th>性能评分</th>
+      <th>发布时间</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GPT-3</td>
+      <td>175B</td>
+      <td>45TB</td>
+      <td>95.2</td>
+      <td>2020-06</td>
+    </tr>
+    <tr>
+      <td>GPT-4</td>
+      <td>~1.7T</td>
+      <td>未公开</td>
+      <td>98.1</td>
+      <td>2023-03</td>
+    </tr>
+    <tr>
+      <td>Llama 2</td>
+      <td>70B</td>
+      <td>2T tokens</td>
+      <td>94.7</td>
+      <td>2023-07</td>
+    </tr>
+    <tr>
+      <td>Claude 3</td>
+      <td>未公开</td>
+      <td>未公开</td>
+      <td>97.3</td>
+      <td>2024-03</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="5-引用">5. 引用</h2>
+
+<blockquote>
+  <p>“人工智能是新的电力。”</p>
+
+  <p>— 吴恩达</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>重要提示：</strong></p>
+
+  <p>在实际应用中，确保你的模型具有良好的泛化能力是至关重要的。过拟合是机器学习中的常见问题。</p>
+</blockquote>
+
+<h2 id="6-列表">6. 列表</h2>
+
+<h3 id="无序列表">无序列表</h3>
+
+<ul>
+  <li><strong>深度学习框架</strong>
+    <ul>
+      <li>PyTorch
+        <ul>
+          <li>动态计算图</li>
+          <li>强大的GPU支持</li>
+          <li>活跃的社区</li>
+        </ul>
+      </li>
+      <li>TensorFlow
+        <ul>
+          <li>静态计算图（TF 1.x）</li>
+          <li>TensorBoard可视化</li>
+          <li>生产环境部署</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="有序列表">有序列表</h3>
+
+<ol>
+  <li><strong>数据预处理</strong>
+    <ol>
+      <li>数据清洗</li>
+      <li>特征工程</li>
+      <li>数据标准化</li>
+    </ol>
+  </li>
+  <li><strong>模型训练</strong>
+    <ol>
+      <li>模型选择</li>
+      <li>超参数调优</li>
+      <li>交叉验证</li>
+    </ol>
+  </li>
+  <li><strong>模型评估</strong>
+    <ol>
+      <li>性能指标计算</li>
+      <li>模型解释性分析</li>
+      <li>错误分析</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="7-链接和图片">7. 链接和图片</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com">GitHub</a></td>
+      <td><a href="https://tensorflow.org">TensorFlow官网</a></td>
+      <td><a href="https://pytorch.org">PyTorch官网</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="8-图表mermaid">8. 图表（Mermaid）</h2>
+
+<h3 id="神经网络架构图">神经网络架构图</h3>
+
+<pre><code class="language-mermaid">graph TB
+    A[输入层&lt;br/&gt;784维] --&gt; B[隐藏层1&lt;br/&gt;128维]
+    B --&gt; C[隐藏层2&lt;br/&gt;64维]
+    C --&gt; D[输出层&lt;br/&gt;10维]
+    
+    B -.-&gt; E[ReLU激活]
+    C -.-&gt; F[ReLU激活]
+    D -.-&gt; G[Softmax激活]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#f3e5f5
+    style D fill:#e8f5e8
+</code></pre>
+
+<h3 id="训练流程图">训练流程图</h3>
+
+<pre><code class="language-mermaid">flowchart TD
+    A[开始] --&gt; B[加载数据]
+    B --&gt; C[数据预处理]
+    C --&gt; D[划分训练/验证集]
+    D --&gt; E[初始化模型]
+    E --&gt; F[前向传播]
+    F --&gt; G[计算损失]
+    G --&gt; H[反向传播]
+    H --&gt; I[更新参数]
+    I --&gt; J{收敛?}
+    J --&gt;|否| F
+    J --&gt;|是| K[模型评估]
+    K --&gt; L[保存模型]
+    L --&gt; M[结束]
+    
+    style A fill:#ffcdd2
+    style M fill:#c8e6c9
+    style J fill:#fff3e0
+</code></pre>
+
+<h2 id="9-任务列表">9. 任务列表</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />实现基础神经网络</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />添加激活函数支持</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />实现反向传播算法</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />添加正则化技术</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />实现不同优化器</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />添加模型可视化功能</li>
+</ul>
+
+<h2 id="10-脚注">10. 脚注</h2>
+
+<p>这是一个包含脚注的句子<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>。还有另一个脚注<sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>。</p>
+
+<h2 id="11-高亮文本">11. 高亮文本</h2>
+
+<p>==这是高亮文本==，用于强调重要内容。</p>
+
+<h2 id="12-总结">12. 总结</h2>
+
+<p>这个示例展示了我们的Markdown支持的所有功能：</p>
+
+<ol>
+  <li>✅ <strong>基础格式</strong> - 粗体、斜体、删除线</li>
+  <li>✅ <strong>数学公式</strong> - 行内和块级LaTeX数学公式</li>
+  <li>✅ <strong>代码高亮</strong> - 多种编程语言的语法高亮</li>
+  <li>✅ <strong>表格</strong> - 支持复杂表格格式</li>
+  <li>✅ <strong>引用块</strong> - 多级引用支持</li>
+  <li>✅ <strong>列表</strong> - 有序和无序列表</li>
+  <li>✅ <strong>图表</strong> - Mermaid图表支持</li>
+  <li>✅ <strong>任务列表</strong> - 交互式复选框</li>
+  <li>✅ <strong>脚注</strong> - 文档内脚注引用</li>
+</ol>
+
+<p>所有这些功能都已经在我们的技术博客中得到了完整支持！</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1">
+      <p>这是第一个脚注的内容，解释了相关概念。 <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>这是第二个脚注，提供了额外的信息和参考资料。 <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>

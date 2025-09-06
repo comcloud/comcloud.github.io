@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepSeek Series</title>
+  <meta name="description" content="DeepSeek 是一系列由 DeepSeek 开发的大型语言模型，具有强大的代码生成和理解能力。">
+  <link rel="canonical" href="http://0.0.0.0:4000/blog/LLM/deepseek/">
+  <link rel="alternate" type="application/rss+xml" title="成都犀牛 Feed"
+    href="http://0.0.0.0:4000/feed.xml">
+  
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/png" />
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+  
+  <!-- Meta tags for better SEO and social sharing -->
+  <meta property="og:title" content="DeepSeek Series">
+  <meta property="og:description" content="DeepSeek 是一系列由 DeepSeek 开发的大型语言模型，具有强大的代码生成和理解能力。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://0.0.0.0:4000/blog/LLM/deepseek/">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+  <div id="page" class="site">
+    <header class="site-header">
+  
+  <p class="site-title"><a class="logo-text" href="/">成都犀牛</a></p>
+  
+  <nav class="site-navigation">
+    <div class="site-navigation-wrap">
+      <h2 class="screen-reader-text">Main navigation</h2>
+      <ul class="menu">
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="/">Home</a>
+        </li>
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="/personal/">Personal</a>
+        </li>
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="/articles/">Articles</a>
+        </li>
+        
+        
+        
+        <li class="menu-item ">
+          <a class="" href="https://github.com/comcloud">comcloud</a>
+        </li>
+        
+      </ul><!-- .menu -->
+      <button id="menu-close" class="menu-toggle"><span class="screen-reader-text">Close Menu</span><span
+          class="icon-close" aria-hidden="true"></span></button>
+    </div><!-- .site-navigation-wrap -->
+  </nav><!-- .site-navigation -->
+  <button id="menu-open" class="menu-toggle"><span class="screen-reader-text">Open Menu</span><span class="icon-menu" aria-hidden="true"></span></button>
+</header>
+
+
+    <main class="site-main">
+      <main class="main-content fadeInDown delay_075s">
+  <header class="series-header">
+    <h1>Deepseek series 系列</h1>
+    
+      <p class="series-description">DeepSeek 是一系列由 DeepSeek 开发的大型语言模型，具有强大的代码生成和理解能力。</p>
+    
+  </header>
+  
+  <div class="series-content">
+    <div class="series-intro">
+  <p>DeepSeek 模型在自然语言处理和代码生成方面表现出色，是当前最先进的开源大语言模型之一。</p>
+  
+  <h3>主要特点</h3>
+  <ul>
+    <li> 🚀 <strong>高性能</strong>：在多项基准测试中表现优异</li>
+    <li> 💻 <strong>代码专长</strong>：特别擅长代码生成和理解</li>
+    <li> 🌐 <strong>多语言支持</strong>：支持多种编程语言和自然语言</li>
+    <li> 🔓 <strong>开源友好</strong>：提供开源版本供研究使用</li>
+  </ul>
+</div>
+
+<div class="post-content">
+  <div id="articles-container">
+    <div class="post-list" id="articles-list">
+      <!-- 动态内容将在这里加载 -->
+    </div>
+  </div>
+  
+  <p><a href="/blog/"> Back to Blog</a> | <a href="/"> Back to Home</a></p>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 获取当前系列名称
+    const seriesName = window.location.pathname.split('/')[2];
+    loadArticles(seriesName);
+  });
+  
+  function loadArticles(seriesName) {
+    const articlesList = document.getElementById('articles-list');
+    
+    // 模拟从API获取数据
+    // 在实际应用中，这里应该是一个真实的API调用
+    let articlesData = [];
+    
+    if (seriesName === 'deepseek') {
+      articlesData = [
+        {
+          title: "intro",
+          url: "/blog/deepseek/intro/",
+          type: "Markdown"
+        }
+      ];
+    }
+    
+    articlesList.innerHTML = '';
+    
+    articlesData.forEach(article => {
+      const articleElement = document.createElement('article');
+      articleElement.className = 'post';
+      articleElement.innerHTML = `
+        <div class="post-thumbnail">
+          <div class="placeholder-image">${article.type}</div>
+        </div>
+        <div class="post-content">
+          <h2><a href="${article.url}">${article.title}</a></h2>
+          <p>${article.type} format article</p>
+          <p class="read-more"><a href="${article.url}" class="read-more-link">Continue reading &rarr;</a></p>
+        </div>
+      `;
+      articlesList.appendChild(articleElement);
+    });
+  }
+</script>
+</main>
+    
+    <!-- 动态文章列表容器 -->
+    <div class="articles-section">
+      <h2>系列文章</h2>
+      <div class="articles-container" data-dynamic-series="deepseek">
+        <div class="dynamic-loading">
+          <div class="loading-spinner"></div>
+          <span>正在加载文章列表...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <nav class="series-navigation">
+    <p>
+      <a href="/blog/">← 返回博客</a> | 
+      <a href="/">← 返回首页</a>
+    </p>
+  </nav>
+  
+  <!-- 动态加载脚本 -->
+  <script src="/assets/js/dynamic-loader.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 初始化动态加载器
+      const loader = new DynamicBlogLoader({
+        baseUrl: '',
+        blogPath: '/blog/'
+      });
+      loader.init();
+      
+      // 获取当前系列名称
+      const seriesName = getSeriesName();
+      
+      // 加载系列文章
+      loadSeriesArticles(seriesName, loader);
+      
+      // 设置自动刷新
+      setupAutoRefresh(seriesName, loader);
+    });
+    
+    function getSeriesName() {
+      // 从URL路径获取系列名称
+      const pathParts = window.location.pathname.split('/').filter(part => part);
+      return pathParts[1] || 'deepseek';
+    }
+    
+    async function loadSeriesArticles(seriesName, loader) {
+      const container = document.querySelector('[data-dynamic-series]');
+      if (!container) return;
+      
+      try {
+        // 获取博客数据
+        const blogData = await loader.fetchBlogData();
+        const series = blogData.find(s => s.name === seriesName);
+        
+        if (!series || !series.files || series.files.length === 0) {
+          container.innerHTML = `
+            <div class="no-articles">
+              <p>该系列暂无文章</p>
+              <p class="help-text">在 <code>/blog/${seriesName}/</code> 目录下添加 Markdown 或 HTML 文件即可自动显示</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // 渲染文章列表
+        renderArticlesList(container, series);
+        
+      } catch (error) {
+        console.error('Failed to load series articles:', error);
+        container.innerHTML = `
+          <div class="error-message">
+            <p>⚠️ 加载文章列表失败</p>
+            <button onclick="location.reload()" class="retry-button">重试</button>
+          </div>
+        `;
+      }
+    }
+    
+    function renderArticlesList(container, series) {
+      const articlesHtml = series.files.map(file => {
+        const fileName = file.name.replace(/\.(md|html)$/, '');
+        const displayName = formatFileName(fileName);
+        const fileType = file.type || (file.name.endsWith('.md') ? 'markdown' : 'html');
+        const fileIcon = fileType === 'markdown' ? '📝' : '🌐';
+        
+        return `
+          <article class="article-item">
+            <div class="article-icon">${fileIcon}</div>
+            <div class="article-content">
+              <h3 class="article-title">
+                <a href="${file.url}">${displayName}</a>
+              </h3>
+              <div class="article-meta">
+                <span class="file-type-badge file-type-${fileType}">${fileType.toUpperCase()}</span>
+                <span class="file-name">${file.name}</span>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+      
+      container.innerHTML = `
+        <div class="articles-list">
+          ${articlesHtml}
+        </div>
+        <div class="articles-summary">
+          <p>共 <strong>${series.files.length}</strong> 篇文章</p>
+        </div>
+      `;
+    }
+    
+    function formatFileName(fileName) {
+      return fileName
+        .replace(/-/g, ' ')
+        .replace(/_/g, ' ')
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    }
+    
+    function setupAutoRefresh(seriesName, loader) {
+      // 每30秒检查一次内容更新
+      setInterval(async () => {
+        try {
+          loader.clearCache();
+          await loadSeriesArticles(seriesName, loader);
+        } catch (error) {
+          console.log('Auto refresh failed:', error);
+        }
+      }, 30000);
+    }
+  </script>
+  
+  <style>
+    .series-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .series-description {
+      font-size: 1.1em;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .articles-section {
+      margin: 3rem 0;
+    }
+    
+    .articles-section h2 {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .article-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .article-item:hover {
+      border-color: #ddd;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .article-icon {
+      font-size: 1.5em;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .article-content {
+      flex: 1;
+    }
+    
+    .article-title {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.2em;
+    }
+    
+    .article-title a {
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .article-title a:hover {
+      color: #2d72d9;
+      text-decoration: underline;
+    }
+    
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9em;
+      color: #888;
+    }
+    
+    .file-name {
+      font-family: monospace;
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    
+    .articles-summary {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+      color: #666;
+    }
+    
+    .no-articles, .error-message {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #666;
+    }
+    
+    .help-text {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 1rem;
+    }
+    
+    .help-text code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    
+    .retry-button {
+      background: #2d72d9;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    
+    .retry-button:hover {
+      background: #1e5bb8;
+    }
+    
+    .series-navigation {
+      margin-top: 3rem;
+      text-align: center;
+      border-top: 1px solid #eee;
+      padding-top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .article-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .article-icon {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+      
+      .article-meta {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</main>
+
+    </main>
+    <footer class="site-footer">
+  <div class="offsite-links">
+    
+      
+<a href="https://twitter.com/" target="_blank" rel="noopener">
+  <span class="fa-twitter" aria-hidden="true"></span>
+  <span class="screen-reader-text">Twitter</span>
+</a>
+
+<a href="https://github.com/" target="_blank" rel="noopener">
+  <span class="fa-github" aria-hidden="true"></span>
+  <span class="screen-reader-text">GitHub</span>
+</a>
+
+<a href="https://www.instagram.com/" target="_blank" rel="noopener">
+  <span class="fa-instagram" aria-hidden="true"></span>
+  <span class="screen-reader-text">Instagram</span>
+</a>
+
+<a href="https://www.linkedin.com/" target="_blank" rel="noopener">
+  <span class="fa-linkedin" aria-hidden="true"></span>
+  <span class="screen-reader-text">LinkedIn</span>
+</a>
+
+    
+  </div><!-- .offsite-links -->
+  <div class="footer-bottom">
+    <div class="site-info">
+      <p>© Scriptor all rights reserved. Theme by <a href="https://www.justgoodthemes.com">JustGoodThemes</a>.</p>
+
+    </div><!-- .site-info -->
+    <a href="#page" id="back-to-top" class="back-to-top"><span class="screen-reader-text">Back to the top </span>&#8593;</a>
+  </div><!-- .footer-bottom -->
+</footer><!-- .site-footer -->
+
+  </div><!-- .site -->
+
+  <!-- Scripts -->
+  
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+  
+  <script src="/assets/js/plugins.js"></script>
+  <script src="/assets/js/custom.js"></script>
+
+</body>
+</html>

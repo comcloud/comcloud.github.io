@@ -1,0 +1,275 @@
+[
+  {
+    "title": "plan act弊端",
+    "url": "/articles/AI-manus/plan-act弊端/",
+    "type": "markdown",
+    "category": "Ai Manus",
+    "date": "2025-09-06",
+    "tags": [],
+    "description": "Ai Manus相关技术文章",
+    "path": "AI-manus/plan-act弊端"
+  },
+  {
+    "title": "正则化",
+    "url": "/articles/深度学习基础知识/模型优化/正则化/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "优化算法",
+      "模型训练",
+      "正则化",
+      "过拟合"
+    ],
+    "description": "L1/L2正则化、Dropout等防止过拟合的技术",
+    "path": "深度学习基础知识/模型优化/正则化"
+  },
+  {
+    "title": "梯度优化方法",
+    "url": "/articles/深度学习基础知识/模型优化/梯度优化方法/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "优化算法",
+      "模型训练"
+    ],
+    "description": "深度学习基础相关技术文章",
+    "path": "深度学习基础知识/模型优化/梯度优化方法"
+  },
+  {
+    "title": "SGD",
+    "url": "/articles/深度学习基础知识/模型优化/SGD/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "优化算法",
+      "模型训练",
+      "梯度下降"
+    ],
+    "description": "随机梯度下降(SGD)的原理和实践应用",
+    "path": "深度学习基础知识/模型优化/SGD"
+  },
+  {
+    "title": "RMSprop",
+    "url": "/articles/深度学习基础知识/模型优化/RMSprop/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "优化算法",
+      "模型训练",
+      "梯度下降"
+    ],
+    "description": "RMSprop优化器的原理和适用场景",
+    "path": "深度学习基础知识/模型优化/RMSprop"
+  },
+  {
+    "title": "Momentum",
+    "url": "/articles/深度学习基础知识/模型优化/Momentum/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "优化算法",
+      "模型训练",
+      "梯度下降"
+    ],
+    "description": "动量(Momentum)优化器的原理和效果",
+    "path": "深度学习基础知识/模型优化/Momentum"
+  },
+  {
+    "title": "Adam",
+    "url": "/articles/深度学习基础知识/模型优化/Adam/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "优化算法",
+      "模型训练",
+      "梯度下降"
+    ],
+    "description": "Adam优化器的原理、优势和使用技巧",
+    "path": "深度学习基础知识/模型优化/Adam"
+  },
+  {
+    "title": "相对熵与交叉熵",
+    "url": "/articles/深度学习基础知识/损失函数/相对熵与交叉熵/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "损失函数",
+      "机器学习",
+      "分类",
+      "信息论"
+    ],
+    "description": "相对熵和交叉熵的数学原理及在分类任务中的应用",
+    "path": "深度学习基础知识/损失函数/相对熵与交叉熵"
+  },
+  {
+    "title": "损失函数总览",
+    "url": "/articles/深度学习基础知识/损失函数/损失函数总览/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "损失函数",
+      "机器学习"
+    ],
+    "description": "常见损失函数的原理、特点和使用场景",
+    "path": "深度学习基础知识/损失函数/损失函数总览"
+  },
+  {
+    "title": "MSE",
+    "url": "/articles/深度学习基础知识/损失函数/MSE/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "损失函数",
+      "机器学习",
+      "回归"
+    ],
+    "description": "均方误差(MSE)损失函数的原理和应用",
+    "path": "深度学习基础知识/损失函数/MSE"
+  },
+  {
+    "title": "MAE",
+    "url": "/articles/深度学习基础知识/损失函数/MAE/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "损失函数",
+      "机器学习",
+      "回归"
+    ],
+    "description": "平均绝对误差(MAE)损失函数的原理和应用",
+    "path": "深度学习基础知识/损失函数/MAE"
+  },
+  {
+    "title": "项目文档分析与 README 撰写指南",
+    "url": "/articles/提示词/项目文档分析与 README 撰写指南/",
+    "type": "markdown",
+    "category": "提示词",
+    "date": "2025-09-06",
+    "tags": [],
+    "description": "提示词相关技术文章",
+    "path": "提示词/项目文档分析与 README 撰写指南"
+  },
+  {
+    "title": "量化的核心原理",
+    "url": "/articles/llm/qwen/量化的核心原理/",
+    "type": "markdown",
+    "category": "LLM",
+    "date": "2025-09-06",
+    "tags": [
+      "LLM",
+      "Qwen",
+      "量化"
+    ],
+    "description": "神经网络量化的数学原理和实现机制",
+    "path": "llm/qwen/量化的核心原理"
+  },
+  {
+    "title": "总览",
+    "url": "/articles/llm/llama/总览/",
+    "type": "markdown",
+    "category": "LLM",
+    "date": "2025-09-06",
+    "tags": [
+      "LLM",
+      "Llama",
+      "大模型"
+    ],
+    "description": "Llama系列大模型全面解析",
+    "path": "llm/llama/总览"
+  },
+  {
+    "title": "Llama Example Article",
+    "url": "/articles/llm/llama/llama-example/",
+    "type": "markdown",
+    "category": "LLM",
+    "date": "2025-09-06",
+    "tags": [
+      "LLM",
+      "Llama",
+      "大模型"
+    ],
+    "description": "LLM相关技术文章",
+    "path": "llm/llama/llama-example"
+  },
+  {
+    "title": "intro",
+    "url": "/articles/llm/deepseek/intro/",
+    "type": "markdown",
+    "category": "LLM",
+    "date": "2025-09-06",
+    "tags": [
+      "LLM",
+      "DeepSeek",
+      "代码生成"
+    ],
+    "description": "技术特点和应用场景介绍",
+    "path": "llm/deepseek/intro"
+  },
+  {
+    "title": "markdown syntax",
+    "url": "/articles/example/markdown-syntax/",
+    "type": "markdown",
+    "category": "示例",
+    "date": "2025-09-06",
+    "tags": [
+      "示例",
+      "Markdown"
+    ],
+    "description": "示例相关技术文章",
+    "path": "example/markdown-syntax"
+  },
+  {
+    "title": "提示词及工作流设计",
+    "url": "/articles/chatppt/提示词及工作流设计/",
+    "type": "markdown",
+    "category": "Chatppt",
+    "date": "2025-09-06",
+    "tags": [],
+    "description": "Chatppt相关技术文章",
+    "path": "chatppt/提示词及工作流设计"
+  },
+  {
+    "title": "快速入门",
+    "url": "/articles/AI-manus/快速入门/",
+    "type": "markdown",
+    "category": "Ai Manus",
+    "date": "2025-09-06",
+    "tags": [],
+    "description": "Ai Manus相关技术文章",
+    "path": "AI-manus/快速入门"
+  },
+  {
+    "title": "激活函数",
+    "url": "/articles/深度学习基础知识/激活函数/",
+    "type": "markdown",
+    "category": "深度学习基础",
+    "date": "2025-09-06",
+    "tags": [
+      "深度学习",
+      "激活函数",
+      "神经网络"
+    ],
+    "description": "深度学习中常用激活函数的原理和应用",
+    "path": "深度学习基础知识/激活函数"
+  }
+]

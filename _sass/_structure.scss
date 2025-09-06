@@ -1,8 +1,72 @@
 /* ==========================================================================
-   3. Structure
+   3. Enhanced Structure
    ========================================================================== */
 
+/* Legacy container for backward compatibility */
 .inner {
   margin: 0 auto;
   max-width: 760px;
+  padding: 0 var(--space-md);
+  
+  @media (min-width: 768px) {
+    padding: 0 var(--space-lg);
+  }
+}
+
+/* Enhanced main content wrapper */
+.main-content {
+  min-height: 80vh;
+  padding: var(--space-xl) 0;
+  
+  @media (min-width: 768px) {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+/* Section spacing */
+section {
+  margin-bottom: var(--space-3xl);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Content spacing */
+.content-section {
+  padding: var(--space-2xl) 0;
+  
+  @media (min-width: 768px) {
+    padding: var(--space-3xl) 0;
+  }
+  
+  &.content-section-sm {
+    padding: var(--space-xl) 0;
+    
+    @media (min-width: 768px) {
+      padding: var(--space-2xl) 0;
+    }
+  }
+}
+
+/* Article layout */
+.article-layout {
+  max-width: 65ch;
+  margin: 0 auto;
+  
+  @media (min-width: 1024px) {
+    max-width: 75ch;
+  }
+}
+
+/* Wide layout for galleries, tables, etc */
+.wide-layout {
+  max-width: var(--container-lg);
+  margin: 0 auto;
+}
+
+/* Full width sections */
+.full-width {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
 }

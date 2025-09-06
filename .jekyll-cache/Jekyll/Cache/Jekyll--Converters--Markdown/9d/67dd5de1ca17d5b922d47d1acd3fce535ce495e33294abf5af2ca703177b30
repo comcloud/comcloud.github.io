@@ -1,0 +1,530 @@
+I"�<h2 id="核心指导原则"><strong>核心指导原则</strong></h2>
+
+<p>这些提示词将引导大模型扮演一个<strong>“PPT内容规划师和智能撰稿人”</strong>的角色，其核心任务是：</p>
+
+<ol>
+  <li><strong>理解用户意图与主题。</strong></li>
+  <li><strong>理解并遵循PPT模板的结构和视觉约束。</strong></li>
+  <li><strong>生成结构化、高质量、且与模板完美匹配的PPT内容。</strong></li>
+</ol>
+
+<hr />
+
+<pre><code class="language-mermaid">%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffd8d8', 'edgeLabelBackground':'#fff', 'tertiaryColor': '#fff0f0'}}}%%
+flowchart LR
+    %% 定义节点样式
+    classDef templateNode fill:#ffd1dc,stroke:#c2185b,stroke-width:2px,color:#000;
+    classDef modelNode fill:#c8e6c9,stroke:#388e3c,stroke-width:2px;
+    classDef outputNode fill:#bbdefb,stroke:#1976d2,stroke-width:2px;
+    classDef techNode fill:#d1c4e9,stroke:#7b1fa2,stroke-width:2px;
+    
+    %% 工作流节点
+    A([PPT模板文件.pptx]):::templateNode --&gt; B[模板深度解析引擎]
+    B --&gt;|输出| C[[结构化模板描述\nJSON/YAML]]:::outputNode
+    
+    D([用户原始需求]) --&gt; E{大模型智能规划}
+    C --&gt; E
+    E --&gt;|输出| F[[结构化PPT大纲]]:::outputNode
+    
+    F --&gt; G{大模型内容生成}
+    C --&gt; G
+    D --&gt; G
+    G --&gt;|输出| H[[结构化页面内容\nJSON]]:::outputNode
+    
+    H --&gt; I[[PPT填充引擎]]
+    A --&gt; I
+    C --&gt; I
+    I --&gt;|输出| J([最终PPT文件.pptx]):::outputNode
+    
+    %% 添加炫酷效果
+    style B fill:#ffcdd2,stroke:#e53935,stroke-width:3px
+    style E fill:#b3e5fc,stroke:#0288d1,stroke-width:3px,stroke-dasharray:5 5
+    style G fill:#dcedc8,stroke:#689f38,stroke-width:3px
+    style I fill:#ffecb3,stroke:#ffa000,stroke-width:3px
+    
+    %% 添加动态元素
+    click B callback "模板解析详情"
+    click E callback "AI规划过程"
+    click G callback "内容生成逻辑"
+    
+
+    
+    %% 添加连接线特效
+    linkStyle 0,1,2,3,4,5,6,7 stroke:#616161,stroke-width:2px;
+    linkStyle 0,3,6 stroke:#9c27b0,stroke-width:2px,stroke-dasharray:3 3;
+    
+</code></pre>
+
+<blockquote>
+  <p>我们将该应用分多个阶段来完成</p>
+</blockquote>
+
+<h4 id="阶段-1-模板深度解析与结构化工具辅助阶段"><strong>阶段 1: 模板深度解析与结构化（工具辅助阶段）</strong></h4>
+
+<p><strong>目标:</strong> 深度解析PPT模板，提取其所有视觉、结构和语义信息，并持久化为结构化描述文件。这一阶段的提示词主要针对<strong>后端服务</strong>，指导它如何利用工具进行模板解析。大模型在后续阶段才会使用到这些解析结果。</p>
+
+<p><strong>后端服务提示词 / 指令：</strong></p>
+
+<p><strong>指令名称：</strong> parse_and_store_ppt_template</p>
+
+<p><strong>描述：</strong> 接收一个PPTX文件，对其进行深度解析，提取模板的颜色方案、字体方案、所有幻灯片布局及其占位符的详细语义信息（类型、位置、大小、默认样式、预期语义、内容约束如最大长度/推荐内容类型），并将这些信息以JSON/YAML格式持久化存储。</p>
+
+<p><strong>可调用工具：</strong></p>
+<ul>
+  <li><strong>工具名称：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>python_pptx_parser
+</pre></td></tr></tbody></table></code>
+    <ul>
+      <li><strong>描述：</strong> 一个Python库封装，能够加载PPTX文件，访问其主题、母版页、幻灯片布局和占位符属性。提供以下核心功能：
+        <ul>
+          <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>get_template_theme_info(file_path)
+</pre></td></tr></tbody></table></code>: 获取模板的颜色方案和字体方案。</li>
+          <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>list_slide_layouts(file_path)
+</pre></td></tr></tbody></table></code>: 列出所有可用的幻灯片布局及其基本信息。</li>
+          <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>get_layout_details(file_path, layout_id)
+</pre></td></tr></tbody></table></code>: 获取特定布局的详细信息，包括所有占位符的类型、位置、大小和默认文本/语义线索。</li>
+          <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>infer_placeholder_semantic(placeholder_data)
+</pre></td></tr></tbody></table></code>: (内部辅助函数) 根据占位符的属性（如默认文本、位置、大小）推断其更具体的语义（例如：’主标题’, ‘图片占位’, ‘两列内容-左’）。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>输入参数：</strong></p>
+<ul>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>ppt_template_file_path
+</pre></td></tr></tbody></table></code>: 待解析的PPTX文件的本地路径。</li>
+</ul>
+
+<p><strong>输出：</strong></p>
+<ul>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_description_json
+</pre></td></tr></tbody></table></code>: 解析后的结构化JSON字符串，包含模板所有元数据。</li>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>status
+</pre></td></tr></tbody></table></code>: “success” 或 “failure”。</li>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>message
+</pre></td></tr></tbody></table></code>: 成功或失败的详细信息。</li>
+</ul>
+
+<p><strong>持久化操作：</strong></p>
+<ul>
+  <li>成功解析后，将<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_description_json
+</pre></td></tr></tbody></table></code>保存到指定目录，文件名为<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_id.json
+</pre></td></tr></tbody></table></code>。</li>
+</ul>
+
+<hr />
+
+<h4 id="阶段-2-智能内容规划与大纲生成大模型核心阶段"><strong>阶段 2: 智能内容规划与大纲生成（大模型核心阶段）</strong></h4>
+
+<p><strong>目标:</strong> 大模型根据用户需求和模板约束，规划PPT的整体大纲和每页的初步内容结构。</p>
+
+<p><strong>大模型提示词：</strong></p>
+
+<p>你是一个专业的PPT内容规划师和智能撰稿人。你的任务是根据用户的需求和指定的PPT模板约束，生成结构化、高质量且符合该模板视觉风格的PPT内容大纲。</p>
+
+<p><strong>可调用工具：</strong></p>
+
+<ul>
+  <li><strong>工具名称：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_info_loader
+</pre></td></tr></tbody></table></code>
+    <ul>
+      <li><strong>描述：</strong> 从预先解析并存储的JSON文件中加载指定PPT模板的详细结构化描述。</li>
+      <li><strong>功能：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>load_template_description(template_id)
+</pre></td></tr></tbody></table></code></li>
+      <li><strong>输入：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_id
+</pre></td></tr></tbody></table></code> (字符串，唯一标识一个PPT模板)</li>
+      <li><strong>输出：</strong> JSON对象，包含模板的 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>color_scheme
+</pre></td></tr></tbody></table></code>, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>font_scheme
+</pre></td></tr></tbody></table></code>, 和 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>layouts
+</pre></td></tr></tbody></table></code> 列表 (每个布局包含 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>layout_name
+</pre></td></tr></tbody></table></code>, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>layout_id
+</pre></td></tr></tbody></table></code>, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>description
+</pre></td></tr></tbody></table></code>, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>placeholders
+</pre></td></tr></tbody></table></code> 及其 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>semantic
+</pre></td></tr></tbody></table></code>, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>max_length
+</pre></td></tr></tbody></table></code>, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>style_hint
+</pre></td></tr></tbody></table></code> 等)。</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>用户输入：</strong></p>
+<ol>
+  <li><strong>用户需求主题：</strong> [在此处填充用户提供的PPT主题，例如：“AI在医疗领域的最新应用”]</li>
+  <li><strong>用户核心内容要求：</strong> [在此处填充用户可能有的具体内容要求，例如：“需要包含诊断、药物研发和个性化治疗的案例，并提及伦理挑战。”]</li>
+  <li><strong>PPT模板ID：</strong> [在此处填充用户选择的PPT模板的唯一ID，例如：“business_clean_v1”]</li>
+</ol>
+
+<p><strong>任务步骤：</strong></p>
+<ol>
+  <li><strong>调用 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_info_loader.load_template_description(PPT模板ID)
+</pre></td></tr></tbody></table></code> 工具</strong>，获取所选模板的完整结构化描述。</li>
+  <li><strong>仔细阅读并内化</strong>工具返回的模板信息，理解所有可用布局、占位符的语义、长度限制以及视觉风格（字体、配色）。</li>
+  <li><strong>结合用户需求，智能规划</strong>整个PPT的结构和内容。
+    <ul>
+      <li>确定合适的幻灯片数量和逻辑顺序。</li>
+      <li>为每张幻灯片选择最匹配的<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>layout_id
+</pre></td></tr></tbody></table></code>。</li>
+      <li>为每张幻灯片拟定一个简洁明了的<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>slide_title
+</pre></td></tr></tbody></table></code>。</li>
+      <li>为每张幻灯片规划主要内容点，并基于模板占位符的语义，指示每个占位符应该填充什么类型的内容（例如：文本、列表、图片描述、图表数据结构等），并遵守其<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>max_length
+</pre></td></tr></tbody></table></code>和<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>style_hint
+</pre></td></tr></tbody></table></code>。</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>输出格式要求：</strong>
+请以JSON格式输出你的PPT大纲和初步内容框架。<strong>禁止</strong>包含任何额外文字或解释，仅输出JSON。</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"ppt_outline"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"slide_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"slide_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AI在医疗领域的革新与机遇"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"suggested_layout_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"title_slide"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content_type_hints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"primary_title"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subtitle"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"slide_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"slide_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"引言：AI为何能改变医疗？"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"suggested_layout_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"title_and_content"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content_type_hints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"slide_heading"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main_content"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="nl">"format_hint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"slide_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"slide_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AI辅助诊断的突破"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"suggested_layout_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"two_column_text"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content_type_hints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"slide_heading"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"left_column_content"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="nl">"format_hint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"right_column_content"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="nl">"format_hint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main_image"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image_description"</span><span class="p">,</span><span class="w"> </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"需要一张展示AI分析医疗影像的科技感图片"</span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="err">更多幻灯片规划</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"template_id_used"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[实际使用的模板ID]"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>保存为临时文件：</strong> 这一阶段的JSON输出将被保存为<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>session_id_outline.json
+</pre></td></tr></tbody></table></code>。</p>
+
+<hr />
+
+<h4 id="阶段-3-逐页内容撰写与ppt生成大模型与工具协同阶段"><strong>阶段 3: 逐页内容撰写与PPT生成（大模型与工具协同阶段）</strong></h4>
+
+<p><strong>目标:</strong></p>
+
+<p>（包括文本、图片描述、图表数据），并最终通过工具填充到PPT模板中，生成最终文件。这个阶段可以分步进行，或一次性生成所有内容。为了精细控制和调试，分步生成更佳。</p>
+
+<p><strong>大模型提示词（针对每页内容的撰写）：</strong></p>
+
+<p>你是一位资深的PPT内容撰稿人。你的任务是根据给定的幻灯片大纲和模板约束，为特定的PPT幻灯片撰写具体内容。</p>
+
+<p><strong>可调用工具：</strong></p>
+
+<ul>
+  <li><strong>工具名称：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_info_loader
+</pre></td></tr></tbody></table></code>
+    <ul>
+      <li><strong>描述：</strong> 从预先解析并存储的JSON文件中加载指定PPT模板的详细结构化描述。</li>
+      <li><strong>功能：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>load_template_description(template_id)
+</pre></td></tr></tbody></table></code></li>
+      <li><strong>输入：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_id
+</pre></td></tr></tbody></table></code> (字符串)</li>
+      <li><strong>输出：</strong> JSON对象，包含模板的 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>layouts
+</pre></td></tr></tbody></table></code> 列表及其占位符详情。</li>
+    </ul>
+  </li>
+  <li><strong>工具名称：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>image_generator_api
+</pre></td></tr></tbody></table></code> (假设有此工具)
+    <ul>
+      <li><strong>描述：</strong> 根据文本描述生成一张相关的图片，并返回图片URL。</li>
+      <li><strong>功能：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>generate_image(description)
+</pre></td></tr></tbody></table></code></li>
+      <li><strong>输入：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>description
+</pre></td></tr></tbody></table></code> (字符串，对所需图片的详细描述)</li>
+      <li><strong>输出：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>image_url
+</pre></td></tr></tbody></table></code> (字符串，生成的图片URL) 或 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>error
+</pre></td></tr></tbody></table></code>。</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>用户输入：</strong></p>
+
+<ol>
+  <li>
+    <p><strong>当前幻灯片的大纲信息：</strong> [从<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>session_id_outline.json
+</pre></td></tr></tbody></table></code>中读取的单页JSON对象，例如：]</p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"slide_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"slide_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AI辅助诊断的突破"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"suggested_layout_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"two_column_text"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"content_type_hints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"slide_heading"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"left_column_content"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="nl">"format_hint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"right_column_content"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w"> </span><span class="nl">"format_hint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main_image"</span><span class="p">,</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image_description"</span><span class="p">,</span><span class="w"> </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"需要一张展示AI分析医疗影像的科技感图片"</span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>PPT模板ID：</strong> [例如：“business_clean_v1”]</p>
+  </li>
+  <li>
+    <p><strong>用户原始需求（可选，用于保持上下文）：</strong> [如前所述]</p>
+  </li>
+</ol>
+
+<p><strong>任务步骤：</strong></p>
+
+<ol>
+  <li><strong>调用 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_info_loader.load_template_description(PPT模板ID)
+</pre></td></tr></tbody></table></code> 工具</strong>，获取所选模板的完整结构化描述，以便精确匹配占位符细节。</li>
+  <li><strong>根据“当前幻灯片的大纲信息”</strong>，为每个<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>placeholder_semantic
+</pre></td></tr></tbody></table></code>撰写具体内容。
+    <ul>
+      <li><strong>文本内容：</strong> 严格遵守<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>max_length
+</pre></td></tr></tbody></table></code>和<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>style_hint
+</pre></td></tr></tbody></table></code>（如列表格式）。</li>
+      <li><strong>图片内容：</strong> 如果<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>type
+</pre></td></tr></tbody></table></code>是<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>image_description
+</pre></td></tr></tbody></table></code>，调用<strong><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>image_generator_api.generate_image(description)
+</pre></td></tr></tbody></table></code>工具</strong>，将生成的<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>image_url
+</pre></td></tr></tbody></table></code>作为内容返回。如果工具调用失败，提供备用文本描述。</li>
+      <li><strong>图表内容：</strong> 如果<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>type
+</pre></td></tr></tbody></table></code>是<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>chart_data
+</pre></td></tr></tbody></table></code>，生成JSON格式的图表类型、标题、系列数据等。</li>
+    </ul>
+  </li>
+</ol>
+
+<p>输出格式要求：</p>
+
+<p>请以JSON格式输出当前幻灯片的所有填充内容。禁止包含任何额外文字或解释，仅输出JSON。</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"slide_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"layout_used"</span><span class="p">:</span><span class="w"> </span><span class="s2">"two_column_text"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"elements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"slide_heading"</span><span class="p">,</span><span class="w"> </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AI辅助诊断的突破"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"left_column_content"</span><span class="p">,</span><span class="w"> </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"### 影像诊断：从辅助到主导</span><span class="se">\n</span><span class="s2">* **高精度图像识别：** AI在X光、CT、MRI等影像中快速识别微小病变，如早期肺癌结节、视网膜病变。</span><span class="se">\n</span><span class="s2">* **效率提升：** 大幅缩短诊断时间，减轻医生负担。"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"right_column_content"</span><span class="p">,</span><span class="w"> </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"### 疾病风险预测与预警</span><span class="se">\n</span><span class="s2">* **大数据分析：** 整合患者病历、基因、生活习惯等多源数据，预测疾病发生风险。</span><span class="se">\n</span><span class="s2">* **个性化干预：** 基于风险评估，为患者提供定制化的预防和治疗建议。"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nl">"placeholder_semantic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main_image"</span><span class="p">,</span><span class="w"> </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://image_[generator.com/api/images/ai_medical_imaging_123.png](https://generator.com/api/images/ai_medical_imaging_123.png)"</span><span class="p">}</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">假设通过工具调用获得</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>保存为临时文件：</strong> 这一阶段的JSON输出（每页一个文件或一个包含所有页的列表）将被保存为<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>session_id_slide_contents_pageX.json
+</pre></td></tr></tbody></table></code> 或 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>session_id_slide_contents_all.json
+</pre></td></tr></tbody></table></code>。</p>
+
+<hr />
+
+<p><strong>后端PPT生成器提示词 / 指令：</strong></p>
+
+<p><strong>指令名称：</strong> generate_ppt_from_content</p>
+
+<p><strong>描述：</strong> 接收已解析的模板描述、用户选择的物理模板文件路径以及大模型生成的结构化PPT页面内容，使用python-pptx等库将内容填充到模板中，并生成最终的PPTX文件。</p>
+
+<p><strong>可调用工具：</strong></p>
+<ul>
+  <li><strong>工具名称：</strong> <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>python_pptx_generator
+</pre></td></tr></tbody></table></code>
+    <ul>
+      <li><strong>描述：</strong> 一个Python库封装，用于基于模板创建和修改PPTX文件。提供以下核心功能：
+        <ul>
+          <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>load_template(template_file_path)
+</pre></td></tr></tbody></table></code>: 加载一个PPTX模板文件。</li>
+          <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>add_slide(layout_id)
+</pre></td></tr></tbody></table></code>: 根据布局ID添加新幻灯片。</li>
+          <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>fill_placeholder(slide, placeholder_semantic, content)
+</pre></td></tr></tbody></table></code>: 根据语义填充文本、图片、表格或图表数据。自动处理文本样式继承、图片插入、表格/图表创建。</li>
+          <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>save_ppt(output_file_path)
+</pre></td></tr></tbody></table></code>: 保存生成的PPTX文件。</li>
+          <li>(内部辅助函数) <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>get_placeholder_by_semantic(slide_layout, semantic)
+</pre></td></tr></tbody></table></code>: 根据语义查找对应的占位符对象。</li>
+          <li>(内部辅助函数) <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>apply_text_style(text_frame, style_hint)
+</pre></td></tr></tbody></table></code>: 根据大模型提供的<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>style_hint
+</pre></td></tr></tbody></table></code>或模板默认样式调整文本。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>输入参数：</strong></p>
+<ul>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>physical_template_path
+</pre></td></tr></tbody></table></code>: 模板文件的实际路径。</li>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_description_json
+</pre></td></tr></tbody></table></code>: 节点1生成的模板结构化描述（加载）。</li>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>ppt_page_contents_json
+</pre></td></tr></tbody></table></code>: 节点3生成的所有页面的结构化内容（加载）。</li>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>output_file_path
+</pre></td></tr></tbody></table></code>: 最终PPT的保存路径。</li>
+</ul>
+
+<p><strong>输出：</strong></p>
+<ul>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>final_ppt_file_path
+</pre></td></tr></tbody></table></code>: 生成的PPT文件的路径。</li>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>status
+</pre></td></tr></tbody></table></code>: “success” 或 “failure”。</li>
+  <li><code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>message
+</pre></td></tr></tbody></table></code>: 成功或失败的详细信息。</li>
+</ul>
+
+<hr />
+
+<p><strong>核心理念：</strong></p>
+
+<ul>
+  <li><strong>清晰的工具接口：</strong> 大模型不必了解<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>python-pptx
+</pre></td></tr></tbody></table></code>的内部细节，它只需要知道<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>template_info_loader
+</pre></td></tr></tbody></table></code>可以提供模板信息，<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>image_generator_api
+</pre></td></tr></tbody></table></code>可以生成图片。后端服务负责封装和调用这些底层工具。</li>
+  <li><strong>大模型专注于高层逻辑：</strong> 大模型的主要任务是“思考”和“创作”，即理解需求、规划结构、撰写内容。</li>
+  <li><strong>后端服务负责执行：</strong> 后端服务根据大模型的输出和内置的工具指令，执行具体的PPT文件操作、图片生成等。</li>
+  <li><strong>分阶段持久化：</strong> 每一步的关键输出都保存为临时文件，增强了系统的健壮性和可调试性。</li>
+</ul>
+
+:ET

@@ -1,0 +1,97 @@
+I"�<main class="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-container">
+        <div class="hero-left">
+          <div class="hero-avatar">
+            <span>📚</span>
+          </div>
+        </div>
+        <div class="hero-right">
+          <h1 class="hero-title">技术文章</h1>
+          <p class="hero-subtitle">探索人工智能与深度学习的实践之路</p>
+          <p class="hero-description">记录学习心得、技术探索和项目实践，分享有价值的技术内容。</p>
+          <div class="hero-actions">
+            <a href="/personal/resume/" class="btn btn-secondary">查看简历</a>
+            <a href="/" class="btn btn-ghost">返回首页</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content-section">
+    <div class="container">
+      <div class="grid grid-2">
+        
+        <!-- 技术分享 -->
+        <div class="card">
+          <h3>AI &amp; 机器学习</h3>
+          <div class="project-item">
+            <h4>深度学习实践</h4>
+            <p>PyTorch、TensorFlow框架应用，模型训练与优化经验分享</p>
+          </div>
+          <div class="project-item">
+            <h4>大模型应用</h4>
+            <p>LangChain、RAG系统开发，提示工程与模型微调实践</p>
+          </div>
+          <div class="card-actions">
+            <a href="/articles/ai/" class="btn btn-ghost">查看文章 →</a>
+          </div>
+        </div>
+
+        <!-- 后端技术 -->
+        <div class="card">
+          <h3>后端开发</h3>
+          <div class="project-item">
+            <h4>Java Spring Boot</h4>
+            <p>微服务架构设计，RESTful API开发最佳实践</p>
+          </div>
+          <div class="project-item">
+            <h4>数据库设计</h4>
+            <p>MySQL优化、Redis缓存策略，数据库性能调优</p>
+          </div>
+          <div class="card-actions">
+            <a href="/articles/backend/" class="btn btn-ghost">查看文章 →</a>
+          </div>
+        </div>
+
+        <!-- 项目实践 -->
+        <div class="card">
+          <h3>项目实战</h3>
+          <div class="project-item">
+            <h4>法律助手RAG系统</h4>
+            <p>基于大模型的智能问答系统开发全过程</p>
+          </div>
+          <div class="project-item">
+            <h4>ChatPPT生成器</h4>
+            <p>自动化PPT生成工具的设计与实现</p>
+          </div>
+          <div class="card-actions">
+            <a href="/articles/projects/" class="btn btn-ghost">查看文章 →</a>
+          </div>
+        </div>
+
+        <!-- 学习资源 -->
+        <div class="card">
+          <h3>学习笔记</h3>
+          <div class="project-item">
+            <h4>算法与数据结构</h4>
+            <p>刷题总结、面试经验，编程基础巩固</p>
+          </div>
+          <div class="project-item">
+            <h4>技术文档</h4>
+            <p>开发工具使用、环境配置、最佳实践汇总</p>
+          </div>
+          <div class="card-actions">
+            <a href="/articles/notes/" class="btn btn-ghost">查看文章 →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+:ET

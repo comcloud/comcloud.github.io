@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>激活函数</title>
+  <meta name="description" content="">
+  <link rel="canonical" href="http://0.0.0.0:4000/articles/深度学习基础知识/激活函数/">
+  <link href="/assets/css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i%7CNoto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
+  
+  <!-- Enhanced Prism.js for comprehensive syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+  
+  <!-- MathJax for math formulas -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- Mermaid for diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      themeVariables: {
+        primaryColor: '#2d72d9',
+        primaryTextColor: '#333',
+        primaryBorderColor: '#2d72d9',
+        lineColor: '#666'
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="page" class="site">
+    <div class="inner">
+      <header class="site-header">
+        <p class="site-title"><a class="logo-text" href="/">成都犀牛</a></p>
+        <nav class="site-navigation">
+          <div class="site-navigation-wrap">
+            <ul class="menu">
+              <li class="menu-item"><a href="/">Home</a></li>
+              <li class="menu-item"><a href="/personal/">Personal</a></li>
+              <li class="menu-item"><a href="/articles/">Articles</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      
+      <main class="main-content fadeInDown delay_075s">
+        <article class="post markdown-content">
+          <header class="post-header">
+            <h1 class="post-title">激活函数</h1>
+            
+            
+            
+          </header>
+          <div class="post-content">
+            
+<h3 id="41-sigmoid函数">4.1 <strong>Sigmoid函数</strong></h3>
+<p>公式： 
+\(\sigma(x) = \frac{1}{1 + e^{-x}}\)</p>
+
+<p><strong>优点</strong>：</p>
+
+<ul>
+  <li>输出范围在 ( (0, 1) ) 之间，适合二分类任务的概率输出。</li>
+  <li>函数平滑，具有良好的数学性质。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+<ul>
+  <li><strong>梯度消失</strong>：当输入值过大或过小时，梯度非常小，导致反向传播时更新缓慢。</li>
+  <li><strong>输出不以零为中心</strong>：会导致梯度下降时参数更新不平衡。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Sigmoid Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"sigmoid(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="42-tanh函数">4.2 <strong>Tanh函数</strong></h3>
+<p>公式： 
+\(\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}\)
+<strong>优点</strong>：</p>
+<ul>
+  <li>输出范围在 ( (-1, 1) ) 之间，输出对称于零。</li>
+  <li>比 Sigmoid 更好地避免梯度消失问题。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+<ul>
+  <li>对于大输入值，依然存在梯度消失问题。</li>
+  <li>计算复杂度相较于 Sigmoid 稍微高一点。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Tanh Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"tanh(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="43-relu函数-rectified-linear-unit">4.3 <strong>ReLU函数 (Rectified Linear Unit)</strong></h3>
+<p>公式： 
+\(\text{ReLU}(x) = \max(0, x)\)
+<strong>优点</strong>：</p>
+<ul>
+  <li>计算简单且高效，广泛应用于深度学习。</li>
+  <li>可以减少梯度消失问题。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+<ul>
+  <li><strong>神经元死亡问题</strong>：对于负数输入，ReLU 的输出始终为零，可能导致神经元在训练中“死亡”。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">relu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"ReLU Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"ReLU(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="44-leaky-relu函数">4.4 <strong>Leaky ReLU函数</strong></h3>
+<p>公式： 
+\(\text{Leaky ReLU}(x) = \max(\alpha x, x)\)
+<strong>优点</strong>：</p>
+<ul>
+  <li>解决了 ReLU 的神经元死亡问题。即使输入小于零，输出也不会完全为零。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+<ul>
+  <li>参数 (\alpha) 的选择需要实验调优，且较为简单。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">leaky_relu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">leaky_relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Leaky ReLU Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"Leaky ReLU(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="45-prelu函数-parametric-relu">4.5 <strong>PReLU函数 (Parametric ReLU)</strong></h3>
+<p>公式： 
+\(\text{PReLU}(x) = \max(\alpha x, x) \quad \text{with learnable} \ \alpha\)</p>
+
+<p><strong>优点</strong>：</p>
+
+<ul>
+  <li>(\alpha) 是可学习的，可以根据训练数据进行优化，解决了 Leaky ReLU 中固定 (\alpha) 的问题。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+<ul>
+  <li>增加了模型的复杂度，需要额外的训练。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">PReLU</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.01</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># Simulated PReLU behavior for illustration
+</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"PReLU Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"PReLU(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="46-elu函数-exponential-linear-unit">4.6 <strong>ELU函数 (Exponential Linear Unit)</strong></h3>
+<p>公式： 
+\(\text{ELU}(x) = \begin{cases} 
+x, &amp; x &gt; 0 \\
+\alpha (e^x - 1), &amp; x \leq 0 
+\end{cases}\)
+<strong>优点</strong>：</p>
+<ul>
+  <li>输出负数的区域避免了死神经元问题。</li>
+  <li>提供了更加平滑的输出，且当 (x &lt; 0) 时有非线性激活。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+
+<ul>
+  <li>计算较为复杂，可能导致训练时的计算开销较大。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">elu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"ELU Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"ELU(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="47-selu函数-scaled-exponential-linear-unit">4.7 <strong>SELU函数 (Scaled Exponential Linear Unit)</strong></h3>
+<p>公式： 
+\(\text{SELU}(x) = \lambda \times \text{ELU}(x)\)
+<strong>优点</strong>：</p>
+<ul>
+  <li>对于深层神经网络，能够自动进行自我归一化，避免梯度消失或爆炸问题。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+<ul>
+  <li>只适用于某些特定的网络架构（如自归一化网络）。</li>
+  <li>需要特定的初始化。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">selu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0507</span> <span class="o">*</span> <span class="n">elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.6733</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">selu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"SELU Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"SELU(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="48-swish函数">4.8 <strong>Swish函数</strong></h3>
+<p>公式： 
+\(\text{Swish}(x) = x \times \sigma(x)\)
+<strong>优点</strong>：</p>
+<ul>
+  <li>平滑且非单调，能够有效缓解梯度消失问题。</li>
+  <li>在很多任务中比 ReLU 和 Sigmoid 等表现更好。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+<ul>
+  <li>计算复杂度比 ReLU 要高。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">swish</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">swish</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Swish Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"Swish(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="49-mish函数">4.9 <strong>Mish函数</strong></h3>
+<p>公式： 
+\(\text{Mish}(x) = x \times \tanh(\text{softplus}(x))\)</p>
+
+\[softplus = ( \ln(1 + e^x)\]
+
+<p><strong>优点</strong>：</p>
+<ul>
+  <li>提供更好的平滑性和非线性，能够在多个深度学习任务中取得更好的性能。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+<ul>
+  <li>计算复杂度相较于 ReLU 更高。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">mish</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">mish</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Mish Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"Mish(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="410-softmax函数">4.10 <strong>Softmax函数</strong></h3>
+<p>公式： 
+\(\text{Softmax}(x_i) = \frac{e^{x_i}}{\sum_j e^{x_j}}\)
+<strong>优点</strong>：</p>
+<ul>
+  <li>常用于多分类问题，能够将输出转换为概率分布。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+<ul>
+  <li>对于类别数目较多时，计算可能较为复杂，且容易受到极端输入值的影响。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">e_x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># Subtract max for numerical stability
+</span>    <span class="k">return</span> <span class="n">e_x</span> <span class="o">/</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">e_x</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Softmax Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"Softmax(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="411-swiglu函数">4.11 <strong>SwiGLU函数</strong></h3>
+<p>公式： 
+\(\text{SwiGLU}(x) = \text{ReLU}(x) \times \text{Sigmoid}(x)\)
+<strong>优点</strong>：</p>
+<ul>
+  <li>结合了 ReLU 和 Sigmoid 的优点，能够在某些任务中提供更好的非线性表现。</li>
+</ul>
+
+<p><strong>缺点</strong>：</p>
+
+<ul>
+  <li>计算复杂度稍高于单独的 ReLU 或 Sigmoid。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">swiglu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">swiglu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"SwiGLU Function"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"x"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"SwiGLU(x)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+
+          </div>
+          <footer class="post-footer">
+            <div class="post-navigation">
+              <a href="/articles/" class="nav-link">← 返回文章列表</a>
+              <a href="/" class="nav-link">返回首页 →</a>
+            </div>
+          </footer>
+        </article>
+      </main>
+      
+      <footer class="site-footer">
+        <div class="offsite-links">
+          &copy; Scriptor all rights reserved. Theme by [JustGoodThemes](https://www.justgoodthemes.com).
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  <!-- Enhanced Prism.js with all plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+  
+  <script src="/assets/js/plugins.js"></script>
+  <script src="/assets/js/custom.js"></script>
+  
+  <style>
+    /* Enhanced styles for markdown content */
+    .markdown-content {
+      line-height: 1.8;
+    }
+    
+    .markdown-content pre {
+      position: relative;
+      margin: 1.5em 0;
+      border-radius: 8px;
+      overflow: visible;
+    }
+    
+    .markdown-content pre[class*="language-"] {
+      padding: 1em;
+      margin: 1.5em 0;
+      background: #2d3748;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .markdown-content code[class*="language-"] {
+      font-size: 0.9em;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    }
+    
+    .markdown-content :not(pre) > code {
+      background: #f1f5f9;
+      color: #e53e3e;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+    
+    .markdown-content blockquote {
+      border-left: 4px solid #2d72d9;
+      margin: 1.5em 0;
+      padding: 0.5em 1em;
+      background: #f8f9fa;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .markdown-content table {
+      width: 100%;
+      margin: 1.5em 0;
+      border-collapse: collapse;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .markdown-content th,
+    .markdown-content td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .markdown-content th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    
+    .markdown-content tr:hover {
+      background: #f1f5f9;
+    }
+    
+    /* Math formulas */
+    .MathJax {
+      font-size: 1.1em !important;
+    }
+    
+    /* Mermaid diagrams */
+    .mermaid {
+      text-align: center;
+      margin: 2em 0;
+    }
+    
+    .post-tags {
+      margin: 15px 0;
+    }
+    .tag {
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-size: 0.85em;
+      margin-right: 8px;
+    }
+    .post-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    .nav-link {
+      color: #2d72d9;
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid #2d72d9;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      background: #2d72d9;
+      color: white;
+    }
+    
+    /* Code block enhancements */
+    .line-numbers .line-numbers-rows {
+      border-right: 1px solid #4a5568 !important;
+    }
+    
+    .toolbar {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      z-index: 10;
+    }
+    
+    .toolbar .toolbar-item button {
+      background: #4a5568;
+      border: none;
+      color: white;
+      padding: 0.25em 0.5em;
+      border-radius: 3px;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    
+    .toolbar .toolbar-item button:hover {
+      background: #2d3748;
+    }
+    
+    @media (max-width: 600px) {
+      .post-navigation {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .markdown-content pre[class*="language-"] {
+        margin: 1em -20px;
+        border-radius: 0;
+      }
+      
+      .markdown-content table {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</body>
+</html>

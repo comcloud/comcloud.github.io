@@ -1,0 +1,66 @@
+I"a
+<ol>
+  <li><strong>均方误差（MSE, Mean Squared Error）</strong>：
+    <ul>
+      <li>公式：($\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$)</li>
+      <li>适用于回归问题，衡量预测值与真实值之间的平方差。</li>
+    </ul>
+  </li>
+  <li><strong>平均绝对误差（MAE, Mean Absolute Error）</strong>：
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>公式：($\frac{1}{n} \sum_{i=1}^{n}</td>
+              <td>y_i - \hat{y}_i</td>
+              <td>$)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>适用于回归问题，衡量预测值与真实值之间的绝对差。</li>
+    </ul>
+  </li>
+  <li><strong>Huber损失（Huber Loss）</strong>：
+    <ul>
+      <li>公式：($\frac{1}{n} \sum_{i=1}^{n} L_\ (y_i, \hat{y}_i)$)</li>
+      <li>其中 ($L_\ (y_i, \hat{y}_i) = \begin{cases} 
+\frac{1}{2} (y_i - \hat{y}_i)^2 &amp; \text{if } |y_i - \hat{y}_i| \leq \ <br />
+\ (|y_i - \hat{y}_i| - \frac{1}{2} ) &amp; \text{otherwise} 
+\end{cases}$)</li>
+      <li>结合了MSE和MAE的优点，适用于回归问题，能够对异常值有较好的鲁棒性。</li>
+    </ul>
+  </li>
+  <li><strong>Kullback-Leibler散度（KL Divergence）</strong>：
+    <ul>
+      <li>公式：($\sum_{i=1}^{n} p(x_i) \log \frac{p(x_i)}{q(x_i)}$)</li>
+      <li>适用于衡量两个概率分布之间的差异，常用于生成模型和概率模型中。</li>
+    </ul>
+  </li>
+  <li><strong>交叉熵损失（Cross-Entropy Loss）</strong>：
+    <ul>
+      <li>公式：($-\sum_{i=1}^{n} y_i \log(\hat{y}_i)$)</li>
+      <li>适用于分类问题，尤其是二分类和多分类问题，用于衡量分类模型输出概率与真实标签的差异。</li>
+    </ul>
+  </li>
+  <li><strong>对数损失（Log Loss）</strong>：
+    <ul>
+      <li>公式：($-\frac{1}{n} \sum_{i=1}^{n} \left( y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right)$)</li>
+      <li>常用于二分类问题，类似于交叉熵损失，通常用于<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>Logistic
+</pre></td></tr></tbody></table></code>回归。</li>
+    </ul>
+  </li>
+  <li><strong>对比损失（Contrastive Loss）</strong>：
+    <ul>
+      <li>适用于度量学习任务，用于衡量一对样本的相似度或不相似度。</li>
+    </ul>
+  </li>
+  <li><strong>Triplet损失（Triplet Loss）</strong>：
+    <ul>
+      <li>适用于深度度量学习，用于训练模型在样本空间中区分正负样本。</li>
+    </ul>
+  </li>
+</ol>
+:ET

@@ -1,0 +1,183 @@
+I"J1<h2 id="项目文档分析与-readme-撰写指南"><strong>项目文档分析与 README 撰写指南</strong></h2>
+
+<h3 id="第一步项目概览与定位"><strong>第一步：项目概览与定位</strong></h3>
+
+<p><strong>核心任务：</strong> 快速浏览项目，从宏观上理解其目的、解决的问题和核心价值。</p>
+
+<p><strong>执行指令：</strong></p>
+
+<ul>
+  <li><strong>文件扫描：</strong> 首先，全面阅读项目根目录下的 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>README.md
+</pre></td></tr></tbody></table></code>（如果有）、<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>package.json
+</pre></td></tr></tbody></table></code> 以及 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>package-lock.json
+</pre></td></tr></tbody></table></code>。</li>
+  <li><strong>目标识别：</strong> 根据 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>description
+</pre></td></tr></tbody></table></code> 字段、依赖项和项目结构，提炼出项目的核心目的和主要功能。</li>
+  <li><strong>撰写摘要：</strong> 用一到两句话的高度概括性语言，描述项目是什么以及它的主要作用，作为 README 的引言部分。</li>
+</ul>
+
+<h3 id="第二步技术栈与架构"><strong>第二步：技术栈与架构</strong></h3>
+
+<p><strong>核心任务：</strong> 深入分析项目的技术细节，为读者提供清晰的技术蓝图。</p>
+
+<p><strong>执行指令：</strong></p>
+
+<ul>
+  <li><strong>依赖分析：</strong> 详细列出 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>package.json
+</pre></td></tr></tbody></table></code> 中的所有 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>dependencies
+</pre></td></tr></tbody></table></code> 和 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>devDependencies
+</pre></td></tr></tbody></table></code>，并简要说明它们在项目中的作用（例如，React 用于构建 UI，Express 用于后端）。</li>
+  <li><strong>文件结构解读：</strong> 根据项目目录结构，推断出是单体应用还是微服务架构，是前端项目还是全栈项目。</li>
+  <li><strong>架构图生成：</strong> 如果项目复杂，尝试生成一个简化的 ASCII 文本架构图或 Mermaid 代码块，直观地展示各组件之间的关系。</li>
+</ul>
+
+<h3 id="第三步快速上手指南"><strong>第三步：快速上手指南</strong></h3>
+
+<p><strong>核心任务：</strong> 编写一个详尽且易于遵循的安装和运行指南，确保任何新开发者都能顺利启动项目。</p>
+
+<p><strong>执行指令：</strong></p>
+
+<ul>
+  <li><strong>前提条件：</strong> 列出所有必要的软件依赖（如 Node.js 版本、数据库）。</li>
+  <li><strong>安装步骤：</strong> 提供详细的命令行步骤，包括克隆仓库、安装依赖和启动服务。</li>
+  <li><strong>配置说明：</strong> 指出任何需要手动配置的文件（如 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>.env
+</pre></td></tr></tbody></table></code>），并提供一个 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>.env.example
+</pre></td></tr></tbody></table></code> 文件的内容，以供参考。</li>
+</ul>
+
+<h3 id="第四步核心功能与特性"><strong>第四步：核心功能与特性</strong></h3>
+
+<p><strong>核心任务：</strong> 从用户和开发者的角度，全面介绍项目提供的核心功能，并提供代码示例。</p>
+
+<p><strong>执行指令：</strong></p>
+
+<ul>
+  <li><strong>功能点罗列：</strong> 以清晰的列表形式，详细描述项目的主要功能。例如，“用户认证系统”、“实时消息传递”、“文件上传功能”等。</li>
+  <li><strong>代码片段展示：</strong> 为每个主要功能点提供一个简短的代码片段或使用示例。这些代码片段应该从项目中提取，并用 Markdown 代码块格式化。</li>
+  <li><strong>亮点突出：</strong> 识别项目中的独特之处或技术创新点，并加以重点描述。</li>
+</ul>
+
+<h3 id="第五步贡献指南与未来计划"><strong>第五步：贡献指南与未来计划</strong></h3>
+
+<p><strong>核心任务：</strong> 鼓励社区参与，并向潜在贡献者展示项目的长期愿景。</p>
+
+<p><strong>执行指令：</strong></p>
+
+<ul>
+  <li><strong>贡献流程：</strong> 简要说明如何贡献代码，包括提交 Issue、Fork 仓库、创建分支和提交 Pull Request 的标准流程。</li>
+  <li><strong>未来路线图：</strong> 列出项目未来的发展方向或计划新增的功能，向社区展示项目的活力。</li>
+</ul>
+
+<hr />
+
+<p><strong>最终输出要求：</strong></p>
+
+<p>将以上所有内容整合为一个完整的 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>README.md
+</pre></td></tr></tbody></table></code> 文件。文件必须采用标准的 Markdown 格式，包含清晰的标题、列表、代码块和粗体等元素，以确保内容的可读性和专业性。</p>
+
+<blockquote>
+  <p>Here’s the professional English translation above Markdown document while preserving all formatting and structure:</p>
+</blockquote>
+
+<hr />
+
+<h2 id="project-documentation-analysis-and-readme-writing-guide"><strong>Project Documentation Analysis and README Writing Guide</strong></h2>
+
+<h3 id="step-1-project-overview-and-positioning"><strong>Step 1: Project Overview and Positioning</strong></h3>
+
+<p><strong>Core Task:</strong> Quickly scan the project to understand its purpose, the problems it solves, and its core value at a high level.</p>
+
+<p><strong>Execution Instructions:</strong></p>
+<ul>
+  <li><strong>File Scan:</strong> Start by thoroughly reading the project’s root directory files, including <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>README.md
+</pre></td></tr></tbody></table></code> (if available), <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>package.json
+</pre></td></tr></tbody></table></code>, and <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>package-lock.json
+</pre></td></tr></tbody></table></code>.</li>
+  <li><strong>Goal Identification:</strong> Extract the project’s core purpose and main features based on the <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>description
+</pre></td></tr></tbody></table></code> field, dependencies, and project structure.</li>
+  <li><strong>Write a Summary:</strong> Provide a one-to-two-sentence high-level summary describing what the project is and its primary function. This will serve as the introduction in the README.</li>
+</ul>
+
+<hr />
+
+<h3 id="step-2-tech-stack-and-architecture"><strong>Step 2: Tech Stack and Architecture</strong></h3>
+
+<p><strong>Core Task:</strong> Dive into the project’s technical details to provide readers with a clear technical blueprint.</p>
+
+<p><strong>Execution Instructions:</strong></p>
+<ul>
+  <li><strong>Dependency Analysis:</strong> List all <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>dependencies
+</pre></td></tr></tbody></table></code> and <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>devDependencies
+</pre></td></tr></tbody></table></code> from <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>package.json
+</pre></td></tr></tbody></table></code>, along with a brief explanation of their roles (e.g., React for UI, Express for backend).</li>
+  <li><strong>File Structure Interpretation:</strong> Infer whether the project follows a monolithic or microservices architecture, and whether it’s frontend, backend, or full-stack.</li>
+  <li><strong>Architecture Diagram:</strong> For complex projects, generate a simplified ASCII text diagram or Mermaid code block to visually represent component relationships.</li>
+</ul>
+
+<hr />
+
+<h3 id="step-3-quick-start-guide"><strong>Step 3: Quick Start Guide</strong></h3>
+
+<p><strong>Core Task:</strong> Write a detailed and easy-to-follow setup and launch guide to ensure new developers can run the project smoothly.</p>
+
+<p><strong>Execution Instructions:</strong></p>
+<ul>
+  <li><strong>Prerequisites:</strong> List all required software dependencies (e.g., Node.js version, database).</li>
+  <li><strong>Installation Steps:</strong> Provide detailed CLI commands for cloning the repo, installing dependencies, and launching the service.</li>
+  <li><strong>Configuration Notes:</strong> Highlight any files requiring manual configuration (e.g., <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>.env
+</pre></td></tr></tbody></table></code>) and include a reference <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>.env.example
+</pre></td></tr></tbody></table></code> file.</li>
+</ul>
+
+<hr />
+
+<h3 id="step-4-core-features-and-capabilities"><strong>Step 4: Core Features and Capabilities</strong></h3>
+
+<p><strong>Core Task:</strong> Thoroughly introduce the project’s core features from both user and developer perspectives, supplemented with code examples.</p>
+
+<p><strong>Execution Instructions:</strong></p>
+<ul>
+  <li><strong>Feature Listing:</strong> Describe the main functionalities in a clear bullet-point list (e.g., “User Authentication,” “Real-Time Messaging,” “File Upload”).</li>
+  <li><strong>Code Snippets:</strong> Include short, relevant code snippets or usage examples for each feature, extracted from the project and formatted in Markdown code blocks.</li>
+  <li><strong>Highlight Innovations:</strong> Identify unique aspects or technical innovations in the project and emphasize them.</li>
+</ul>
+
+<hr />
+
+<h3 id="step-5-contribution-guidelines-and-future-plans"><strong>Step 5: Contribution Guidelines and Future Plans</strong></h3>
+
+<p><strong>Core Task:</strong> Encourage community participation and showcase the project’s long-term vision to potential contributors.</p>
+
+<p><strong>Execution Instructions:</strong></p>
+<ul>
+  <li><strong>Contribution Process:</strong> Briefly explain the workflow for contributing code, including submitting Issues, Forking the repo, creating branches, and opening Pull Requests.</li>
+  <li><strong>Future Roadmap:</strong> List planned features or development directions to demonstrate project momentum.</li>
+</ul>
+
+<hr />
+
+<p><strong>Final Output Requirements:</strong><br />
+Compile all the above into a complete <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>README.md
+</pre></td></tr></tbody></table></code> file. The document must use standard Markdown formatting (headings, lists, code blocks, bold text, etc.) to ensure readability and professionalism.</p>
+
+:ET

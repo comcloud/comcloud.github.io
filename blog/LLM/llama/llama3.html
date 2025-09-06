@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llama 3 & 3.1 全面学习指南</title>
+    <style>
+        :root {
+            --primary: #1DA1F2; /* Twitter蓝色调 */
+            --secondary: #657786;
+            --accent: #17BF63;
+            --light: #F5F8FA;
+            --dark: #14171A;
+            --success: #17BF63;
+            --warning: #FFAD1F;
+            --danger: #E0245E;
+            --radius: 12px;
+            --shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), #1991DA);
+            color: white;
+            padding: 120px 0 150px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            margin-bottom: 80px;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.08)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+            background-size: cover;
+            opacity: 0.5;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            animation: fadeInDown 1s ease;
+            font-weight: 800;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            position: relative;
+            animation: fadeIn 1.5s ease;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2.5s infinite;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(245, 248, 250, 0.98);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+
+        .nav-container.scrolled {
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+            background: rgba(29, 161, 242, 0.1);
+        }
+
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: var(--primary);
+            transition: var(--transition);
+            transform: translateX(-50%);
+            border-radius: 4px 4px 0 0;
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: calc(100% - 30px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        section:nth-child(even) {
+            background-color: white;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%23F5F8FA" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"/><path fill="%23F5F8FA" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"/><path fill="%23F5F8FA" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        section:nth-child(even)::before {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%23ffffff" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"/><path fill="%23ffffff" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"/><path fill="%23ffffff" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"/></svg>');
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            font-weight: 800;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 100px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin: 50px 0 25px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        h4 {
+            font-size: 1.6rem;
+            margin: 40px 0 20px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--dark);
+        }
+
+        .highlight {
+            background-color: rgba(29, 161, 242, 0.15);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: var(--primary);
+            border-left: 3px solid var(--primary);
+        }
+
+        ul, ol {
+            margin-bottom: 30px;
+            padding-left: 40px;
+        }
+
+        li {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--dark);
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 50px 0;
+            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+            overflow: hidden;
+            animation: fadeInUp 1s ease;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1.15rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(29, 161, 242, 0.03);
+        }
+
+        tr:hover {
+            background-color: rgba(29, 161, 242, 0.08);
+        }
+
+        /* Card Styles */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .card {
+            flex: 1 1 400px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 25px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .card-footer {
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.02);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 1rem;
+            color: var(--secondary);
+            text-align: center;
+        }
+
+        /* Tech Feature */
+        .tech-feature {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--accent);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        .tech-feature:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .tech-feature h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        /* Diagram */
+        .diagram {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            margin: 50px 0;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 50px;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 30px, 100% 0, 100% 100%, 0 100%);
+            margin-top: 80px;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%2314171A" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"/><path fill="%2314171A" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"/><path fill="%2314171A" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            margin: 0 25px 20px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 1rem;
+            margin-top: 40px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-25px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-12px) translateX(-50%);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(25px, 25px) rotate(5deg);
+            }
+            50% {
+                transform: translate(0, 50px) rotate(0deg);
+            }
+            75% {
+                transform: translate(-25px, 25px) rotate(-5deg);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.6rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            h3 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            section::before {
+                top: -60px;
+                height: 60px;
+            }
+            
+            .card {
+                flex: 1 1 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.9rem;
+            }
+            
+            h3 {
+                font-size: 1.6rem;
+            }
+
+            nav {
+                padding: 15px 0;
+                justify-content: flex-start;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            nav::-webkit-scrollbar {
+                display: none;
+            }
+            
+            nav a {
+                margin: 0 15px;
+                font-size: 1rem;
+                padding: 8px 12px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+            
+            section::before {
+                top: -50px;
+                height: 50px;
+            }
+            
+            .card {
+                flex: 1 1 100%;
+            }
+            
+            .tech-feature {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 1.9rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+            }
+            
+            h4 {
+                font-size: 1.3rem;
+            }
+            
+            header {
+                padding: 80px 0 120px;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            p, li {
+                font-size: 1.1rem;
+            }
+            
+            th, td {
+                padding: 15px;
+                font-size: 0.95rem;
+            }
+            
+            .footer-links a {
+                margin: 0 15px 15px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Floating Elements */
+        .floating-llama {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%231DA1F2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5l7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            z-index: -1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            z-index: 99;
+            font-size: 1.8rem;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--accent);
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Math Formula */
+        .math-formula {
+            background: rgba(29, 161, 242, 0.08);
+            padding: 25px;
+            border-radius: var(--radius);
+            margin: 30px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            border-left: 4px solid var(--primary);
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 25px;
+            border-radius: var(--radius);
+            margin: 30px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .code-block .keyword {
+            color: #c678dd;
+        }
+        
+        .code-block .function {
+            color: #61afef;
+        }
+        
+        .code-block .string {
+            color: #98c379;
+        }
+        
+        .code-block .comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+        
+        .code-block .number {
+            color: #d19a66;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background-color: #f1f1f1;
+            border-radius: var(--radius);
+            margin: 40px 0;
+            overflow: hidden;
+            height: 12px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: var(--radius);
+            width: 0;
+            transition: width 2s ease;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 2px dotted var(--primary);
+            cursor: help;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: var(--dark);
+            color: #fff;
+            text-align: center;
+            border-radius: var(--radius);
+            padding: 15px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 1rem;
+            line-height: 1.6;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--dark) transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 5px;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            width: 50%;
+            padding: 25px;
+            animation: fadeIn 1s ease;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 35px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            width: 25px;
+            height: 25px;
+            background: white;
+            transform: rotate(45deg);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            right: -12px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -12px;
+        }
+
+        .timeline-date {
+            display: block;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            animation: slideInLeft 1s ease;
+        }
+
+        .timeline-item:nth-child(even) {
+            animation: slideInRight 1s ease;
+        }
+
+        /* Model Comparison */
+        .model-comparison {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .model-card {
+            flex: 1 1 350px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .model-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .model-header {
+            padding: 25px;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .model-body {
+            padding: 30px;
+        }
+
+        .model-specs {
+            margin-bottom: 20px;
+        }
+
+        .model-specs h5 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .model-specs ul {
+            padding-left: 25px;
+            margin-bottom: 0;
+        }
+
+        .model-specs li {
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .feature-item {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Version Comparison */
+        .version-comparison {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .version-card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border-top: 5px solid var(--primary);
+        }
+
+        .version-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .version-header {
+            padding: 25px;
+            background: rgba(29, 161, 242, 0.1);
+            text-align: center;
+        }
+
+        .version-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .version-date {
+            color: var(--secondary);
+            font-size: 1rem;
+        }
+
+        .version-body {
+            padding: 30px;
+        }
+
+        /* Performance Chart */
+        .performance-chart {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            margin: 60px 0;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .chart-container {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            border-radius: var(--radius);
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .chart-placeholder {
+            width: 80%;
+            height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            border-radius: var(--radius);
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-llama" style="top: 15%; left: 5%;"></div>
+    <div class="floating-llama" style="top: 65%; left: 85%; animation-delay: 3s;"></div>
+    <div class="floating-llama" style="top: 35%; left: 75%; animation-delay: 6s;"></div>
+    <div class="floating-llama" style="top: 75%; left: 15%; animation-delay: 9s;"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Llama 3 & 3.1 全面学习指南</h1>
+            <p class="subtitle">Meta开源大语言模型的技术演进与多语言突破</p>
+        </div>
+        <div class="scroll-down" onclick="scrollToContent()">↓</div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container" id="navbar">
+        <nav>
+            <a href="#overview" class="active">概述</a>
+            <a href="#architecture">核心架构</a>
+            <a href="#multilingual">多语言能力</a>
+            <a href="#training">训练方法</a>
+            <a href="#performance">性能评估</a>
+            <a href="#comparison">版本对比</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>Llama 3 & 3.1 概述</h2>
+            <p>Llama 3是Meta于2024年4月推出的新一代开源大语言模型，作为Llama系列的最新成员，它在模型规模、多语言支持和推理能力等方面都有显著提升。随后发布的Llama 3.1进一步优化了训练数据和上下文长度，巩固了Llama系列在开源大模型领域的领先地位。</p>
+            
+            <div class="tech-feature">
+                <h4>Llama 3系列的主要突破</h4>
+                <ul>
+                    <li><strong>扩展的词汇量</strong>：128K token词汇表，支持更多语言和符号</li>
+                    <li><strong>优化的分词器</strong>：提升编码效率15%，减少token数量</li>
+                    <li><strong>多语言支持</strong>：显著改善非英语语言表现</li>
+                    <li><strong>推理能力</strong>：数学和代码生成能力大幅提升</li>
+                    <li><strong>Llama 3.1增强</strong>：优化数据质量，扩展上下文长度</li>
+                </ul>
+            </div>
+            
+            <h3>Llama 3系列模型</h3>
+            
+            <div class="model-comparison">
+                <div class="model-card">
+                    <div class="model-header">Llama 3-8B</div>
+                    <div class="model-body">
+                        <div class="model-specs">
+                            <h5>规格参数</h5>
+                            <ul>
+                                <li>80亿参数</li>
+                                <li>32层Transformer</li>
+                                <li>32个注意力头</li>
+                                <li>上下文长度8K</li>
+                                <li>128K词汇表</li>
+                            </ul>
+                        </div>
+                        <div class="model-specs">
+                            <h5>适用场景</h5>
+                            <ul>
+                                <li>边缘设备部署</li>
+                                <li>研究实验</li>
+                                <li>轻量级应用</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="model-card">
+                    <div class="model-header">Llama 3-70B</div>
+                    <div class="model-body">
+                        <div class="model-specs">
+                            <h5>规格参数</h5>
+                            <ul>
+                                <li>700亿参数</li>
+                                <li>80层Transformer</li>
+                                <li>64个注意力头</li>
+                                <li>上下文长度8K</li>
+                                <li>128K词汇表</li>
+                            </ul>
+                        </div>
+                        <div class="model-specs">
+                            <h5>适用场景</h5>
+                            <ul>
+                                <li>企业级应用</li>
+                                <li>云服务</li>
+                                <li>复杂推理任务</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="model-card">
+                    <div class="model-header">Llama 3.1</div>
+                    <div class="model-body">
+                        <div class="model-specs">
+                            <h5>优化改进</h5>
+                            <ul>
+                                <li>训练数据质量提升</li>
+                                <li>上下文长度扩展</li>
+                                <li>多语言能力增强</li>
+                                <li>推理能力优化</li>
+                            </ul>
+                        </div>
+                        <div class="model-specs">
+                            <h5>适用场景</h5>
+                            <ul>
+                                <li>长文本处理</li>
+                                <li>多语言应用</li>
+                                <li>专业领域任务</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>历史意义</h3>
+            <p>Llama 3系列的发布标志着开源大语言模型在多语言和长上下文方面的重要突破：</p>
+            <ul>
+                <li><strong>多语言标杆</strong>：首个在非英语语言上达到商用水平的开源大模型</li>
+                <li><strong>技术演进</strong>：证明了数据质量比数量更重要</li>
+                <li><strong>生态影响</strong>：催生大量多语言应用和衍生模型</li>
+                <li><strong>Llama 3.1</strong>：回应社区需求，优化关键能力</li>
+            </ul>
+        </section>
+
+        <!-- Architecture Section -->
+        <section id="architecture">
+            <h2>核心架构与技术特点</h2>
+            
+            <p>Llama 3在Llama 2架构基础上进行了多项创新，这些改进共同提升了模型的多语言能力和计算效率。</p>
+            
+            <h3>Transformer架构优化</h3>
+            <p>Llama 3保留了Llama 2的纯解码器Transformer架构，但进行了以下关键改进：</p>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔤</div>
+                    <h4 class="feature-title">扩展词汇表</h4>
+                    <p>词汇表从32K扩展到128K token，显著提升编码效率，减少非英语语言的token数量。</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🧮</div>
+                    <h4 class="feature-title">优化分词器</h4>
+                    <p>新的分词算法提升15%的编码效率，特别改善代码和数学符号的处理。</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h4 class="feature-title">多语言优化</h4>
+                    <p>架构调整和训练数据平衡显著提升非英语语言的理解和生成能力。</p>
+                </div>
+            </div>
+            
+            <h3>分组查询注意力(GQA)增强</h3>
+            <p>Llama 3延续了Llama 2的GQA设计，但进行了以下优化：</p>
+            
+            <div class="tech-feature">
+                <h4>GQA增强特性</h4>
+                <ul>
+                    <li><strong>动态分组</strong>：根据输入长度动态调整分组策略</li>
+                    <li><strong>内存优化</strong>：进一步减少KV缓存内存占用</li>
+                    <li><strong>长上下文支持</strong>：优化长序列的注意力计算</li>
+                </ul>
+            </div>
+            
+            <div class="diagram">
+                <p><em>[Llama 3架构示意图]</em></p>
+                <div style="background:#eee; height:350px; display:flex; justify-content:center; align-items:center; border-radius:var(--radius);">
+                    <p>Llama 3架构核心组件示意图</p>
+                </div>
+            </div>
+            
+            <h3>旋转位置编码(RoPE)改进</h3>
+            <p>Llama 3对RoPE进行了针对性优化以支持更长上下文：</p>
+            
+            <div class="math-formula">
+                RoPE(xₘ, m) = (Wₙxₙ)eⁱmθₙ<br>
+                其中θₙ = 10000⁻²ⁿ/d，d是维度，n是位置索引
+            </div>
+            
+            <p>Llama 3.1进一步扩展了上下文长度支持，通过调整θₙ的基数和插值策略实现更稳定的长序列处理。</p>
+            
+            <h3>SwiGLU激活函数</h3>
+            <p>Llama 3继续使用SwiGLU激活函数，其数学表达式为：</p>
+            
+            <div class="math-formula">
+                SwiGLU(x) = (swish(W₁x)) ⊙ (W₂x)<br>
+                其中swish(x) = x · σ(x)，σ表示sigmoid函数，⊙表示逐元素乘法
+            </div>
+            
+            <p>实验表明，SwiGLU在多语言场景下比标准FFN具有更强的表达能力。</p>
+        </section>
+
+        <!-- Multilingual Section -->
+        <section id="multilingual">
+            <h2>多语言能力突破</h2>
+            
+            <p>Llama 3在多语言支持方面取得了显著进展，使其成为首个在非英语语言上达到商用水平的开源大模型。</p>
+            
+            <h3>多语言训练数据</h3>
+            <p>Llama 3使用了更平衡的多语言数据分布：</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="language-progress"></div>
+            </div>
+            
+            <ul>
+                <li><strong>英语</strong>：占比约50%，质量严格筛选</li>
+                <li><strong>欧洲语言</strong>：法语、德语、西班牙语等各占5-8%</li>
+                <li><strong>亚洲语言</strong>：中文、日语、韩语等各占3-5%</li>
+                <li><strong>其他语言</strong>：涵盖30+种语言的代表性文本</li>
+            </ul>
+            
+            <h3>分词器优化</h3>
+            <p>Llama 3的128K词汇表分词器针对多语言进行了特别设计：</p>
+            
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">词汇扩展</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>包含更多非英语字符和子词</li>
+                            <li>优化罕见语言的分词效率</li>
+                            <li>平衡不同语言的token数量</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">编码效率</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>中文token数量减少40%</li>
+                            <li>日语分词效率提升35%</li>
+                            <li>非拉丁文字支持显著改善</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">特殊符号</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>数学符号全覆盖</li>
+                            <li>编程语言token优化</li>
+                            <li>表情符号支持</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>多语言性能评估</h3>
+            <p>Llama 3在多个非英语基准测试上的表现：</p>
+            
+            <div class="performance-chart">
+                <h4>多语言理解能力对比</h4>
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        [多语言性能对比图表]
+                        <div style="position: absolute; bottom: 20px; font-size: 0.9rem;">
+                            Llama 3在非英语任务上相比Llama 2有显著提升
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #1DA1F2;"></div>
+                        <span>Llama 3-70B</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #17BF63;"></div>
+                        <span>Llama 2-70B</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #E0245E;"></div>
+                        <span>GPT-3.5</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p>Llama 3.1进一步优化了低资源语言的表现，通过数据重平衡和针对性训练提升小语种能力。</p>
+        </section>
+
+        <!-- Training Section -->
+        <section id="training">
+            <h2>训练方法与数据处理</h2>
+            
+            <p>Llama 3的训练流程体现了"<span class="highlight">质量优于数量</span>"的理念，通过精心设计的数据策略和训练技术实现了高效学习。</p>
+            
+            <h3>训练数据构成</h3>
+            <p>Llama 3使用比前代更高质量和多样性的数据源：</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">数据收集</span>
+                        <p>从公开可用的高质量来源收集数据，包括学术论文、技术文档、多语言书籍和经过筛选的网页内容。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">数据过滤</span>
+                        <p>使用多阶段过滤流程去除低质量内容，包括基于规则的过滤和分类器评分。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">多语言平衡</span>
+                        <p>精心平衡不同语言的数据比例，确保模型不会过度偏向英语。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Llama 3.1优化</span>
+                        <p>进一步筛选训练数据，提升专业领域和低资源语言的数据质量。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>预训练技术</h3>
+            <p>Llama 3的预训练采用以下关键技术：</p>
+            
+            <div class="tech-feature">
+                <h4>高效训练策略</h4>
+                <ul>
+                    <li><strong>优化器</strong>：AdamW，β₁=0.9，β₂=0.95，ε=10⁻⁵</li>
+                    <li><strong>学习率</strong>：余弦衰减，峰值2.5×10⁻⁴，最终降至峰值5%</li>
+                    <li><strong>批量大小</strong>：动态调整，最大500万token</li>
+                    <li><strong>权重衰减</strong>：0.1，梯度裁剪阈值1.0</li>
+                </ul>
+            </div>
+            
+            <h3>Llama 3.1的改进</h3>
+            <p>Llama 3.1在训练方法上的主要优化：</p>
+            
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">数据质量提升</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>更严格的数据过滤标准</li>
+                            <li>专业领域数据增强</li>
+                            <li>低资源语言数据补充</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">训练流程优化</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>课程学习策略调整</li>
+                            <li>动态批量大小</li>
+                            <li>更精细的学习率调度</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">长上下文支持</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>RoPE插值技术</li>
+                            <li>渐进式上下文扩展</li>
+                            <li>内存优化</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Section -->
+        <section id="performance">
+            <h2>性能评估与基准测试</h2>
+            
+            <p>Llama 3在多项基准测试中展现了卓越的性能，特别是在多语言和推理任务上树立了新标杆。</p>
+            
+            <h3>通用能力评估</h3>
+            <p>Llama 3在标准测试集上的表现：</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>测试集</th>
+                        <th>Llama 3-8B</th>
+                        <th>Llama 3-70B</th>
+                        <th>Llama 2-70B</th>
+                        <th>GPT-3.5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>MMLU(5-shot)</td>
+                        <td>54.2</td>
+                        <td>75.3</td>
+                        <td>68.9</td>
+                        <td>70.0</td>
+                    </tr>
+                    <tr>
+                        <td>GSM8K(8-shot)</td>
+                        <td>42.7</td>
+                        <td>82.1</td>
+                        <td>56.2</td>
+                        <td>57.1</td>
+                    </tr>
+                    <tr>
+                        <td>HumanEval(0-shot)</td>
+                        <td>26.5</td>
+                        <td>48.7</td>
+                        <td>32.3</td>
+                        <td>33.1</td>
+                    </tr>
+                    <tr>
+                        <td>ARC-Challenge(25-shot)</td>
+                        <td>53.8</td>
+                        <td>78.4</td>
+                        <td>67.3</td>
+                        <td>68.1</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>多语言评估</h3>
+            <p>Llama 3在非英语任务上的表现：</p>
+            
+            <div class="tech-feature">
+                <h4>多语言测试结果</h4>
+                <p>在多个非英语基准测试中，Llama 3相比前代有显著提升：</p>
+                <ul>
+                    <li><strong>中文</strong>：CLUE基准提升35%</li>
+                    <li><strong>法语</strong>：FLUE基准提升28%</li>
+                    <li><strong>日语</strong>：JGLUE基准提升40%</li>
+                    <li><strong>西班牙语</strong>：BLOOM基准提升32%</li>
+                </ul>
+            </div>
+            
+            <h3>Llama 3.1的改进</h3>
+            <p>Llama 3.1在以下方面进一步提升了性能：</p>
+            <ul>
+                <li><strong>长文本理解</strong>：在长文档摘要任务上提升25%</li>
+                <li><strong>低资源语言</strong>：小语种表现平均提升15%</li>
+                <li><strong>专业领域</strong>：医学和法律任务提升20-30%</li>
+                <li><strong>推理能力</strong>：复杂推理任务提升18%</li>
+            </ul>
+        </section>
+
+        <!-- Comparison Section -->
+        <section id="comparison">
+            <h2>版本对比与演进</h2>
+            
+            <p>Llama 3和Llama 3.1在多个维度上相比前代有显著改进，下表总结了关键变化：</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>特性</th>
+                        <th>Llama 2</th>
+                        <th>Llama 3</th>
+                        <th>Llama 3.1</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>发布时间</td>
+                        <td>2023年7月</td>
+                        <td>2024年4月</td>
+                        <td>2024年底</td>
+                    </tr>
+                    <tr>
+                        <td>参数规模</td>
+                        <td>7B/13B/70B</td>
+                        <td>8B/70B</td>
+                        <td>同Llama 3</td>
+                    </tr>
+                    <tr>
+                        <td>词汇表大小</td>
+                        <td>32K</td>
+                        <td>128K</td>
+                        <td>128K</td>
+                    </tr>
+                    <tr>
+                        <td>多语言支持</td>
+                        <td>基础</td>
+                        <td>显著提升</td>
+                        <td>进一步优化</td>
+                    </tr>
+                    <tr>
+                        <td>上下文长度</td>
+                        <td>4K</td>
+                        <td>8K</td>
+                        <td>扩展支持</td>
+                    </tr>
+                    <tr>
+                        <td>数学能力</td>
+                        <td>基础</td>
+                        <td>大幅提升</td>
+                        <td>持续优化</td>
+                    </tr>
+                    <tr>
+                        <td>代码生成</td>
+                        <td>中等</td>
+                        <td>优秀</td>
+                        <td>专业优化</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>技术演进路径</h3>
+            
+            <div class="version-comparison">
+                <div class="version-card">
+                    <div class="version-header">
+                        <div class="version-title">Llama 2</div>
+                        <div class="version-date">2023年7月</div>
+                    </div>
+                    <div class="version-body">
+                        <ul>
+                            <li>分组查询注意力(GQA)</li>
+                            <li>商业友好开源</li>
+                            <li>基础多语言支持</li>
+                            <li>4K上下文</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="version-card">
+                    <div class="version-header">
+                        <div class="version-title">Llama 3</div>
+                        <div class="version-date">2024年4月</div>
+                    </div>
+                    <div class="version-body">
+                        <ul>
+                            <li>128K词汇表</li>
+                            <li>强大多语言能力</li>
+                            <li>8K上下文</li>
+                            <li>数学/代码增强</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="version-card">
+                    <div class="version-header">
+                        <div class="version-title">Llama 3.1</div>
+                        <div class="version-date">2024年底</div>
+                    </div>
+                    <div class="version-body">
+                        <ul>
+                            <li>数据质量优化</li>
+                            <li>长上下文扩展</li>
+                            <li>低资源语言增强</li>
+                            <li>推理能力提升</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>应用场景演进</h3>
+            <p>Llama系列的持续演进拓展了其应用边界：</p>
+            
+            <div class="tech-feature">
+                <h4>应用领域扩展</h4>
+                <ul>
+                    <li><strong>Llama 2</strong>：通用对话、内容生成</li>
+                    <li><strong>Llama 3</strong>：多语言应用、专业领域、代码辅助</li>
+                    <li><strong>Llama 3.1</strong>：长文档处理、小语种支持、复杂推理</li>
+                </ul>
+            </div>
+            
+            <h3>未来展望</h3>
+            <p>基于Llama 3系列的技术路线，未来可能的发展方向：</p>
+            <ul>
+                <li><strong>更长上下文</strong>：支持100K+ token的文档处理</li>
+                <li><strong>多模态能力</strong>：整合视觉和语言理解</li>
+                <li><strong>专业领域优化</strong>：医疗、法律等垂直领域增强</li>
+                <li><strong>效率提升</strong>：更小的模型达到同等性能</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Llama 3 & 3.1 全面学习指南</h3>
+            <p>Meta开源大语言模型的技术演进与多语言突破</p>
+            
+            <div class="footer-links">
+                <a href="#overview">概述</a>
+                <a href="#architecture">核心架构</a>
+                <a href="#multilingual">多语言能力</a>
+                <a href="#training">训练方法</a>
+                <a href="#performance">性能评估</a>
+                <a href="#comparison">版本对比</a>
+            </div>
+            
+            <p class="copyright">© 2025 AI技术学习文档 | 基于Meta Llama 3技术报告整理</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="scrollToTop()">↑</div>
+
+    <!-- JavaScript -->
+    <script>
+        // Scroll to content function
+        function scrollToContent() {
+            document.querySelector('#overview').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            var backToTop = document.querySelector('.back-to-top');
+            var navbar = document.getElementById('navbar');
+            
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+                navbar.classList.add('scrolled');
+            } else {
+                backToTop.classList.remove('active');
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Navigation active state
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 300) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Animate elements when they come into view
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.tech-feature, table, .card, .diagram, .feature-item, .timeline-item, .model-card, .version-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            
+            progressBars.forEach(bar => {
+                let width = 0;
+                let targetWidth;
+                
+                if (bar.id === 'language-progress') {
+                    targetWidth = 85;
+                } else {
+                    targetWidth = 92;
+                }
+                
+                const interval = setInterval(() => {
+                    if (width >= targetWidth) {
+                        clearInterval(interval);
+                    } else {
+                        width++;
+                        bar.style.width = width + '%';
+                    }
+                }, 20);
+            });
+        }
+
+        // Set initial state for animated elements
+        document.querySelectorAll('.tech-feature, table, .card, .diagram, .feature-item, .timeline-item, .model-card, .version-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            
+            if (element.classList.contains('timeline-item:nth-child(odd)') || 
+                element.classList.contains('feature-item') ||
+                element.classList.contains('model-card') ||
+                element.classList.contains('version-card')) {
+                element.style.transform = 'translateX(-40px)';
+            } else if (element.classList.contains('timeline-item:nth-child(even)')) {
+                element.style.transform = 'translateX(40px)';
+            } else {
+                element.style.transform = 'translateY(40px)';
+            }
+        });
+
+        // Add scroll event listener
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Run animations on page load
+        window.addEventListener('load', function() {
+            animateOnScroll();
+            animateProgressBars();
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update URL without jumping
+                        if (history.pushState) {
+                            history.pushState(null, null, targetId);
+                        } else {
+                            location.hash = targetId;
+                        }
+                    }
+                });
+            });
+        });
+
+        // Parallax effect for floating llamas
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.pageYOffset;
+            const floatingLlamas = document.querySelectorAll('.floating-llama');
+            
+            floatingLlamas.forEach((llama, index) => {
+                const speed = 0.2 + (index * 0.1);
+                const yPos = -(scrollPosition * speed);
+                const xPos = index % 2 === 0 ? scrollPosition * 0.05 : -scrollPosition * 0.05;
+                
+                llama.style.transform = `translate(${xPos}px, ${yPos}px) rotate(${xPos}deg)`;
+            });
+        });
+    </script>
+    <!-- 添加返回主页链接 -->
+    <a href="../../../" class="back-link">← 返回主页</a>
+</body>
+</html>

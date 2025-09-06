@@ -1,0 +1,479 @@
+---
+layout: default
+title: Blog
+---
+
+<main class="main-content fadeInDown delay_075s">
+  <h1>Blog Series</h1>
+  
+  <div class="blog-series-list post-list" id="blog-series-list" data-dynamic-blog>
+    <!-- Dynamic content will be loaded here -->
+  </div>
+  
+  <p><a href="{{ site.baseurl }}/">← Back to Home</a></p>
+  
+  <script src="{{ site.baseurl }}/assets/js/content-watcher.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/dynamic-loader.js"></script>
+  <script>
+    let contentWatcher;
+    let dynamicLoader;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize dynamic loader
+      dynamicLoader = new DynamicBlogLoader({
+        baseUrl: '{{ site.baseurl }}'
+      });
+      
+      loadBlogSeries();
+      
+      // Initialize content watcher for automatic updates
+      contentWatcher = new ContentWatcher({ checkInterval: 30000 }); // Check every 30 seconds
+      
+      // Set up callback for when content changes
+      contentWatcher.onChange((newContent, oldContent) => {
+        console.log('Content updated! Refreshing blog series...');
+        loadBlogSeries();
+        
+        // Show a subtle notification to the user
+        showUpdateNotification();
+      });
+      
+      // Start watching for changes
+      contentWatcher.startWatching();
+    });
+    
+    async function loadBlogSeries() {
+      const seriesList = document.getElementById('blog-series-list');
+      if (dynamicLoader) {
+        dynamicLoader.loadBlogSeries(seriesList);
+      } else {
+        // Fallback to old method
+        try {
+          // Get the list of directories and files in the blog folder
+          const blogData = await scanBlogDirectory();
+          
+          seriesList.innerHTML = '';
+          
+          blogData.forEach(series => {
+            const article = document.createElement('article');
+            article.className = 'post';
+            
+            let filesHtml = '';
+            if (series.files && series.files.length > 0) {
+              filesHtml = '<ul class="series-files">';
+              series.files.forEach(file => {
+                const fileName = file.title || file.name.replace(/\.(md|html)$/, '').replace(/-/g, ' ');
+                const displayName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+                // 修复文件链接格式
+                const fileUrl = file.url || `{{ site.baseurl }}/blog/${series.name}/${file.name.replace(/\.(md|html)$/, '')}`;
+                filesHtml += `<li><a href="${fileUrl}">${displayName}</a> <span class="file-type">[${file.type}]</span></li>`;
+              });
+              filesHtml += '</ul>';
+            }
+            
+            article.innerHTML = `
+              <div class="post-thumbnail">
+                <div class="placeholder-image">
+                  <span class="series-icon">📚</span>
+                  <h3>${series.title}</h3>
+                </div>
+              </div>
+              <div class="post-content">
+                <h2><a href="${series.url || '#'}">${series.title}</a></h2>
+                <p class="series-description">${series.description}</p>
+                <div class="series-stats">
+                  <span class="file-count">📄 ${series.files ? series.files.length : 0} 篇文章</span>
+                  <span class="series-type">🔖 系列文章</span>
+                </div>
+                ${filesHtml}
+                <div class="series-actions">
+                  ${series.url ? `<a href="${series.url}" class="read-more primary">查看系列 →</a>` : ''}
+                  <a href="{{ site.baseurl }}/articles/" class="read-more secondary">查看所有文章</a>
+                </div>
+              </div>
+            `;
+            seriesList.appendChild(article);
+          });
+        } catch (error) {
+          console.error('Error loading blog series:', error);
+          // Fallback to static content if dynamic loading fails
+          loadStaticBlogSeries();
+        }
+      }
+    }
+    
+    async function scanBlogDirectory() {
+      try {
+        // Try to load dynamically generated blog data
+        const response = await fetch('{{ site.baseurl }}/assets/blog-data.json');
+        if (response.ok) {
+          const blogData = await response.json();
+          return blogData.map(series => ({
+            title: series.title,
+            url: `{{ site.baseurl }}/blog/${series.name}/`,
+            description: series.description,
+            files: series.files || []
+          }));
+        }
+      } catch (error) {
+        console.log('Could not load dynamic blog data, using fallback:', error);
+      }
+      
+      // Fallback to known series if dynamic loading fails
+      const knownSeries = [
+        {
+          name: 'llama',
+          title: 'Llama Series',
+          description: 'Explore articles about llama, covering various aspects of these fascinating animals.',
+          files: [
+            { name: 'overview.html', url: '{{ site.baseurl }}/blog/llama/overview', type: 'html' },
+            { name: 'llama-example.md', url: '{{ site.baseurl }}/blog/llama/llama-example', type: 'markdown' },
+            { name: '总览.md', url: '{{ site.baseurl }}/blog/llama/总览', type: 'markdown' }
+          ]
+        },
+        {
+          name: 'deepseek',
+          title: 'DeepSeek Series',
+          description: 'DeepSeek is a series of large language models with powerful code generation capabilities.',
+          files: [
+            { name: 'intro.md', url: '{{ site.baseurl }}/blog/deepseek/intro', type: 'markdown' }
+          ]
+        },
+        {
+          name: 'deepseek2',
+          title: 'DeepSeek2 Series',
+          description: 'Advanced DeepSeek models and applications.',
+          files: []
+        }
+      ];
+      
+      return knownSeries.map(series => ({
+        title: series.title,
+        url: `{{ site.baseurl }}/blog/${series.name}/`,
+        description: series.description,
+        files: series.files
+      }));
+    }
+    
+    function loadStaticBlogSeries() {
+      // Fallback static content
+      const seriesList = document.getElementById('blog-series-list');
+      const staticData = [
+        {
+          title: "Llama Series",
+          url: "{{ site.baseurl }}/blog/llama/",
+          description: "Explore articles about llama, covering various aspects of these fascinating animals."
+        },
+        {
+          title: "DeepSeek Series", 
+          url: "{{ site.baseurl }}/blog/deepseek/",
+          description: "DeepSeek is a series of large language models with powerful code generation capabilities."
+        }
+      ];
+      
+      staticData.forEach(series => {
+        const article = document.createElement('article');
+        article.className = 'post';
+        article.innerHTML = `
+          <div class="post-thumbnail">
+            <div class="placeholder-image">${series.title}</div>
+          </div>
+          <div class="post-content">
+            <h2><a href="${series.url}">${series.title}</a></h2>
+            <p>${series.description}</p>
+            <a href="${series.url}" class="read-more">View Series →</a>
+          </div>
+        `;
+        seriesList.appendChild(article);
+      });
+    }
+    
+    function showUpdateNotification() {
+      // Create a subtle notification
+      const notification = document.createElement('div');
+      notification.innerHTML = '✨ Blog content updated!';
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        z-index: 1000;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Fade in
+      setTimeout(() => {
+        notification.style.opacity = '1';
+      }, 100);
+      
+      // Fade out and remove after 3 seconds
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 3000);
+    }
+  </script>
+  
+  <style>
+    .placeholder-image {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 160px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .placeholder-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+    
+    .series-icon {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      z-index: 1;
+    }
+    
+    .placeholder-image h3 {
+      margin: 0;
+      font-size: 1.2em;
+      font-weight: 600;
+      z-index: 1;
+      text-align: center;
+    }
+    
+    .series-description {
+      color: #666;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+    
+    .series-files {
+      margin: 15px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #2d72d9;
+    }
+    
+    .series-files li {
+      margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    .series-files li:last-child {
+      border-bottom: none;
+    }
+    
+    .series-files a {
+      color: #2d72d9;
+      text-decoration: none;
+      font-weight: 500;
+      flex-grow: 1;
+      transition: color 0.3s ease;
+    }
+    
+    .series-files a:hover {
+      color: #1976d2;
+      text-decoration: underline;
+    }
+    
+    .file-type {
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      margin-left: 10px;
+      font-weight: 500;
+    }
+    
+    .series-stats {
+      margin: 15px 0;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .series-stats span {
+      background: #f0f0f0;
+      color: #666;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: 500;
+    }
+    
+    .series-actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .read-more.primary {
+      background: #2d72d9;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    
+    .read-more.primary:hover {
+      background: #1976d2;
+    }
+    
+    .read-more.secondary {
+      background: #f8f9fa;
+      color: #666;
+      padding: 10px 20px;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .read-more.secondary:hover {
+      background: #e9ecef;
+      color: #495057;
+    }
+    
+    .post {
+      margin-bottom: 40px;
+      border: 1px solid #e9ecef;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+    
+    .post:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .post-content {
+      padding: 25px;
+    }
+    
+    .post-content h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #2d72d9;
+    }
+    
+    .post-content h2 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    .post-content h2 a:hover {
+      text-decoration: underline;
+    }
+  </style>
+    
+    .file-count {
+      background: #e8f5e8;
+      color: #2e7d32;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+    
+    .series-actions {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .read-more.secondary {
+      background: #f5f5f5;
+      color: #666;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+    
+    .read-more.secondary:hover {
+      background: #e0e0e0;
+      color: #333;
+    }
+    
+    .placeholder-image {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 5px;
+      font-size: 1.1em;
+    }
+    
+    .post {
+      margin-bottom: 40px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .post:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-color: #2d72d9;
+    }
+    
+    .post-content {
+      padding: 20px;
+    }
+    
+    .directory-structure {
+      margin: 20px 0;
+      padding-left: 20px;
+      border-left: 2px solid #eee;
+    }
+    
+    .directory-item {
+      margin: 5px 0;
+    }
+    
+    .directory-name {
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .file-list {
+      margin-left: 20px;
+    }
+  </style>
+</main>

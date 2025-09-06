@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<main class="main-content fadeInDown delay_075s">
+  <h1>{{ page.title }}</h1>
+  
+  <div class="post-content">
+    {{ content }}
+    
+    {% assign series_path = page.path | split: '/' | slice: 1 | first %}
+    {% assign series_dir = site.baseurl | append: '/blog/' | append: series_path | append: '/' %}
+    
+    <div class="post-list">
+      {% for file in site.static_files %}
+        {% if file.path contains series_dir and file.name != 'index.html' and file.extname == '.html' %}
+        {% assign filename = file.name | remove: file.extname %}
+        <article class="post">
+          <div class="post-content">
+            <h2><a href="{{ file.path | relative_url }}">{{ filename }}</a></h2>
+            <p class="read-more"><a href="{{ file.path | relative_url }}" class="read-more-link">Continue reading &rarr;</a></p>
+          </div>
+        </article>
+        {% endif %}
+      {% endfor %}
+      
+      {% for file in site.static_files %}
+        {% if file.path contains series_dir and file.extname == '.md' %}
+        {% assign filename = file.name | remove: file.extname %}
+        <article class="post">
+          <div class="post-content">
+            <h2><a href="{{ file.path | relative_url }}">{{ filename }}</a></h2>
+            <p class="read-more"><a href="{{ file.path | relative_url }}" class="read-more-link">Continue reading &rarr;</a></p>
+          </div>
+        </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    <p><a href="{{ site.baseurl }}/blog/">← Back to Blog</a> | <a href="{{ site.baseurl }}/">← Back to Home</a></p>
+  </div>
+</main>

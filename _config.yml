@@ -30,14 +30,65 @@ google_analytics: ""
 navigation:
   - text: Home
     url: /
-  - text: Resume
-    url: /personal/resume/
-  - text: Llama
-    url: /blog/llama-overview/
-  - text: Blog
-    url: /blog/
+  - text: Personal
+    url: /personal/
+  - text: Articles  
+    url: /articles/
   - text: comcloud
     url: https://github.com/comcloud
+
+# Collections for blog series
+collections:
+  blog_series:
+    output: true
+    permalink: /blog/:path/
+  llm_articles:
+    output: true
+    permalink: /blog/LLM/:name/
+  deepseek_articles:
+    output: true
+    permalink: /blog/LLM/deepseek/:name/
+  qwen_articles:
+    output: true
+    permalink: /blog/LLM/qwen/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: blog_series
+    values:
+      layout: page
+  - scope:
+      path: ""
+      type: llm_articles
+    values:
+      layout: markdown
+  - scope:
+      path: ""
+      type: deepseek_articles
+    values:
+      layout: markdown
+  - scope:
+      path: ""
+      type: qwen_articles
+    values:
+      layout: markdown
+  - scope:
+      path: "blog/**/*.md"
+    values:
+      layout: markdown
+      permalink: /blog/:path/
+  - scope:
+      path: "personal/**/*.md"
+    values:
+      layout: markdown
+      permalink: /personal/:path/
 
 # The shortname for your Disqus site to enable comments.
 disqus: justgoodthemes
@@ -50,22 +101,37 @@ footer:
   content: "&copy; Scriptor all rights reserved. Theme by [JustGoodThemes](https://www.justgoodthemes.com)."
   has_social: true
 
+# Pagination
+paginate: 5
+paginate_path: "/page:num/"
+
 # Plugins
 plugins:
+  - jekyll-sitemap
   - jekyll-paginate
+  - jekyll-feed
 
-# http://jekyllrb.com/docs/pagination/
-paginate: 3
-paginate_path: '/page:num/'
-
-
-# Permalinks
-permalink: /:title
-
-# Conversion
+# Markdown settings
 markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    line_numbers: true
 
-# Sass
-sass:
-  sass_dir: _sass
-  style: compressed
+# Include markdown files in processing
+include: ["blog/**/*.md", "personal/**/*.md"]
+
+# Enable processing of all markdown files
+keep_files: [".git", ".svn"]
+
+# Exclude unnecessary files
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+  - .jekyll-metadata

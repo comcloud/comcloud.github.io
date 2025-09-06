@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历 - 张玉雷</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        h1 {
+            color: var(--secondary);
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            font-size: 1.2em;
+            margin: 20px 0 10px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .education, .experience {
+            margin-bottom: 25px;
+        }
+        
+        .date {
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .awards, .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .award-item, .skill-item {
+            background: var(--light);
+            padding: 12px;
+            border-radius: 5px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .project {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .project h3 {
+            color: var(--accent);
+        }
+        
+        .tech-stack {
+            font-style: italic;
+            color: var(--gray);
+            margin: 10px 0;
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+            
+            .awards, .skills {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>张玉雷</h1>
+            <div class="contact-info">
+                <span>26岁 | 汉族</span>
+                <span>13523327374</span>
+                <span>zyl13523327374@163.com</span>
+            </div>
+        </header>
+        
+        <section class="section">
+            <h2>教育背景</h2>
+            <div class="education">
+                <h3>安徽理工大学 - 硕士</h3>
+                <p class="date">2023.9.12 -- 2026.6.1</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>获奖与证书</h2>
+            <div class="awards">
+                <div class="award-item">
+                    <strong>国家奖学金</strong>
+                </div>
+                <div class="award-item">
+                    <strong>中国研究生数学建模竞赛</strong>
+                    <p>第二十一届国赛二等奖</p>
+                    <p>第二十届国赛三等奖</p>
+                </div>
+                <div class="award-item">
+                    <strong>中国大学生软件设计大赛</strong>
+                    <p>国赛二等奖</p>
+                </div>
+                <div class="award-item">
+                    <strong>腾讯微信小程序大赛</strong>
+                    <p>西南赛区一等奖 (国赛三等奖)</p>
+                    <p>西南赛区二等奖</p>
+                </div>
+                <div class="award-item">
+                    <strong>其他奖项</strong>
+                    <p>软件设计与开发大赛三等奖</p>
+                    <p>软件设计创意比赛二等奖</p>
+                </div>
+                <div class="award-item">
+                    <strong>英语六级证书</strong>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>科研情况</h2>
+            <ul>
+                <li>前往意大利罗马参加国际会议（Oral）</li>
+                <li>发表论文：SCI3区一篇、CCF-C国际会议(IJCNN)一篇、北航学报一篇</li>
+                <li>负责编写过论文综述、国基报告等</li>
+                <li>研究生创新基金一篇，研究方向为图文多模态</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2>专业技能</h2>
+            <div class="skills">
+                <div class="skill-item">
+                    <strong>大模型与AI开发</strong>
+                    <p>熟悉LangChain、LlamaIndex等框架，具备RAG及Agent系统开发能力</p>
+                    <p>掌握Coze和Dify低代码AI平台开发</p>
+                </div>
+                <div class="skill-item">
+                    <strong>深度学习</strong>
+                    <p>理解GPT、BERT、Transformer等模型核心技术</p>
+                    <p>掌握PyTorch框架及LoRA/Q-LoRA微调技术</p>
+                </div>
+                <div class="skill-item">
+                    <strong>模型部署</strong>
+                    <p>具备Ollama、vLLM等模型本地化部署经验</p>
+                    <p>了解MCP(Model Control Protocol)协议</p>
+                </div>
+                <div class="skill-item">
+                    <strong>后端开发</strong>
+                    <p>熟练掌握Java及Spring/Spring Boot框架</p>
+                    <p>熟悉MySQL数据库设计与优化</p>
+                </div>
+                <div class="skill-item">
+                    <strong>系统运维</strong>
+                    <p>熟悉Unix/Linux系统，有服务部署经验</p>
+                    <p>熟悉Git版本控制</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>项目经验</h2>
+            
+            <div class="project">
+                <h3>法律助手RAG</h3>
+                <p>通过实时捕捉劳动法与合同法作为知识库的法律问答助手</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">RAG</span>
+                    <span class="tech-tag">LoRA微调</span>
+                    <span class="tech-tag">数据爬取</span>
+                    <span class="tech-tag">数据清洗</span>
+                </div>
+                <ul>
+                    <li>项目涉及法律条文数据爬取、清洗与结构化处理</li>
+                    <li>采用RAG与Lora微调结合的模型优化方案</li>
+                </ul>
+            </div>
+            
+            <div class="project">
+                <h3>简易版ChatPPT</h3>
+                <p>支持用户输入主题由大模型生成内容完成PPT，或输入网址对指定网页进行PPT生成</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">PPT生成</span>
+                    <span class="tech-tag">工作流设计</span>
+                    <span class="tech-tag">模板提取</span>
+                    <span class="tech-tag">内容规划</span>
+                </div>
+                <ul>
+                    <li>设计PPT生成工作流，包括模板样式提取</li>
+                    <li>根据用户需求和模板约束规划PPT大纲和内容结构</li>
+                    <li>使用大模型为每页幻灯片撰写具体内容</li>
+                </ul>
+            </div>
+            
+            <div class="project">
+                <h3>文件管理MCP</h3>
+                <p>基础文件存储与操作、精细化权限控制、文件夹目录管理、智能处理(如OCR提取文件内容)等</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">文件管理</span>
+                    <span class="tech-tag">权限控制</span>
+                    <span class="tech-tag">OCR</span>
+                    <span class="tech-tag">MCP</span>
+                </div>
+                <ul>
+                    <li>实现文件效率管控系统</li>
+                    <li>开发智能处理功能如OCR内容提取</li>
+                </ul>
+            </div>
+            
+            <div class="project">
+                <h3>模型代码生成能力对比系统</h3>
+                <p>通过Modelscope API并行调用两大模型，结合DeepEval自动评估代码质量</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Modelscope API</span>
+                    <span class="tech-tag">DeepEval</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">代码评估</span>
+                </div>
+                <ul>
+                    <li>从代码正确性、可读性、效率、可维护性四个维度进行评分</li>
+                    <li>以GitHub仓库代码作为上下文，通过Streamlit交互界面获取实时结果</li>
+                    <li>可视化图表展示对比结果</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>工作经历</h2>
+            
+            <div class="experience">
+                <h3>美团 - 餐饮SAAS-软件服务组</h3>
+                <p class="date">后端开发实习生 | 2021.7.19 ~ 2021.12.22</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">MTthrift</span>
+                    <span class="tech-tag">Leaf</span>
+                    <span class="tech-tag">Kafka</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Spring</span>
+                    <span class="tech-tag">MyBatis</span>
+                    <span class="tech-tag">MySQL</span>
+                </div>
+                <ul>
+                    <li>负责美团餐饮SAAS项目系统开发工作，包括特征建设、工作流迭代等</li>
+                    <li>参与线上系统的稳定性建设与维护</li>
+                    <li>参与解决开发过程中遇到的技术和业务难题</li>
+                    <li>参与相关系统、业务的文档撰写与维护</li>
+                </ul>
+            </div>
+            
+            <div class="experience">
+                <h3>山东优岳科技有限责任公司</h3>
+                <p class="date">后端开发 | 2022.5.11 ~ 2023.2.23</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Kafka</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Spring</span>
+                    <span class="tech-tag">MyBatis</span>
+                    <span class="tech-tag">Canal</span>
+                    <span class="tech-tag">Nginx</span>
+                    <span class="tech-tag">MySQL</span>
+                </div>
+                <ul>
+                    <li>参与相关软件开发，承担模块的开发任务</li>
+                    <li>进行Java软件设计、开发、测试及相关文档工作</li>
+                    <li>对已运行系统进行监控、维护、修改</li>
+                    <li>负责与客户沟通协调</li>
+                    <li>进行盲盒产品后端开发以及文档编写</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
