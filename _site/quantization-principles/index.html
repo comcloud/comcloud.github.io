@@ -140,11 +140,7 @@
 <p>在进行量化之前，我们需要确定浮点数范围（$F_{min}$,$F_{max}$）和整数范围（$Q_{min}$,$Q_{max}$）。</p>
 
 <ul>
-  <li><strong>整数范围</strong>通常是固定的。例如，对于 8 位无符号整数 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>(UINT8)
-</pre></td></tr></tbody></table></code> $Q_{min}=0$,$Q_{max}=255$；对于 8 位有符号整数 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>(INT8)
-</pre></td></tr></tbody></table></code>，$Q_{min}=-128$,$Q_{max}=127$。</li>
+  <li><strong>整数范围</strong>通常是固定的。例如，对于 8 位无符号整数 <code class="highlighter-rouge">(UINT8)</code> $Q_{min}=0$,$Q_{max}=255$；对于 8 位有符号整数 <code class="highlighter-rouge">(INT8)</code>，$Q_{min}=-128$,$Q_{max}=127$。</li>
   <li><strong>浮点数范围</strong>则需要从模型中获取。</li>
 </ul>
 

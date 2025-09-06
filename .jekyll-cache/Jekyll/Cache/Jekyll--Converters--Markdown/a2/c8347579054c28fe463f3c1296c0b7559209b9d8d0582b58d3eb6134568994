@@ -1,4 +1,4 @@
-I"xO<h1 id="完整markdown语法示例">完整Markdown语法示例</h1>
+I"�K<h1 id="完整markdown语法示例">完整Markdown语法示例</h1>
 
 <p>这是一个展示所有支持的Markdown语法功能的示例文档。</p>
 
@@ -6,9 +6,7 @@
 
 <p>这是 <strong>粗体文本</strong> 和 <em>斜体文本</em>，还有 <del>删除线文本</del>。</p>
 
-<p>你也可以使用 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>行内代码
-</pre></td></tr></tbody></table></code> 来突出显示代码片段。</p>
+<p>你也可以使用 <code class="highlighter-rouge">行内代码</code> 来突出显示代码片段。</p>
 
 <h2 id="2-数学公式">2. 数学公式</h2>
 
@@ -39,30 +37,7 @@ a^{(l)} &amp;= \sigma(z^{(l)})
 
 <h3 id="python代码">Python代码</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
@@ -85,51 +60,11 @@ a^{(l)} &amp;= \sigma(z^{(l)})
 <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"数据形状: X=</span><span class="si">{</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="s">, y=</span><span class="si">{</span><span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <h3 id="javascript代码">JavaScript代码</h3>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-</pre></td><td class="rouge-code"><pre><span class="c1">// 深度学习框架的简单实现</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 深度学习框架的简单实现</span>
 <span class="kd">class</span> <span class="nx">NeuralNetwork</span> <span class="p">{</span>
     <span class="kd">constructor</span><span class="p">(</span><span class="nx">layers</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">layers</span> <span class="o">=</span> <span class="nx">layers</span><span class="p">;</span>
@@ -169,43 +104,11 @@ a^{(l)} &amp;= \sigma(z^{(l)})
 <span class="kd">const</span> <span class="nx">nn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NeuralNetwork</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span>
 <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">nn</span><span class="p">.</span><span class="nx">forward</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">预测结果:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <h3 id="shell脚本">Shell脚本</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-</pre></td><td class="rouge-code"><pre><span class="c">#!/bin/bash</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
 <span class="c"># 深度学习环境设置脚本</span>
 setup_dl_environment<span class="o">()</span> <span class="o">{</span>
@@ -237,7 +140,7 @@ check_gpu<span class="o">()</span> <span class="o">{</span>
 
 setup_dl_environment
 check_gpu
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <h2 id="4-表格">4. 表格</h2>
 

@@ -1,4 +1,4 @@
-I"Í5<p>This is a pragraph. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+I"».<p>This is a pragraph. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
 
 <h1 id="heading-1">Heading 1</h1>
 
@@ -44,27 +44,13 @@
   <p>‚ÄúCreativity is allowing yourself to make mistakes. Design is knowing which ones to keep.‚Äù</p>
 </blockquote>
 
-<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>consectetuer adipiscing
-</pre></td></tr></tbody></table></code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
+<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
 
 <hr />
 
 <h2 id="code-blocks">Code Blocks</h2>
 
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="rouge-code"><pre><span class="nf">#header</span> <span class="nt">h1</span> <span class="p">{</span> 
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#header</span> <span class="nt">h1</span> <span class="p">{</span> 
   <span class="nl">color</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span>
   <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">1.5em</span><span class="p">;</span> 
 <span class="p">}</span>
@@ -76,17 +62,9 @@
   <span class="nl">margin-right</span><span class="p">:</span> <span class="m">30px</span><span class="p">;</span>
   <span class="nl">width</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="rouge-code"><pre><span class="c1">// Simple map</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simple map</span>
 <span class="kd">var</span> <span class="nx">map</span><span class="p">;</span>
 <span class="kd">function</span> <span class="nx">initMap</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nb">Map</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">map</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span>
@@ -94,20 +72,9 @@
     <span class="na">zoom</span><span class="p">:</span> <span class="mi">8</span>
   <span class="p">});</span>
 <span class="p">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="nl">"menu"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"menu"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"popup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -118,31 +85,20 @@
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}}</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></div></div>
+</span></code></pre></div></div>
 
-<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td><td class="rouge-code"><pre><span class="na">sass</span><span class="pi">:</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">sass</span><span class="pi">:</span>
   <span class="na">input_file</span><span class="pi">:</span> <span class="s">sass/main.scss.njk</span>
   <span class="na">output_file</span><span class="pi">:</span> <span class="s">assets/css/main.css</span>
   <span class="na">indentWidth</span><span class="pi">:</span> <span class="m">4</span>
   <span class="na">outputStyle</span><span class="pi">:</span> <span class="s">nested</span>
   <span class="na">precision</span><span class="pi">:</span> <span class="m">10</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>No language indicated, so no syntax highlighting. 
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No language indicated, so no syntax highlighting. 
+</code></pre></div></div>
 
-<p>Inline <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>code
-</pre></td></tr></tbody></table></code> has <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>back-ticks around
-</pre></td></tr></tbody></table></code> it.</p>
+<p>Inline <code class="highlighter-rouge">code</code> has <code class="highlighter-rouge">back-ticks around</code> it.</p>
 
 <h2 id="videos">Videos</h2>
 
@@ -161,9 +117,7 @@
   
 </figure>
 
-<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>consectetuer adipiscing
-</pre></td></tr></tbody></table></code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
+<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
 
 <h2 id="regular-image">Regular Image</h2>
 
@@ -174,11 +128,7 @@
   
 </figure>
 
-<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>consectetuer adipiscing
-</pre></td></tr></tbody></table></code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Lorem ipsum dolor sit amet, <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>consectetuer adipiscing
-</pre></td></tr></tbody></table></code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
+<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Lorem ipsum dolor sit amet, <code class="highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
 
 <h2 id="lists">Lists</h2>
 

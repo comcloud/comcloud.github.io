@@ -1,4 +1,4 @@
-I"�<h1 id="量化的核心原理浮点数到整数的映射">量化的核心原理：浮点数到整数的映射</h1>
+I"�<h1 id="量化的核心原理浮点数到整数的映射">量化的核心原理：浮点数到整数的映射</h1>
 
 <p>量化的基本思想是将神经网络中通常使用的浮点数（如FP32，32位浮点数）表示的权重和激活值，映射到低位宽的整数（如INT8，8位整数）表示。这个映射过程需要定义一个<strong>量化函数</strong>和一个<strong>反量化函数</strong>。</p>
 
@@ -9,11 +9,7 @@
 <p>在进行量化之前，我们需要确定浮点数范围（$F_{min}$,$F_{max}$）和整数范围（$Q_{min}$,$Q_{max}$）。</p>
 
 <ul>
-  <li><strong>整数范围</strong>通常是固定的。例如，对于 8 位无符号整数 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>(UINT8)
-</pre></td></tr></tbody></table></code> $Q_{min}=0$,$Q_{max}=255$；对于 8 位有符号整数 <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>(INT8)
-</pre></td></tr></tbody></table></code>，$Q_{min}=-128$,$Q_{max}=127$。</li>
+  <li><strong>整数范围</strong>通常是固定的。例如，对于 8 位无符号整数 <code class="highlighter-rouge">(UINT8)</code> $Q_{min}=0$,$Q_{max}=255$；对于 8 位有符号整数 <code class="highlighter-rouge">(INT8)</code>，$Q_{min}=-128$,$Q_{max}=127$。</li>
   <li><strong>浮点数范围</strong>则需要从模型中获取。</li>
 </ul>
 

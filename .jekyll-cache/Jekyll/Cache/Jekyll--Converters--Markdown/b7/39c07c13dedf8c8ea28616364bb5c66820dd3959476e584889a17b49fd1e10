@@ -1,5 +1,4 @@
-I"a
-<ol>
+I"�	<ol>
   <li><strong>均方误差（MSE, Mean Squared Error）</strong>：
     <ul>
       <li>公式：($\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$)</li>
@@ -47,9 +46,7 @@
   <li><strong>对数损失（Log Loss）</strong>：
     <ul>
       <li>公式：($-\frac{1}{n} \sum_{i=1}^{n} \left( y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right)$)</li>
-      <li>常用于二分类问题，类似于交叉熵损失，通常用于<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>Logistic
-</pre></td></tr></tbody></table></code>回归。</li>
+      <li>常用于二分类问题，类似于交叉熵损失，通常用于<code class="highlighter-rouge">Logistic</code>回归。</li>
     </ul>
   </li>
   <li><strong>对比损失（Contrastive Loss）</strong>：

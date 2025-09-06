@@ -4,7 +4,7 @@
     "url": "/articles/AI-manus/plan-act弊端/",
     "type": "markdown",
     "category": "Ai Manus",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [],
     "description": "Ai Manus相关技术文章",
     "path": "AI-manus/plan-act弊端"
@@ -14,7 +14,7 @@
     "url": "/articles/深度学习基础知识/模型优化/正则化/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "优化算法",
@@ -30,7 +30,7 @@
     "url": "/articles/深度学习基础知识/模型优化/梯度优化方法/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "优化算法",
@@ -44,7 +44,7 @@
     "url": "/articles/深度学习基础知识/模型优化/SGD/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "优化算法",
@@ -59,7 +59,7 @@
     "url": "/articles/深度学习基础知识/模型优化/RMSprop/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "优化算法",
@@ -74,7 +74,7 @@
     "url": "/articles/深度学习基础知识/模型优化/Momentum/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "优化算法",
@@ -89,7 +89,7 @@
     "url": "/articles/深度学习基础知识/模型优化/Adam/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "优化算法",
@@ -104,7 +104,7 @@
     "url": "/articles/深度学习基础知识/损失函数/相对熵与交叉熵/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "损失函数",
@@ -120,7 +120,7 @@
     "url": "/articles/深度学习基础知识/损失函数/损失函数总览/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "损失函数",
@@ -134,7 +134,7 @@
     "url": "/articles/深度学习基础知识/损失函数/MSE/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "损失函数",
@@ -149,7 +149,7 @@
     "url": "/articles/深度学习基础知识/损失函数/MAE/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "损失函数",
@@ -164,7 +164,7 @@
     "url": "/articles/提示词/项目文档分析与 README 撰写指南/",
     "type": "markdown",
     "category": "提示词",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [],
     "description": "提示词相关技术文章",
     "path": "提示词/项目文档分析与 README 撰写指南"
@@ -174,7 +174,7 @@
     "url": "/articles/llm/qwen/量化的核心原理/",
     "type": "markdown",
     "category": "LLM",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "LLM",
       "Qwen",
@@ -188,7 +188,7 @@
     "url": "/articles/llm/llama/总览/",
     "type": "markdown",
     "category": "LLM",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "LLM",
       "Llama",
@@ -202,7 +202,7 @@
     "url": "/articles/llm/llama/llama-example/",
     "type": "markdown",
     "category": "LLM",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "LLM",
       "Llama",
@@ -216,7 +216,7 @@
     "url": "/articles/llm/deepseek/intro/",
     "type": "markdown",
     "category": "LLM",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "LLM",
       "DeepSeek",
@@ -230,7 +230,7 @@
     "url": "/articles/example/markdown-syntax/",
     "type": "markdown",
     "category": "示例",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "示例",
       "Markdown"
@@ -243,7 +243,7 @@
     "url": "/articles/chatppt/提示词及工作流设计/",
     "type": "markdown",
     "category": "Chatppt",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [],
     "description": "Chatppt相关技术文章",
     "path": "chatppt/提示词及工作流设计"
@@ -253,7 +253,7 @@
     "url": "/articles/AI-manus/快速入门/",
     "type": "markdown",
     "category": "Ai Manus",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [],
     "description": "Ai Manus相关技术文章",
     "path": "AI-manus/快速入门"
@@ -263,7 +263,7 @@
     "url": "/articles/深度学习基础知识/激活函数/",
     "type": "markdown",
     "category": "深度学习基础",
-    "date": "2025-09-06",
+    "date": "2025-09-07",
     "tags": [
       "深度学习",
       "激活函数",

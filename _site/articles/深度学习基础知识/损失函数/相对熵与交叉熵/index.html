@@ -72,11 +72,7 @@
           </header>
           <div class="post-content">
             <blockquote>
-  <p>相对熵（<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>Relative Entropy
-</pre></td></tr></tbody></table></code>）和交叉熵（<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>Cross Entropy
-</pre></td></tr></tbody></table></code>）是信息论中的两个重要概念，在机器学习中，它们通常用来衡量两个概率分布之间的差异</p>
+  <p>相对熵（<code class="highlighter-rouge">Relative Entropy</code>）和交叉熵（<code class="highlighter-rouge">Cross Entropy</code>）是信息论中的两个重要概念，在机器学习中，它们通常用来衡量两个概率分布之间的差异</p>
 </blockquote>
 
 <h3 id="一相对熵relative-entropy">一、相对熵（Relative Entropy）</h3>
@@ -106,9 +102,7 @@
           <td> </td>
           <td>Q)$) 不等于 ($D_{KL}(Q</td>
           <td> </td>
-          <td>P)$)，因此相对熵不是度量<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>metric
-</pre></td></tr></tbody></table></code>，也就是不表示距离。</td>
+          <td>P)$)，因此相对熵不是度量<code class="highlighter-rouge">metric</code>，也就是不表示距离。</td>
         </tr>
       </tbody>
     </table>
@@ -206,11 +200,7 @@
     <table>
       <tbody>
         <tr>
-          <td><strong>相对熵（KL散度）</strong>：衡量两个概率分布之间的差异，度量了真实分布与预测分布之间的额外编码代价。它是一个非对称的“度量”（不是度量），广泛应用于生成模型和变分推理中，<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>pytorch
-</pre></td></tr></tbody></table></code>中<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>F.kl_div(Q.log(), P, reduction='')
-</pre></td></tr></tbody></table></code>表示$D_{KL}(P</td>
+          <td><strong>相对熵（KL散度）</strong>：衡量两个概率分布之间的差异，度量了真实分布与预测分布之间的额外编码代价。它是一个非对称的“度量”（不是度量），广泛应用于生成模型和变分推理中，<code class="highlighter-rouge">pytorch</code>中<code class="highlighter-rouge">F.kl_div(Q.log(), P, reduction='')</code>表示$D_{KL}(P</td>
           <td> </td>
           <td>Q)$</td>
         </tr>
@@ -218,11 +208,7 @@
     </table>
   </li>
   <li>
-    <p><strong>交叉熵</strong>：衡量真实分布与预测分布之间的差异，常用作分类任务中的损失函数。它可以看作是真实分布的自熵与相对熵之和，<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>pytorch
-</pre></td></tr></tbody></table></code>中<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>nn.CrossEntropyLoss()
-</pre></td></tr></tbody></table></code></p>
+    <p><strong>交叉熵</strong>：衡量真实分布与预测分布之间的差异，常用作分类任务中的损失函数。它可以看作是真实分布的自熵与相对熵之和，<code class="highlighter-rouge">pytorch</code>中<code class="highlighter-rouge">nn.CrossEntropyLoss()</code></p>
   </li>
   <li><strong>关系</strong>：交叉熵由真实分布的自熵和真实分布与预测分布之间的相对熵组成。在优化时，交叉熵的最小化意味着我们在尽量减少模型预测和真实分布之间的差异。</li>
 </ul>

@@ -1,4 +1,4 @@
-I"À<h1 id="llama-example-article">Llama Example Article</h1>
+I"<h1 id="llama-example-article">Llama Example Article</h1>
 
 <p>This is an example of a Markdown article in the Llama series.</p>
 
@@ -10,13 +10,10 @@
 
 <p>Sed euismod, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">example_function</span><span class="p">():</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">example_function</span><span class="p">():</span>
     <span class="k">print</span><span class="p">(</span><span class="s">"This is an example code block"</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">True</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>This is the end of the example article.</p>
 :ET

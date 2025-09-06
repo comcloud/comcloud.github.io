@@ -1,7 +1,5 @@
-I"Rr<blockquote>
-  <p>正则化（<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>Regularization
-</pre></td></tr></tbody></table></code>）是一种在机器学习中用来防止过拟合的技术。过拟合是指模型在训练数据上表现很好，但在新数据上的泛化能力较差。正则化通过<strong>在损失函数中增加额外的惩罚项</strong>，限制模型的复杂度，从而提升模型的泛化能力。</p>
+I"n<blockquote>
+  <p>正则化（<code class="highlighter-rouge">Regularization</code>）是一种在机器学习中用来防止过拟合的技术。过拟合是指模型在训练数据上表现很好，但在新数据上的泛化能力较差。正则化通过<strong>在损失函数中增加额外的惩罚项</strong>，限制模型的复杂度，从而提升模型的泛化能力。</p>
 </blockquote>
 
 <ol>
@@ -34,33 +32,7 @@
 
 <p><img src="/Users/rayss/Public/work/AI求职/study/深度学习基础知识/模型优化/image/L1.png" alt="image-20250315105347708" style="zoom:17%;" /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">Lasso</span>
 
@@ -86,7 +58,7 @@
 
 <span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">'./L1.png'</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <h4 id="2-l2-正则化ridge-正则化">2. <strong>L2 正则化（Ridge 正则化）</strong></h4>
 <ul>
@@ -126,43 +98,7 @@
 
 <p><img src="/Users/rayss/Public/work/AI求职/study/深度学习基础知识/模型优化/image/E.png" alt="image-20250315105347710" style="zoom:17%;" /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span><span class="n">Lasso</span> <span class="p">,</span><span class="n">Ridge</span><span class="p">,</span> <span class="n">ElasticNet</span>
 
@@ -198,7 +134,7 @@
 <span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"./E.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <h4 id="4-早停early-stopping">4. <strong>早停（Early Stopping）</strong></h4>
 <ul>
@@ -206,59 +142,7 @@
   <li><strong>作用</strong>：避免模型在训练数据上过度拟合，通过找到合适的训练时机，确保模型在未见过的数据上表现良好。</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">torch</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="n">optim</span>
 
 <span class="k">class</span> <span class="nc">EarlyStopping</span><span class="p">:</span>
@@ -310,7 +194,7 @@
 </span>            <span class="k">break</span>
 
     <span class="k">return</span> <span class="n">model</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <h4 id="5-dropout">5. <strong>Dropout</strong></h4>
 <ul>
@@ -318,9 +202,8 @@
   <li><strong>作用</strong>：通过随机丢弃神经元，防止神经网络过度依赖某些特征，提高泛化能力。</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="n">nn</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nn</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div></div>
 
 <h4 id="6-数据增强data-augmentation">6. <strong>数据增强（Data Augmentation）</strong></h4>
 <ul>

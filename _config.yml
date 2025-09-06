@@ -117,7 +117,7 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
   syntax_highlighter_opts:
-    line_numbers: true
+    line_numbers: false
 
 # Include markdown files in processing
 include: ["blog/**/*.md", "personal/**/*.md"]

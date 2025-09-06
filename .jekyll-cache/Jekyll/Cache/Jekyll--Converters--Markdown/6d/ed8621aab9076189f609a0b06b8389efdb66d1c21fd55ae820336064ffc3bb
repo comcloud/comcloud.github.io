@@ -1,4 +1,4 @@
-I"�<blockquote>
+I"<blockquote>
   <p>动量法（Momentum）是一种优化算法，通常用于加速梯度下降法的收敛速度，减少震荡，特别是在训练深度学习模型时常常使用。它通过<strong>将前一次更新的方向“记住”一段时间</strong>，帮助模型沿着合适的方向更快地收敛。</p>
 </blockquote>
 
@@ -92,11 +92,9 @@
   </li>
 </ol>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre><span class="c1"># 动量法
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 动量法
 </span><span class="n">w</span> <span class="o">+=</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">w</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">dw</span>  <span class="c1"># 梯度影响速度
-</span></pre></td></tr></tbody></table></code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="动量法的变种">动量法的变种</h3>
 

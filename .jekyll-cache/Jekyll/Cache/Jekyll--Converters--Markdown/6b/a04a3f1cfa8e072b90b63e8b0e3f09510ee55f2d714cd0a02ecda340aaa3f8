@@ -1,4 +1,4 @@
-I"�<h2 id="快速入门">快速入门</h2>
+I"A<h2 id="快速入门">快速入门</h2>
 
 <blockquote>
   <p>阅读本文前，请先确保阅读了项目根目录的 <a href="../../../../../AI/ai-manus/README_zh.md">README_zh.md</a></p>
@@ -6,49 +6,29 @@
 
 <h3 id="登陆">登陆</h3>
 
-<p>执行指令: <code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>cp .env.example .env
-</pre></td></tr></tbody></table></code>，然后做后面的修改</p>
+<p>执行指令: <code class="highlighter-rouge">cp .env.example .env</code>，然后做后面的修改</p>
 
 <ol>
-  <li>修改<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>API_KEY
-</pre></td></tr></tbody></table></code>，<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>API_BASE
-</pre></td></tr></tbody></table></code>，其他配置我们先不做修改，并不会影响运行</li>
+  <li>修改<code class="highlighter-rouge">API_KEY</code>，<code class="highlighter-rouge">API_BASE</code>，其他配置我们先不做修改，并不会影响运行</li>
 </ol>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre><span class="nv">API_KEY</span><span class="o">=</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">API_KEY</span><span class="o">=</span>
 <span class="nv">API_BASE</span><span class="o">=</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <ol>
   <li>设置认证配置</li>
 </ol>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="c"># Auth configuration</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Auth configuration</span>
 <span class="c"># Options: password, none, local</span>
 <span class="nv">AUTH_PROVIDER</span><span class="o">=</span><span class="nb">local</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <blockquote>
   <p>这里是因为前端设置了路由守卫，首先从后台获取认证方式，local会使用配置的邮箱/密码，password会使用数据库中存储的，当使用none则认为不做拦截，因此如果你想跳过登陆，<strong>设置为none即可</strong>，此时其实是作为匿名用户而已</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">auth_provider</span> <span class="o">==</span> <span class="s">"none"</span><span class="p">:</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">auth_provider</span> <span class="o">==</span> <span class="s">"none"</span><span class="p">:</span>
   <span class="c1"># Add anonymous user to request state
 </span>  <span class="n">request</span><span class="p">.</span><span class="n">state</span><span class="p">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
     <span class="nb">id</span><span class="o">=</span><span class="s">"anonymous"</span><span class="p">,</span>
@@ -57,30 +37,24 @@
     <span class="n">role</span><span class="o">=</span><span class="n">UserRole</span><span class="p">.</span><span class="n">USER</span><span class="p">,</span>
     <span class="n">is_active</span><span class="o">=</span><span class="bp">True</span>
   <span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></div>  </div>
+</code></pre></div>  </div>
 </blockquote>
 
 <ol>
   <li>设置登录账号和密码（自己设置，其中密码不要少于6位字符）</li>
 </ol>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="c"># Local auth configuration, only used when AUTH_PROVIDER=local</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Local auth configuration, only used when AUTH_PROVIDER=local</span>
 <span class="nv">LOCAL_AUTH_EMAIL</span><span class="o">=</span>admin@example.com
 <span class="nv">LOCAL_AUTH_PASSWORD</span><span class="o">=</span>admin123
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <ol>
-  <li>执行<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>docker compose
-</pre></td></tr></tbody></table></code>命令</li>
+  <li>执行<code class="highlighter-rouge">docker compose</code>命令</li>
 </ol>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>./dev.sh up
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./dev.sh up
+</code></pre></div></div>
 
 <blockquote>
   <p>访问http://localhost:5173/登陆即可</p>
@@ -94,21 +68,14 @@
   <p>修改的模型请注意下面几点</p>
 </blockquote>
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre><span class="p">-</span> 兼容OpenAI接口
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">-</span> 兼容OpenAI接口
 <span class="p">-</span> 支持FunctionCall
 <span class="p">-</span> 支持Json Format输出
 
 推荐使用Deepseek与GPT模型。
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<p>现在对于其他的一些模型适配并不是很好，例如我们使用模型<code class="highlighter-rouge"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>Qwen/Qwen3-235B-A22B-Instruct-2507
-</pre></td></tr></tbody></table></code>时，就会出现问题如下：</p>
+<p>现在对于其他的一些模型适配并不是很好，例如我们使用模型<code class="highlighter-rouge">Qwen/Qwen3-235B-A22B-Instruct-2507</code>时，就会出现问题如下：</p>
 
 <p><img src="/Users/rayss/Public/work/AI求职/study/AI-manus/assets/image-20250902145119200.png" alt="image-20250902145119200" /></p>
 
@@ -122,20 +89,13 @@
   <p>笔者</p>
 </blockquote>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="rouge-code"><pre>  <span class="na">sandbox</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">sandbox</span><span class="pi">:</span>
 <span class="c1">#    image: docker.xuanyuan.me/manus-sandbox:latest</span>
     <span class="na">build</span><span class="pi">:</span>
        <span class="na">context</span><span class="pi">:</span> <span class="s">./sandbox</span>
        <span class="na">dockerfile</span><span class="pi">:</span> <span class="s">Dockerfile</span>
     <span class="na">hostname</span><span class="pi">:</span> <span class="s">sandbox</span>
     <span class="na">volumes</span><span class="pi">:</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 :ET
