@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Styles -->
-  <link href="/assets/css/style.css" rel="stylesheet">
+  <link href="/assets/css/temp-style.css" rel="stylesheet">
   
   <!-- Meta tags for better SEO and social sharing -->
   <meta property="og:title" content="Personal Information">
@@ -27,66 +27,109 @@
   <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+  <!-- 页面加载动画 -->
+  <div id="page-loader" class="page-loader">
+    <div class="loader-content">
+      <div class="cloud-container">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+      </div>
+      <div class="loader-text">
+        <h2>云游君的小站</h2>
+        <p>正在为您准备精彩内容...</p>
+      </div>
+      <div class="loading-progress">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+  </div>
 
-  <div id="page" class="site">
-    <header class="site-header">
-  
-  <p class="site-title"><a class="logo-text" href="/">成都犀牛</a></p>
-  
-  <nav class="site-navigation">
-    <div class="site-navigation-wrap">
-      <h2 class="screen-reader-text">Main navigation</h2>
-      <ul class="menu">
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="/">Home</a>
-        </li>
-        
-        
-        
-        <li class="menu-item nav-current">
-          <a class="nav-current" href="/personal/">Personal</a>
-        </li>
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="/articles/">Articles</a>
-        </li>
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="https://github.com/comcloud">comcloud</a>
-        </li>
-        
-      </ul><!-- .menu -->
-      <button id="menu-close" class="menu-toggle"><span class="screen-reader-text">Close Menu</span><span
-          class="icon-close" aria-hidden="true"></span></button>
-    </div><!-- .site-navigation-wrap -->
-  </nav><!-- .site-navigation -->
-  <button id="menu-open" class="menu-toggle"><span class="screen-reader-text">Open Menu</span><span class="icon-menu" aria-hidden="true"></span></button>
+  <div id="page" class="site page-hidden">
+    <header class="site-header" id="site-header">
+  <div class="container">
+    
+    <div class="site-title">
+      <a href="/">
+        成都犀牛
+      </a>
+    </div>
+    
+    
+    <nav class="site-navigation" id="site-navigation">
+      <div class="site-navigation-wrap">
+        <ul class="menu">
+          
+          
+          
+          
+            
+            
+            <li class="menu-item">
+              <a href="/" class="">
+                Home
+              </a>
+            </li>
+          
+            
+            
+            <li class="menu-item">
+              <a href="/personal/" class="current">
+                Personal
+              </a>
+            </li>
+          
+            
+            
+            <li class="menu-item">
+              <a href="/articles/" class="">
+                Articles
+              </a>
+            </li>
+          
+            
+            
+            <li class="menu-item">
+              <a href="https://github.com/comcloud" class="">
+                comcloud
+              </a>
+            </li>
+          
+        </ul>
+        <button id="menu-close" class="menu-toggle">
+          <span class="visually-hidden">关闭菜单</span>
+          ✕
+        </button>
+      </div>
+    </nav>
+    
+    <button id="menu-open" class="menu-toggle">
+      <span class="visually-hidden">打开菜单</span>
+      ☰
+    </button>
+  </div>
 </header>
 
 
     <main class="site-main">
       <main class="main-content fade-in-up">
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero personal-hero">
     <div class="container">
-      <div class="hero-container">
+      <div class="hero-container personal-hero-container">
         <div class="hero-left">
-          <div class="hero-avatar">
+          <div class="hero-avatar personal-avatar">
             <span>👨‍💻</span>
           </div>
         </div>
         <div class="hero-right">
-          <h1 class="hero-title">张玉雷</h1>
-          <p class="hero-subtitle">AI研究生 & 后端开发工程师</p>
-          <p class="hero-description">专注于人工智能和后端开发，具有丰富的项目经验和技术背景。</p>
-          <div class="stats">
+          <h1 class="hero-title personal-title">
+            <span class="name-highlight">张玉雷</span>
+          </h1>
+          <p class="hero-subtitle personal-subtitle">AI研究生 & 后端开发工程师</p>
+          <p class="hero-description personal-description">专注于人工智能和后端开发，具有丰富的项目经验和技术背景。热爱技术创新，追求代码的优雅与效率。</p>
+          <div class="stats personal-stats">
             <div class="stat">
               <span class="stat-number">3+</span>
               <span class="stat-label">年经验</span>
@@ -100,9 +143,15 @@
               <span class="stat-label">获奖</span>
             </div>
           </div>
-          <div class="hero-actions">
-            <a href="/personal/resume/" class="btn btn-primary">查看简历</a>
-            <a href="mailto:zyl13523327374@163.com" class="btn btn-secondary">联系我</a>
+          <div class="hero-actions personal-actions">
+            <a href="/personal/resume/" class="btn btn-primary btn-large">
+              <span>📄</span>
+              查看详细简历
+            </a>
+            <a href="mailto:zyl13523327374@163.com" class="btn btn-secondary btn-large">
+              <span>✉️</span>
+              联系我
+            </a>
           </div>
         </div>
       </div>
@@ -241,6 +290,212 @@
   </section>
 </main>
 
+<style>
+/* Personal 页面特定样式优化 */
+.personal-hero {
+  background: var(--gradient-primary);
+  padding: var(--space-16) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.personal-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  animation: gradientShift 10s ease-in-out infinite alternate;
+}
+
+@keyframes gradientShift {
+  0% { transform: translateX(-20px) translateY(-20px); }
+  100% { transform: translateX(20px) translateY(20px); }
+}
+
+.personal-hero-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-10);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.personal-avatar {
+  width: 140px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  backdrop-filter: blur(15px);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-base);
+}
+
+.personal-avatar:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.personal-title {
+  font-size: var(--text-5xl);
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+  color: white;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.name-highlight {
+  background: linear-gradient(45deg, #ffffff, #f0f9ff, #e0f2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.name-highlight::after {
+  content: '成都犀牛';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: var(--text-lg);
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.personal-subtitle {
+  font-size: var(--text-xl);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--space-4);
+  font-weight: 500;
+}
+
+.personal-description {
+  font-size: var(--text-lg);
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: var(--space-8);
+  line-height: 1.7;
+  max-width: 500px;
+}
+
+.personal-stats {
+  display: flex;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.stat {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.15);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all var(--transition-base);
+}
+
+.stat:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.stat-number {
+  display: block;
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stat-label {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.personal-actions {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.btn-large {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.personal-actions .btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.personal-actions .btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .personal-hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--space-8);
+  }
+  
+  .personal-avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+  
+  .personal-title {
+    font-size: var(--text-4xl);
+  }
+  
+  .personal-stats {
+    justify-content: center;
+    gap: var(--space-4);
+  }
+  
+  .personal-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .personal-hero {
+    padding: var(--space-12) 0;
+  }
+  
+  .personal-stats {
+    gap: var(--space-3);
+  }
+  
+  .stat {
+    padding: var(--space-3) var(--space-4);
+  }
+}
+</style>
+
     </main>
     <footer class="site-footer">
   <div class="offsite-links">
@@ -293,6 +548,99 @@
   
   <script src="/assets/js/plugins.js"></script>
   <script src="/assets/js/custom.js"></script>
+  
+  <!-- 移动端菜单脚本 -->
+  <script>
+    (function() {
+      const menuOpen = document.getElementById('menu-open');
+      const menuClose = document.getElementById('menu-close');
+      const navigation = document.getElementById('site-navigation');
+      const body = document.body;
+      
+      if (menuOpen && menuClose && navigation) {
+        menuOpen.addEventListener('click', function() {
+          navigation.classList.add('menu-open');
+          body.classList.add('menu--opened');
+        });
+        
+        menuClose.addEventListener('click', function() {
+          navigation.classList.remove('menu-open');
+          body.classList.remove('menu--opened');
+        });
+        
+        // 点击导航外部区域关闭菜单
+        navigation.addEventListener('click', function(e) {
+          if (e.target === navigation) {
+            navigation.classList.remove('menu-open');
+            body.classList.remove('menu--opened');
+          }
+        });
+      }
+      
+      // 头部滚动效果
+      const header = document.getElementById('site-header');
+      let lastScroll = 0;
+      
+      window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+      });
+    })();
+  </script>
+  
+  <!-- 加载动画脚本 -->
+  <script>
+    (function() {
+      const loader = document.getElementById('page-loader');
+      const site = document.getElementById('page');
+      const progressBar = document.querySelector('.progress-bar');
+      
+      let progress = 0;
+      const progressInterval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress > 95) progress = 95;
+        progressBar.style.width = progress + '%';
+      }, 100);
+      
+      // 模拟加载进程，实际中可以基于资源加载情况
+      window.addEventListener('load', function() {
+        clearInterval(progressInterval);
+        progressBar.style.width = '100%';
+        
+        setTimeout(function() {
+          loader.classList.add('loader-hide');
+          site.classList.remove('page-hidden');
+          site.classList.add('page-show');
+        }, 500);
+        
+        setTimeout(function() {
+          loader.style.display = 'none';
+        }, 1500);
+      });
+      
+      // 防止加载时间过长，设置最大等待时间
+      setTimeout(function() {
+        if (loader && loader.style.display !== 'none') {
+          clearInterval(progressInterval);
+          progressBar.style.width = '100%';
+          loader.classList.add('loader-hide');
+          site.classList.remove('page-hidden');
+          site.classList.add('page-show');
+          
+          setTimeout(function() {
+            loader.style.display = 'none';
+          }, 1000);
+        }
+      }, 3000);
+    })();
+  </script>
 
 </body>
 </html>

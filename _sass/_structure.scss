@@ -1,72 +1,120 @@
 /* ==========================================================================
-   3. Enhanced Structure
+   3. 简约结构样式
    ========================================================================== */
 
-/* Legacy container for backward compatibility */
+/* 主要内容区域 */
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-main {
+  flex: 1;
+  padding: var(--space-8) 0;
+  
+  @media (min-width: 768px) {
+    padding: var(--space-12) 0;
+  }
+}
+
+/* 传统内容容器 */
 .inner {
   margin: 0 auto;
-  max-width: 760px;
-  padding: 0 var(--space-md);
+  max-width: var(--container-lg);
+  padding: 0 var(--space-4);
   
   @media (min-width: 768px) {
-    padding: 0 var(--space-lg);
+    padding: 0 var(--space-6);
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 0 var(--space-8);
   }
 }
 
-/* Enhanced main content wrapper */
+/* 内容布局 */
 .main-content {
-  min-height: 80vh;
-  padding: var(--space-xl) 0;
+  width: 100%;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
   
   @media (min-width: 768px) {
-    padding: var(--space-2xl) 0;
+    padding: 0 var(--space-6);
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 0 var(--space-8);
   }
 }
 
-/* Section spacing */
-section {
-  margin-bottom: var(--space-3xl);
+/* 内容区域 */
+.content-section {
+  margin-bottom: var(--space-16);
   
   &:last-child {
     margin-bottom: 0;
   }
-}
-
-/* Content spacing */
-.content-section {
-  padding: var(--space-2xl) 0;
   
-  @media (min-width: 768px) {
-    padding: var(--space-3xl) 0;
-  }
-  
-  &.content-section-sm {
-    padding: var(--space-xl) 0;
-    
-    @media (min-width: 768px) {
-      padding: var(--space-2xl) 0;
-    }
+  @media (max-width: 768px) {
+    margin-bottom: var(--space-12);
   }
 }
 
-/* Article layout */
+/* 文章布局 */
 .article-layout {
   max-width: 65ch;
   margin: 0 auto;
-  
-  @media (min-width: 1024px) {
-    max-width: 75ch;
-  }
 }
 
-/* Wide layout for galleries, tables, etc */
-.wide-layout {
-  max-width: var(--container-lg);
-  margin: 0 auto;
-}
-
-/* Full width sections */
+/* 全宽容器 */
 .full-width {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
+}
+
+/* 响应式间距 */
+.section-padding {
+  padding: var(--space-16) 0;
+  
+  @media (max-width: 768px) {
+    padding: var(--space-12) 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: var(--space-8) 0;
+  }
+}
+
+.section-padding-sm {
+  padding: var(--space-8) 0;
+  
+  @media (max-width: 768px) {
+    padding: var(--space-6) 0;
+  }
+}
+
+/* 布局网格 */
+.layout-grid {
+  display: grid;
+  gap: var(--space-8);
+  
+  &.two-column {
+    grid-template-columns: 1fr 300px;
+    
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+  
+  &.three-column {
+    grid-template-columns: repeat(3, 1fr);
+    
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
 }

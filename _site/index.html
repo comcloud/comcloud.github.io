@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Styles -->
-  <link href="/assets/css/style.css" rel="stylesheet">
+  <link href="/assets/css/temp-style.css" rel="stylesheet">
   
   <!-- Meta tags for better SEO and social sharing -->
   <meta property="og:title" content="成都犀牛">
@@ -27,79 +27,125 @@
   <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+  <!-- 页面加载动画 -->
+  <div id="page-loader" class="page-loader">
+    <div class="loader-content">
+      <div class="cloud-container">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+      </div>
+      <div class="loader-text">
+        <h2>云游君的小站</h2>
+        <p>正在为您准备精彩内容...</p>
+      </div>
+      <div class="loading-progress">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+  </div>
 
-  <div id="page" class="site">
-    <header class="site-header">
-  
-  <h1 class="site-title"><a class="logo-text" href="/">成都犀牛</a></h1>
-  
-  <nav class="site-navigation">
-    <div class="site-navigation-wrap">
-      <h2 class="screen-reader-text">Main navigation</h2>
-      <ul class="menu">
-        
-        
-        
-        <li class="menu-item nav-current">
-          <a class="nav-current" href="/">Home</a>
-        </li>
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="/personal/">Personal</a>
-        </li>
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="/articles/">Articles</a>
-        </li>
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="https://github.com/comcloud">comcloud</a>
-        </li>
-        
-      </ul><!-- .menu -->
-      <button id="menu-close" class="menu-toggle"><span class="screen-reader-text">Close Menu</span><span
-          class="icon-close" aria-hidden="true"></span></button>
-    </div><!-- .site-navigation-wrap -->
-  </nav><!-- .site-navigation -->
-  <button id="menu-open" class="menu-toggle"><span class="screen-reader-text">Open Menu</span><span class="icon-menu" aria-hidden="true"></span></button>
+  <div id="page" class="site page-hidden">
+    <header class="site-header" id="site-header">
+  <div class="container">
+    
+    <h1 class="site-title">
+      <a href="/">
+        成都犀牛
+      </a>
+    </h1>
+    
+    
+    <nav class="site-navigation" id="site-navigation">
+      <div class="site-navigation-wrap">
+        <ul class="menu">
+          
+          
+          
+          
+            
+            
+            <li class="menu-item">
+              <a href="/" class="current">
+                Home
+              </a>
+            </li>
+          
+            
+            
+            <li class="menu-item">
+              <a href="/personal/" class="">
+                Personal
+              </a>
+            </li>
+          
+            
+            
+            <li class="menu-item">
+              <a href="/articles/" class="">
+                Articles
+              </a>
+            </li>
+          
+            
+            
+            <li class="menu-item">
+              <a href="https://github.com/comcloud" class="">
+                comcloud
+              </a>
+            </li>
+          
+        </ul>
+        <button id="menu-close" class="menu-toggle">
+          <span class="visually-hidden">关闭菜单</span>
+          ✕
+        </button>
+      </div>
+    </nav>
+    
+    <button id="menu-open" class="menu-toggle">
+      <span class="visually-hidden">打开菜单</span>
+      ☰
+    </button>
+  </div>
 </header>
 
 
-<div class="site-description fadeInDown delay_05s">
-  <p>会当水击三千里，自信人生二百年</p>
-</div><!-- .site-description -->
+<div class="site-description">
+  <div class="container">
+    <p>会当水击三千里，自信人生二百年</p>
+  </div>
+</div>
 
     <main class="site-main">
-      <main class="main-content fade-in-up">
-  <!-- Hero Section -->
-  <section class="hero">
+      <main class="main-content">
+  <!-- Hero 区域 -->
+  <section class="hero section-padding">
     <div class="container">
       <div class="hero-container">
         <div class="hero-left">
           <div class="hero-icon">
-            <span class="icon-emoji">📚</span>
+            <span>🌟</span>
           </div>
         </div>
         <div class="hero-right">
-          <h1 class="hero-title">📚 我的技术文章</h1>
+          <h1 class="hero-title">
+            <span class="site-name">云游君的技术小站</span>
+            <span class="location-tag">成都犀牛</span>
+          </h1>
           <p class="hero-subtitle">探索AI、深度学习与技术实践的奥秘</p>
-          <p class="hero-description">这里记录了我在人工智能、深度学习、大模型等领域的学习心得和技术分析。</p>
+          <p class="hero-description">记录在人工智能、深度学习、大模型等领域的学习心得和技本分析。</p>
           <div class="hero-actions">
-            <a href="/articles/" class="btn btn-primary">查看所有文章</a>
-            <a href="/personal/" class="btn btn-secondary">个人信息</a>
+            <a href="/articles/" class="btn btn-primary">🔍 查看所有文章</a>
+            <a href="/personal/" class="btn btn-secondary">👨‍💻 个人信息</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Featured Articles Section -->
+  <!-- 精选文章区域 -->
   <section class="content-section">
     <div class="container">
       <h2 class="section-title gradient-text">精选文章</h2>
@@ -109,107 +155,167 @@
         <!-- 精选文章将在这里动态加载 -->
       </div>
       
-      <div class="text-center" style="margin-top: var(--space-xl);">
+      <div class="text-center" style="margin-top: var(--space-12);">
         <a href="/articles/" class="btn btn-outline">查看更多文章 →</a>
       </div>
     </div>
   </section>
 
-  <!-- Recent Posts Section -->
+  <!-- 最新博客区域 -->
+  
   <section class="content-section bg-secondary">
     <div class="container">
       <h2 class="section-title">最新博客</h2>
-      <div id="recent-posts" class="post-list">
+      <div class="post-list">
         
-          
-          <article class="post card card-elevated fade-in-up">
-            <div class="post-thumbnail">
-              
-                <a href="/2022/01/05/Graphic-Designer-On-The-Road.html">
-                  <img src="/images/road.jpg" alt="Graphic Designer On The Road">
-                </a>
-              
-            </div>
-            <div class="post-content">
-              <div class="post-header">
-                <time class="post-date" datetime="2022-01-05">January 5, 2022</time>
-                <h3 class="post-title"><a href="/2022/01/05/Graphic-Designer-On-The-Road.html" rel="bookmark">Graphic Designer On The Road</a></h3>
-                <div class="post-meta">
-                  By <span class="post-author">John Doe</span><span class="post-tags"> in
-                    <a href="/tags/#tips" rel="tag">tips</a>, <a href="/tags/#work" rel="tag">work</a></span>
-                </div>
-              </div>
-              <div class="post-content-body">
+        <article class="post card card-elevated">
+          <div class="post-thumbnail">
+            
+              <a href="/2022/01/05/Graphic-Designer-On-The-Road.html">
+                <img src="/images/road.jpg" alt="Graphic Designer On The Road" loading="lazy">
+              </a>
+            
+          </div>
+          <div class="post-content">
+            <div class="post-header">
+              <time class="post-date" datetime="2022-01-05">
+                2022年1月5日
+              </time>
+              <h3 class="post-title">
+                <a href="/2022/01/05/Graphic-Designer-On-The-Road.html">Graphic Designer On The Road</a>
+              </h3>
+              <div class="post-meta">
+                By <span class="post-author">John Doe</span>
                 
-                  A graphic designer is a professional within the graphic design and graphic arts industry who assembles together images, typography, or motion graph...
+                  <span class="post-tags">
+                    
+                      <a href="/tags/#tips">tips</a>
+                      , 
+                    
+                      <a href="/tags/#work">work</a>
+                      
+                    
+                  </span>
                 
-                <div class="read-more">
-                  <a href="/2022/01/05/Graphic-Designer-On-The-Road.html" class="btn btn-outline btn-sm">阅读更多</a>
-                </div>
-              </div>
-            </div>
-          </article>
-          
-          <article class="post card card-elevated fade-in-up">
-            <div class="post-thumbnail">
-              
-                <a href="/2019/01/04/a-week-with-the-apple-watch.html">
-                  <img src="/images/apple-watch.jpg" alt="Review: A Week With the Apple Watch">
-                </a>
-              
-            </div>
-            <div class="post-content">
-              <div class="post-header">
-                <time class="post-date" datetime="2019-01-04">January 4, 2019</time>
-                <h3 class="post-title"><a href="/2019/01/04/a-week-with-the-apple-watch.html" rel="bookmark">Review: A Week With the Apple Watch</a></h3>
-                <div class="post-meta">
-                  By <span class="post-author">John Doe</span><span class="post-tags"> in
-                    <a href="/tags/#tips" rel="tag">tips</a>, <a href="/tags/#work" rel="tag">work</a></span>
-                </div>
-              </div>
-              <div class="post-content-body">
-                
-                  The Apple Watch is a smartwatch developed by Apple Inc. It incorporates fitness tracking and health-oriented capabilities as well as integration wi...
-                
-                <div class="read-more">
-                  <a href="/2019/01/04/a-week-with-the-apple-watch.html" class="btn btn-outline btn-sm">阅读更多</a>
-                </div>
               </div>
             </div>
-          </article>
-          
-          <article class="post card card-elevated fade-in-up">
-            <div class="post-thumbnail">
-              
-                <a href="/2019/01/03/basic-rules-for-walking-in-the-mountains.html">
-                  <img src="/images/mountain.jpg" alt="Basic Rules For Walking In The Mountains">
-                </a>
-              
-            </div>
-            <div class="post-content">
-              <div class="post-header">
-                <time class="post-date" datetime="2019-01-03">January 3, 2019</time>
-                <h3 class="post-title"><a href="/2019/01/03/basic-rules-for-walking-in-the-mountains.html" rel="bookmark">Basic Rules For Walking In The Mountains</a></h3>
-                <div class="post-meta">
-                  By <span class="post-author">John Doe</span><span class="post-tags"> in
-                    <a href="/tags/#tips" rel="tag">tips</a>, <a href="/tags/#work" rel="tag">work</a></span>
-                </div>
-              </div>
-              <div class="post-content-body">
-                
-                  In the United States, Canada, the Republic of Ireland, and United Kingdom, hiking refers to walking outdoors on a trail, or off trail, for recreati...
-                
-                <div class="read-more">
-                  <a href="/2019/01/03/basic-rules-for-walking-in-the-mountains.html" class="btn btn-outline btn-sm">阅读更多</a>
-                </div>
+            <div class="post-content-body">
+              <p>A graphic designer is a professional within the graphic design and graphic arts industry who assembles together image...</p>
+              <div class="read-more">
+                <a href="/2022/01/05/Graphic-Designer-On-The-Road.html" class="btn btn-outline btn-sm">阅读更多</a>
               </div>
             </div>
-          </article>
-          
+          </div>
+        </article>
+        
+        <article class="post card card-elevated">
+          <div class="post-thumbnail">
+            
+              <a href="/2019/01/04/a-week-with-the-apple-watch.html">
+                <img src="/images/apple-watch.jpg" alt="Review: A Week With the Apple Watch" loading="lazy">
+              </a>
+            
+          </div>
+          <div class="post-content">
+            <div class="post-header">
+              <time class="post-date" datetime="2019-01-04">
+                2019年1月4日
+              </time>
+              <h3 class="post-title">
+                <a href="/2019/01/04/a-week-with-the-apple-watch.html">Review: A Week With the Apple Watch</a>
+              </h3>
+              <div class="post-meta">
+                By <span class="post-author">John Doe</span>
+                
+                  <span class="post-tags">
+                    
+                      <a href="/tags/#tips">tips</a>
+                      , 
+                    
+                      <a href="/tags/#work">work</a>
+                      
+                    
+                  </span>
+                
+              </div>
+            </div>
+            <div class="post-content-body">
+              <p>The Apple Watch is a smartwatch developed by Apple Inc. It incorporates fitness tracking and health-oriented capabili...</p>
+              <div class="read-more">
+                <a href="/2019/01/04/a-week-with-the-apple-watch.html" class="btn btn-outline btn-sm">阅读更多</a>
+              </div>
+            </div>
+          </div>
+        </article>
+        
+        <article class="post card card-elevated">
+          <div class="post-thumbnail">
+            
+              <a href="/2019/01/03/basic-rules-for-walking-in-the-mountains.html">
+                <img src="/images/mountain.jpg" alt="Basic Rules For Walking In The Mountains" loading="lazy">
+              </a>
+            
+          </div>
+          <div class="post-content">
+            <div class="post-header">
+              <time class="post-date" datetime="2019-01-03">
+                2019年1月3日
+              </time>
+              <h3 class="post-title">
+                <a href="/2019/01/03/basic-rules-for-walking-in-the-mountains.html">Basic Rules For Walking In The Mountains</a>
+              </h3>
+              <div class="post-meta">
+                By <span class="post-author">John Doe</span>
+                
+                  <span class="post-tags">
+                    
+                      <a href="/tags/#tips">tips</a>
+                      , 
+                    
+                      <a href="/tags/#work">work</a>
+                      
+                    
+                  </span>
+                
+              </div>
+            </div>
+            <div class="post-content-body">
+              <p>In the United States, Canada, the Republic of Ireland, and United Kingdom, hiking refers to walking outdoors on a tra...</p>
+              <div class="read-more">
+                <a href="/2019/01/03/basic-rules-for-walking-in-the-mountains.html" class="btn btn-outline btn-sm">阅读更多</a>
+              </div>
+            </div>
+          </div>
+        </article>
         
       </div>
     </div>
   </section>
+  
+
+  <!-- 统计信息 -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-container">
+        <h2 class="stats-title">站点统计</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number" id="articles-count">--</span>
+            <span class="stat-label">技术文章</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="series-count">--</span>
+            <span class="stat-label">文章系列</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">5</span>
+            <span class="stat-label">博客文章</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
   
 </main>
@@ -292,6 +398,117 @@ function renderFeaturedArticles(container, articles) {
   container.innerHTML = html;
 }
 
+<script>
+// 动态加载精选文章和统计信息
+document.addEventListener('DOMContentLoaded', function() {
+  loadFeaturedArticles();
+  loadSiteStats();
+  
+  // 定时检测新文章（每30秒检查一次）
+  setInterval(function() {
+    loadFeaturedArticles();
+    loadSiteStats();
+  }, 30000);
+});
+
+async function loadFeaturedArticles() {
+  const container = document.getElementById('featured-articles');
+  if (!container) return;
+  
+  try {
+    const response = await fetch('/assets/data/articles.json?t=' + Date.now());
+    let articles = [];
+    
+    if (response.ok) {
+      articles = await response.json();
+    }
+    
+    if (articles.length === 0) {
+      container.innerHTML = '
+        <div class="text-center" style="grid-column: 1 / -1;">
+          <p style="color: var(--text-muted); font-style: italic;">
+            暂无文章，请在 articles 文件夹中添加 Markdown 文件
+          </p>
+        </div>';
+      return;
+    }
+    
+    // 按日期排序，最新的在前
+    articles.sort((a, b) => {
+      const dateA = new Date(a.date || '1900-01-01');
+      const dateB = new Date(b.date || '1900-01-01');
+      return dateB - dateA;
+    });
+    
+    const featured = articles.slice(0, 3);
+    renderFeaturedArticles(container, featured);
+    
+  } catch (error) {
+    console.error('加载文章失败:', error);
+    container.innerHTML = '
+      <div class="text-center" style="grid-column: 1 / -1;">
+        <p style="color: var(--text-muted);">
+          文章加载失败，请检查 articles 文件夹
+        </p>
+      </div>';
+  }
+}
+
+function renderFeaturedArticles(container, articles) {
+  let html = '';
+  
+  articles.forEach((article, index) => {
+    const tags = article.tags && article.tags.length > 0 
+      ? article.tags.slice(0, 2).map(tag => `<span class="skill-tag">${tag}</span>`).join(' ')
+      : '';
+    
+    html += `
+      <article class="card card-elevated" style="--animation-order: ${index}">
+        <div class="card-header">
+          <div class="card-icon icon-gradient">📄</div>
+          <h3 class="card-title">${article.title}</h3>
+          <p class="card-subtitle">${article.category || '技术'} 系列</p>
+        </div>
+        <div class="card-body">
+          <p>${article.description || '无描述信息'}</p>
+          ${article.date ? `<time class="text-muted" style="font-size: var(--text-xs);">📅 ${formatDate(article.date)}</time>` : ''}
+          ${tags ? `<div style="margin-top: var(--space-3);">${tags}</div>` : ''}
+        </div>
+        <div class="card-actions">
+          <a href="${article.url}" class="btn btn-primary btn-full">阅读文章 →</a>
+        </div>
+      </article>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+async function loadSiteStats() {
+  const articlesCount = document.getElementById('articles-count');
+  const seriesCount = document.getElementById('series-count');
+  
+  if (!articlesCount || !seriesCount) return;
+  
+  try {
+    const response = await fetch('/assets/data/articles.json?t=' + Date.now());
+    
+    if (response.ok) {
+      const articles = await response.json();
+      const categories = [...new Set(articles.map(a => a.category).filter(Boolean))];
+      
+      articlesCount.textContent = articles.length;
+      seriesCount.textContent = categories.length;
+    } else {
+      articlesCount.textContent = '0';
+      seriesCount.textContent = '0';
+    }
+  } catch (error) {
+    articlesCount.textContent = '--';
+    seriesCount.textContent = '--';
+  }
+}
+
 function formatDate(dateString) {
   const date = new Date(dateString);
   return date.toLocaleDateString('zh-CN', {
@@ -301,129 +518,6 @@ function formatDate(dateString) {
   });
 }
 </script>
-  
-  <script>
-    // 可用的图片列表
-    const availableImages = [
-      'images/404.jpg',
-      'images/about.jpg', 
-      'images/apple-watch-in-car.jpg',
-      'images/apple-watch.jpg',
-      'images/author.png',
-      'images/design.jpg',
-      'images/desk.jpg',
-      'images/iphone-6.jpg',
-      'images/iphone-in-hand.jpg',
-      'images/mountain-2.jpg',
-      'images/mountain.jpg',
-      'images/road.jpg',
-      'images/scriptor-jekyll.png'
-    ];
-    
-    // 定义我的文章数据（确保总是显示）
-    const myArticles = [
-      {
-        title: '激活函数详解',
-        url: '/articles/深度学习基础知识/激活函数/',
-        type: 'markdown',
-        series: '深度学习基础',
-        description: '深入讲解深度学习中常用激活函数的原理和应用'
-      },
-      {
-        title: '损失函数全面解析',
-        url: '/articles/深度学习基础知识/损失函数/损失函数总览/',
-        type: 'markdown',
-        series: '深度学习基础',
-        description: '全面介绍常见损失函数的原理、特点和适用场景'
-      },
-      {
-        title: 'Adam优化器原理',
-        url: '/articles/深度学习基础知识/模型优化/Adam/',
-        type: 'markdown',
-        series: '深度学习基础',
-        description: '详细介绍 Adam优化器的数学原理和实际应用'
-      }
-    ];
-    
-    document.addEventListener('DOMContentLoaded', function() {
-      // 优先显示我的文章
-      loadMyArticles();
-    });
-    
-    function loadMyArticles() {
-      const container = document.getElementById('random-content-container');
-      const defaultContent = document.getElementById('default-content');
-      
-      try {
-        // 显示我的文章内容
-        renderMyArticles(container, myArticles);
-        defaultContent.style.display = 'none';
-      } catch (error) {
-        console.error('Error loading my articles:', error);
-        // 出错时显示默认内容
-        defaultContent.style.display = 'block';
-      }
-    }
-    
-    function selectRandomImage() {
-      const randomIndex = Math.floor(Math.random() * availableImages.length);
-      return '/' + availableImages[randomIndex];
-    }
-    
-    function renderMyArticles(container, articles) {
-      let html = '<div class="hero">';
-      html += '<div class="container">';
-      html += '<div class="hero-container">';
-      html += '<div class="hero-left">';
-      html += '<div class="hero-icon"><span class="icon-emoji">📚</span></div>';
-      html += '</div>';
-      html += '<div class="hero-right">';
-      html += '<h1 class="hero-title">📚 我的技术文章</h1>';
-      html += '<p class="hero-subtitle">探索AI、深度学习与技术实践的奥秘</p>';
-      html += '</div></div></div></div>';
-      
-      html += '<section class="content-section">';
-      html += '<div class="container">';
-      html += '<div class="grid grid-3">';
-      
-      articles.forEach(article => {
-        const imageUrl = selectRandomImage();
-        
-        html += `
-          <article class="card card-elevated fade-in-up">
-            <div class="card-header">
-              <div class="card-icon">📄</div>
-              <div class="card-info">
-                <h3>${article.title}</h3>
-                <p>${article.series} 系列</p>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="post-thumbnail">
-                <img src="${imageUrl}" alt="${article.title}" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-lg);">
-              </div>
-              <p>${article.description}</p>
-              <div class="skill-tags">
-                <span class="skill-tag">${article.series}</span>
-                <span class="skill-tag">${article.type}</span>
-              </div>
-            </div>
-            <div class="card-footer">
-              <a href="${article.url}" class="card-link">阅读文章</a>
-            </div>
-          </article>
-        `;
-      });
-      
-      html += '</div>';
-      html += '<div class="text-center mt-6">';
-      html += '<a href="/articles/" class="btn btn-primary btn-lg">查看所有文章</a>';
-      html += '</div>';
-      html += '</div></section>';
-      
-      container.innerHTML = html;
-    }
-  </script>
 
 </main><!-- .site-main -->
     </main>
@@ -478,6 +572,99 @@ function formatDate(dateString) {
   
   <script src="/assets/js/plugins.js"></script>
   <script src="/assets/js/custom.js"></script>
+  
+  <!-- 移动端菜单脚本 -->
+  <script>
+    (function() {
+      const menuOpen = document.getElementById('menu-open');
+      const menuClose = document.getElementById('menu-close');
+      const navigation = document.getElementById('site-navigation');
+      const body = document.body;
+      
+      if (menuOpen && menuClose && navigation) {
+        menuOpen.addEventListener('click', function() {
+          navigation.classList.add('menu-open');
+          body.classList.add('menu--opened');
+        });
+        
+        menuClose.addEventListener('click', function() {
+          navigation.classList.remove('menu-open');
+          body.classList.remove('menu--opened');
+        });
+        
+        // 点击导航外部区域关闭菜单
+        navigation.addEventListener('click', function(e) {
+          if (e.target === navigation) {
+            navigation.classList.remove('menu-open');
+            body.classList.remove('menu--opened');
+          }
+        });
+      }
+      
+      // 头部滚动效果
+      const header = document.getElementById('site-header');
+      let lastScroll = 0;
+      
+      window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+      });
+    })();
+  </script>
+  
+  <!-- 加载动画脚本 -->
+  <script>
+    (function() {
+      const loader = document.getElementById('page-loader');
+      const site = document.getElementById('page');
+      const progressBar = document.querySelector('.progress-bar');
+      
+      let progress = 0;
+      const progressInterval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress > 95) progress = 95;
+        progressBar.style.width = progress + '%';
+      }, 100);
+      
+      // 模拟加载进程，实际中可以基于资源加载情况
+      window.addEventListener('load', function() {
+        clearInterval(progressInterval);
+        progressBar.style.width = '100%';
+        
+        setTimeout(function() {
+          loader.classList.add('loader-hide');
+          site.classList.remove('page-hidden');
+          site.classList.add('page-show');
+        }, 500);
+        
+        setTimeout(function() {
+          loader.style.display = 'none';
+        }, 1500);
+      });
+      
+      // 防止加载时间过长，设置最大等待时间
+      setTimeout(function() {
+        if (loader && loader.style.display !== 'none') {
+          clearInterval(progressInterval);
+          progressBar.style.width = '100%';
+          loader.classList.add('loader-hide');
+          site.classList.remove('page-hidden');
+          site.classList.add('page-show');
+          
+          setTimeout(function() {
+            loader.style.display = 'none';
+          }, 1000);
+        }
+      }, 3000);
+    })();
+  </script>
 
 </body>
 </html>

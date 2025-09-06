@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="" />
+    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/66/adefa78a236c4122c0dff1940e5975b88f201c610c1a676a18171c7e9ea79d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_layouts/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/default.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/_general.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_general.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/_site-header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_site-header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_sass/_structure.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_structure.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/01/01/the-advantages-and-disadvantages-of-working-from-home.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/01/01/the-advantages-and-disadvantages-of-working-from-home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/01/02/set-up-your-new-iphone-6-the-Right-Way.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/01/02/set-up-your-new-iphone-6-the-Right-Way.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/01/03/basic-rules-for-walking-in-the-mountains.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/01/03/basic-rules-for-walking-in-the-mountains.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/01/04/a-week-with-the-apple-watch.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/01/04/a-week-with-the-apple-watch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2022/01/05/Graphic-Designer-On-The-Road.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2022/01/05/Graphic-Designer-On-The-Road.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/deepseek/intro.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/deepseek/intro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/llama/总览.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/llama/总览.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/css/style.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/deepseek/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/deepseek/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama-example/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama-example/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama-overview/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama-overview/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/qwen/quantization-principles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/qwen/quantization-principles/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/blog/LLM/deepseek/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/blog/LLM/deepseek/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/blog/LLM/llama/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/blog/LLM/llama/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/blog/LLM/qwen/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/blog/LLM/qwen/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/deepseek/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/deepseek/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/llama/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/llama/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/series.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/series.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/deepseek-intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/deepseek-intro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/llama-series/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/llama-series/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/personal/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/personal/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/personal/personal/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/personal/personal/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/personal/resume.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/personal/resume.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/quantization-principles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/quantization-principles/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/sitemap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/style-guide.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/style-guide.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/tags.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/tags.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/style.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +66,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/blog/qwen" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -42,10 +92,34 @@
       <option name="presentableId" value="Default" />
       <updated>1754152968390</updated>
       <workItem from="1754152970404" duration="16477000" />
+      <workItem from="1757169662123" duration="643000" />
     </task>
+    <task id="LOCAL-00001" summary="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置">
+      <created>1757169692269</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1757169692269</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置" />
   </component>
 </project>

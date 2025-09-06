@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Styles -->
-  <link href="/assets/css/style.css" rel="stylesheet">
+  <link href="/assets/css/temp-style.css" rel="stylesheet">
   
   <!-- Meta tags for better SEO and social sharing -->
   <meta property="og:title" content="Llama系列大模型全面解析">
@@ -27,47 +27,88 @@
   <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+  <!-- 页面加载动画 -->
+  <div id="page-loader" class="page-loader">
+    <div class="loader-content">
+      <div class="cloud-container">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+      </div>
+      <div class="loader-text">
+        <h2>云游君的小站</h2>
+        <p>正在为您准备精彩内容...</p>
+      </div>
+      <div class="loading-progress">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+  </div>
 
-  <div id="page" class="site">
-    <header class="site-header">
-  
-  <p class="site-title"><a class="logo-text" href="/">成都犀牛</a></p>
-  
-  <nav class="site-navigation">
-    <div class="site-navigation-wrap">
-      <h2 class="screen-reader-text">Main navigation</h2>
-      <ul class="menu">
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="/">Home</a>
-        </li>
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="/personal/">Personal</a>
-        </li>
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="/articles/">Articles</a>
-        </li>
-        
-        
-        
-        <li class="menu-item ">
-          <a class="" href="https://github.com/comcloud">comcloud</a>
-        </li>
-        
-      </ul><!-- .menu -->
-      <button id="menu-close" class="menu-toggle"><span class="screen-reader-text">Close Menu</span><span
-          class="icon-close" aria-hidden="true"></span></button>
-    </div><!-- .site-navigation-wrap -->
-  </nav><!-- .site-navigation -->
-  <button id="menu-open" class="menu-toggle"><span class="screen-reader-text">Open Menu</span><span class="icon-menu" aria-hidden="true"></span></button>
+  <div id="page" class="site page-hidden">
+    <header class="site-header" id="site-header">
+  <div class="container">
+    
+    <div class="site-title">
+      <a href="/">
+        成都犀牛
+      </a>
+    </div>
+    
+    
+    <nav class="site-navigation" id="site-navigation">
+      <div class="site-navigation-wrap">
+        <ul class="menu">
+          
+          
+          
+          
+            
+            
+            <li class="menu-item">
+              <a href="/" class="">
+                Home
+              </a>
+            </li>
+          
+            
+            
+            <li class="menu-item">
+              <a href="/personal/" class="">
+                Personal
+              </a>
+            </li>
+          
+            
+            
+            <li class="menu-item">
+              <a href="/articles/" class="">
+                Articles
+              </a>
+            </li>
+          
+            
+            
+            <li class="menu-item">
+              <a href="https://github.com/comcloud" class="">
+                comcloud
+              </a>
+            </li>
+          
+        </ul>
+        <button id="menu-close" class="menu-toggle">
+          <span class="visually-hidden">关闭菜单</span>
+          ✕
+        </button>
+      </div>
+    </nav>
+    
+    <button id="menu-open" class="menu-toggle">
+      <span class="visually-hidden">打开菜单</span>
+      ☰
+    </button>
+  </div>
 </header>
 
 
@@ -191,6 +232,99 @@
   
   <script src="/assets/js/plugins.js"></script>
   <script src="/assets/js/custom.js"></script>
+  
+  <!-- 移动端菜单脚本 -->
+  <script>
+    (function() {
+      const menuOpen = document.getElementById('menu-open');
+      const menuClose = document.getElementById('menu-close');
+      const navigation = document.getElementById('site-navigation');
+      const body = document.body;
+      
+      if (menuOpen && menuClose && navigation) {
+        menuOpen.addEventListener('click', function() {
+          navigation.classList.add('menu-open');
+          body.classList.add('menu--opened');
+        });
+        
+        menuClose.addEventListener('click', function() {
+          navigation.classList.remove('menu-open');
+          body.classList.remove('menu--opened');
+        });
+        
+        // 点击导航外部区域关闭菜单
+        navigation.addEventListener('click', function(e) {
+          if (e.target === navigation) {
+            navigation.classList.remove('menu-open');
+            body.classList.remove('menu--opened');
+          }
+        });
+      }
+      
+      // 头部滚动效果
+      const header = document.getElementById('site-header');
+      let lastScroll = 0;
+      
+      window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+      });
+    })();
+  </script>
+  
+  <!-- 加载动画脚本 -->
+  <script>
+    (function() {
+      const loader = document.getElementById('page-loader');
+      const site = document.getElementById('page');
+      const progressBar = document.querySelector('.progress-bar');
+      
+      let progress = 0;
+      const progressInterval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress > 95) progress = 95;
+        progressBar.style.width = progress + '%';
+      }, 100);
+      
+      // 模拟加载进程，实际中可以基于资源加载情况
+      window.addEventListener('load', function() {
+        clearInterval(progressInterval);
+        progressBar.style.width = '100%';
+        
+        setTimeout(function() {
+          loader.classList.add('loader-hide');
+          site.classList.remove('page-hidden');
+          site.classList.add('page-show');
+        }, 500);
+        
+        setTimeout(function() {
+          loader.style.display = 'none';
+        }, 1500);
+      });
+      
+      // 防止加载时间过长，设置最大等待时间
+      setTimeout(function() {
+        if (loader && loader.style.display !== 'none') {
+          clearInterval(progressInterval);
+          progressBar.style.width = '100%';
+          loader.classList.add('loader-hide');
+          site.classList.remove('page-hidden');
+          site.classList.add('page-show');
+          
+          setTimeout(function() {
+            loader.style.display = 'none';
+          }, 1000);
+        }
+      }, 3000);
+    })();
+  </script>
 
 </body>
 </html>
