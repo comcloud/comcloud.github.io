@@ -1,11 +1,4 @@
----
-layout: default
-title: "技术文章"
-description: "AI、深度学习与技术实践"
-permalink: /articles/
----
-
-<main class="main-content">
+I"G<main class="main-content">
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
@@ -62,7 +55,7 @@ permalink: /articles/
   async function loadArticles() {
     try {
       console.log('🔄 开始检测文章更新...');
-      const response = await fetch('{{ site.baseurl }}/assets/data/articles.json?t=' + Date.now());
+      const response = await fetch('/assets/data/articles.json?t=' + Date.now());
       
       if (response.ok) {
         const newArticles = await response.json();
@@ -687,3 +680,4 @@ permalink: /articles/
   }
   </style>
 </main>
+:ET
