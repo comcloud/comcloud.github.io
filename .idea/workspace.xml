@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="refactor: 更新网站链接为 localhost&#10;&#10;- 将所有页面中的 http://0.0.0.0:4000 替换为 http://localhost:4000&#10;- 更新了多个 HTML 文件中的 canonical 链接、RSS 链接和社交媒体分享链接&#10;- 此更改统一了网站链接格式，有助于提高网站的可访问性和维护性">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/series.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/series.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/articles.md" beforeDir="false" afterPath="$PROJECT_DIR$/articles.md" afterDir="false" />
-    </list>
+    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="fix(deployment): 修复 GitHub Pages 部署时的文章加载问题&#10;&#10;- 添加静态回退机制，在动态数据加载失败时使用预定义文章列表&#10;- 实现 GitHub Actions 工作流，自动化构建和部署 Jekyll 网站- 更新 Gemfile，管理依赖并确保在 GitHub Actions 中正确构建- 添加部署问题排查指南和长期维护建议" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +45,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754152968390</updated>
       <workItem from="1754152970404" duration="16477000" />
-      <workItem from="1757169662123" duration="3979000" />
+      <workItem from="1757169662123" duration="4297000" />
     </task>
     <task id="LOCAL-00001" summary="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置">
       <created>1757169692269</created>
@@ -119,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1757238560558</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix(deployment): 修复 GitHub Pages 部署时的文章加载问题&#10;&#10;- 添加静态回退机制，在动态数据加载失败时使用预定义文章列表&#10;- 实现 GitHub Actions 工作流，自动化构建和部署 Jekyll 网站- 更新 Gemfile，管理依赖并确保在 GitHub Actions 中正确构建- 添加部署问题排查指南和长期维护建议">
+      <created>1757239297202</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1757239297202</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,6 +143,7 @@
     <MESSAGE value="refactor(site): 更新网站加载动画并调整样式&#10;&#10;- 移除复杂的云层拨开动画，改为简单的云门推开动画&#10;-调整云门容器和云门样式，优化动画效果&#10;- 更新字体大小和间距变量，提高可读性&#10;- 简化卡片组件样式，提升视觉一致性" />
     <MESSAGE value="fix(site): 修复 GitHub Pages 上文章加载失败的问题&#10;&#10;-增加了对多个数据源路径的尝试，提高兼容性&#10;- 添加了对 blog-data.json 格式的支持和自动转换&#10;-优化了错误处理，提供了更友好的提示信息&#10;- 调整了 _config.yml 中的 URL 配置，适应 GitHub Pages- 新增 GITHUB_PAGES_FIX.md 文件，提供详细的修复指南" />
     <MESSAGE value="refactor: 更新网站链接为 localhost&#10;&#10;- 将所有页面中的 http://0.0.0.0:4000 替换为 http://localhost:4000&#10;- 更新了多个 HTML 文件中的 canonical 链接、RSS 链接和社交媒体分享链接&#10;- 此更改统一了网站链接格式，有助于提高网站的可访问性和维护性" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: 更新网站链接为 localhost&#10;&#10;- 将所有页面中的 http://0.0.0.0:4000 替换为 http://localhost:4000&#10;- 更新了多个 HTML 文件中的 canonical 链接、RSS 链接和社交媒体分享链接&#10;- 此更改统一了网站链接格式，有助于提高网站的可访问性和维护性" />
+    <MESSAGE value="fix(deployment): 修复 GitHub Pages 部署时的文章加载问题&#10;&#10;- 添加静态回退机制，在动态数据加载失败时使用预定义文章列表&#10;- 实现 GitHub Actions 工作流，自动化构建和部署 Jekyll 网站- 更新 Gemfile，管理依赖并确保在 GitHub Actions 中正确构建- 添加部署问题排查指南和长期维护建议" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(deployment): 修复 GitHub Pages 部署时的文章加载问题&#10;&#10;- 添加静态回退机制，在动态数据加载失败时使用预定义文章列表&#10;- 实现 GitHub Actions 工作流，自动化构建和部署 Jekyll 网站- 更新 Gemfile，管理依赖并确保在 GitHub Actions 中正确构建- 添加部署问题排查指南和长期维护建议" />
   </component>
 </project>
