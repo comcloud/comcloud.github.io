@@ -65,6 +65,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
           <meta name="description" content="#{description}">
           <link rel="canonical" href="#{site.config['url']}#{site.baseurl}/articles/#{relative_path_without_ext}/">
           <link href="#{site.baseurl}/assets/css/style.css" rel="stylesheet">
+          <link href="#{site.baseurl}/assets/css/temp-style.css" rel="stylesheet">
           <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i%7CNoto+Serif:400,400i,700,700i&display=swap" rel="stylesheet">
           
           <!-- Enhanced Prism.js for comprehensive syntax highlighting -->
@@ -121,7 +122,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
               </header>
               
               <main class="main-content fadeInDown delay_075s">
-                <article class="post markdown-content">
+                <article class="post article-content">
                   <header class="post-header">
                     <h1 class="post-title">#{title}</h1>
                     #{description.empty? ? '' : "<p class=\"post-description\">#{description}</p>"}
