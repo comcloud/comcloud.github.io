@@ -139,84 +139,6 @@ layout: default
 </main>
 
 <script>
-// 动态加载精选文章
-document.addEventListener('DOMContentLoaded', function() {
-  loadFeaturedArticles();
-  
-  // 定时检测新文章（每30秒检查一次）
-  setInterval(loadFeaturedArticles, 30000);
-  
-  console.log('已启动文章自动检测，每30秒检查一次');
-});
-
-async function loadFeaturedArticles() {
-  const container = document.getElementById('featured-articles');
-  
-  try {
-    // 动态从JSON文件加载文章数据
-    const response = await fetch('{{ site.baseurl }}/assets/data/articles.json');
-    let articles = [];
-    
-    if (response.ok) {
-      articles = await response.json();
-      console.log(`动态加载了 ${articles.length} 篇文章`);
-    } else {
-      console.warn('无法加载articles.json，使用空数组');
-    }
-    
-    // 如果没有文章，显示提示信息
-    if (articles.length === 0) {
-      container.innerHTML = '<div class="text-center"><p>暂无文章，请在articles文件夹中添加Markdown文件</p></div>';
-      return;
-    }
-    
-    // 选择前3篇文章作为精选（按日期排序，最新的在前）
-    articles.sort((a, b) => {
-      const dateA = new Date(a.date || '1900-01-01');
-      const dateB = new Date(b.date || '1900-01-01');
-      return dateB - dateA;
-    });
-    
-    const featured = articles.slice(0, 3);
-    renderFeaturedArticles(container, featured);
-    
-  } catch (error) {
-    console.error('加载文章失败:', error);
-    container.innerHTML = '<div class="text-center"><p>文章加载失败，请检查articles文件夹</p></div>';
-  }
-}
-
-function renderFeaturedArticles(container, articles) {
-  let html = '';
-  
-  articles.forEach((article, index) => {
-    const tagsHtml = article.tags && article.tags.length > 0 
-      ? article.tags.slice(0, 2).map(tag => `<span class="skill-tag">${tag}</span>`).join(' ')
-      : '';
-    
-    html += `
-      <article class="card card-elevated fade-in-up" style="--animation-order: ${index}">
-        <div class="card-header">
-          <div class="card-icon icon-gradient">📄</div>
-          <h3 class="card-title">${article.title}</h3>
-          <p class="card-subtitle">${article.category} 系列</p>
-        </div>
-        <div class="card-body">
-          <p>${article.description}</p>
-          ${article.date ? `<time class="text-muted" style="font-size: var(--text-xs);">📅 ${formatDate(article.date)}</time>` : ''}
-          ${tagsHtml ? `<div style="margin-top: var(--space-sm);">${tagsHtml}</div>` : ''}
-        </div>
-        <div class="card-actions">
-          <a href="${article.url}" class="btn btn-primary btn-full">阅读文章 →</a>
-        </div>
-      </article>
-    `;
-  });
-  
-  container.innerHTML = html;
-}
-
-<script>
 // 动态加载精选文章和统计信息
 document.addEventListener('DOMContentLoaded', function() {
   loadFeaturedArticles();
@@ -251,14 +173,9 @@ async function loadFeaturedArticles() {
       return;
     }
     
-    // 按日期排序，最新的在前
-    articles.sort((a, b) => {
-      const dateA = new Date(a.date || '1900-01-01');
-      const dateB = new Date(b.date || '1900-01-01');
-      return dateB - dateA;
-    });
-    
-    const featured = articles.slice(0, 3);
+    // 随机选择3篇文章
+    const shuffled = articles.sort(() => 0.5 - Math.random());
+    const featured = shuffled.slice(0, 3);
     renderFeaturedArticles(container, featured);
     
   } catch (error) {

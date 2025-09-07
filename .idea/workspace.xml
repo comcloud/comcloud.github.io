@@ -1,69 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="feat(personal): 优化个人页面样式和布局&#10;&#10;- 重新设计了个人页面的英雄部分，增加了更多视觉元素和交互效果&#10;- 优化了响应式布局，确保在不同设备上都有良好的阅读体验&#10;- 调整了颜色方案和字体样式，提升了页面的整体美感&#10;- 增加了一些新的 CSS 动画和过渡效果，使页面更加生动">
+    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="style(articles): 优化文章页面样式和布局&#10;&#10;- 添加 temp-style.css 文件，修复导航栏、内容区域和代码块样式&#10;- 更新 site-header、main-content、post 和 post-content 类的样式&#10;-重新设计 Markdown 代码块样式，增加背景、边框和阴影效果&#10;- 优化移动设备上的文章页面布局">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/12/6d8d583956b260b33388281f1598cedbed829e0c1bcc5092ce4898fc49711d" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/12/6d8d583956b260b33388281f1598cedbed829e0c1bcc5092ce4898fc49711d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3e/c3070cf6f3f66bd32fd8ac9c26be3e67db840710741639be0f3f6c031d0441" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3e/c3070cf6f3f66bd32fd8ac9c26be3e67db840710741639be0f3f6c031d0441" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3e/efecbe1f5de31a93693534917623371cb327352456b1c4274521588264a9f5" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/3e/efecbe1f5de31a93693534917623371cb327352456b1c4274521588264a9f5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/54/813aa889d9e0ad94b320b8088930e5a4843a5fd52d243ad2d6b64cfb26b32e" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/54/813aa889d9e0ad94b320b8088930e5a4843a5fd52d243ad2d6b64cfb26b32e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/62/ac08c7ca6cbdc2ec4ad7c397f0f02767b9db2890eb3409bb6bb978d7b4607a" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/62/ac08c7ca6cbdc2ec4ad7c397f0f02767b9db2890eb3409bb6bb978d7b4607a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/6b/a04a3f1cfa8e072b90b63e8b0e3f09510ee55f2d714cd0a02ecda340aaa3f8" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/6b/a04a3f1cfa8e072b90b63e8b0e3f09510ee55f2d714cd0a02ecda340aaa3f8" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/6d/ed8621aab9076189f609a0b06b8389efdb66d1c21fd55ae820336064ffc3bb" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/6d/ed8621aab9076189f609a0b06b8389efdb66d1c21fd55ae820336064ffc3bb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/6e/caa97212255e597f61d8d398fefa550d6af4d9945973abbb9460d62b2cefda" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/6e/caa97212255e597f61d8d398fefa550d6af4d9945973abbb9460d62b2cefda" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/73/ba1d34bc521e40374dc894a20869c2d134300a99d7cf72a2992c59fdde3d2f" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/73/ba1d34bc521e40374dc894a20869c2d134300a99d7cf72a2992c59fdde3d2f" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/9d/67dd5de1ca17d5b922d47d1acd3fce535ce495e33294abf5af2ca703177b30" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/9d/67dd5de1ca17d5b922d47d1acd3fce535ce495e33294abf5af2ca703177b30" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/9e/fe3139d9c4dbc6b238c19ecd0659d597fa70fab9339f89910c429308938b04" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/9e/fe3139d9c4dbc6b238c19ecd0659d597fa70fab9339f89910c429308938b04" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/9f/6d9ad84393d18fd6bfe1e75b064fa63a2ae762911158e40578f6042daf9138" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/9f/6d9ad84393d18fd6bfe1e75b064fa63a2ae762911158e40578f6042daf9138" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/a2/c8347579054c28fe463f3c1296c0b7559209b9d8d0582b58d3eb6134568994" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/a2/c8347579054c28fe463f3c1296c0b7559209b9d8d0582b58d3eb6134568994" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/a3/49f934b5e62d067088b2faf39e34c1cf16672b317838c16cd926265266bebb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/b1/0ed4ab8e5c6d82ab4d374a4d3e890d22897a78851fae334f5424948d86b513" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/b1/0ed4ab8e5c6d82ab4d374a4d3e890d22897a78851fae334f5424948d86b513" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/b7/39c07c13dedf8c8ea28616364bb5c66820dd3959476e584889a17b49fd1e10" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/b7/39c07c13dedf8c8ea28616364bb5c66820dd3959476e584889a17b49fd1e10" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ba/c28394e88fd892c3b023f3c561bab192e710b867a8b26af7e6f1521de8d0f1" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ba/c28394e88fd892c3b023f3c561bab192e710b867a8b26af7e6f1521de8d0f1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/bf/e3048ab63a748547f59ca9f06074a6bbb48f47ea6435aab0992a7b5248af3e" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/bf/e3048ab63a748547f59ca9f06074a6bbb48f47ea6435aab0992a7b5248af3e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/c5/7e710c5c7782ecb701a5f1ddbc2723dd9215d76c126854a042f75cd5fd4e0a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ca/193924c603629f778e41c2f0ee20c62c3bea589d6bbd21bea9f17b86455db7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/cc/31ea26ac370272f99f0a54aa2a7a53db14d514b95b7bfed5c571c2db135ee4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/d3/1ca44b3788d668aa69d67d2017759edb9c0b45eb62035d668a2872128614fa" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/d3/1ca44b3788d668aa69d67d2017759edb9c0b45eb62035d668a2872128614fa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/e3/11e9d6956cddcf432c13dddb761d281a17e4b3344cb6eb6dcbb9b07c0af7bd" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/e3/11e9d6956cddcf432c13dddb761d281a17e4b3344cb6eb6dcbb9b07c0af7bd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/e6/c6beb09b584dcd7e997424cf7421af3f6676cb7db0cca2bc663050c0d9bb85" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/e8/470ae15939da2bc1873d9793781ba525df44fbf3b1b36e5d7be3be11193338" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/e8/470ae15939da2bc1873d9793781ba525df44fbf3b1b36e5d7be3be11193338" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ea/e3b9d62d51833571b68c8789e19acd3d0aa835c1970088c72e43021eb6fda7" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ea/e3b9d62d51833571b68c8789e19acd3d0aa835c1970088c72e43021eb6fda7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/AI-manus/快速入门/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/AI-manus/快速入门/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/chatppt/提示词及工作流设计/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/chatppt/提示词及工作流设计/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/example/markdown-syntax.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/example/markdown-syntax.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/example/markdown-syntax/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/example/markdown-syntax/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/llm/llama/llama-example.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/llama/llama-example.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/llm/llama/llama-example/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/llama/llama-example/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/提示词/项目文档分析与 README 撰写指南/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/提示词/项目文档分析与 README 撰写指南/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/MAE/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/MAE/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/MSE/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/MSE/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/损失函数总览/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/损失函数总览/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/相对熵与交叉熵/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/相对熵与交叉熵/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/Adam/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/Adam/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/Momentum/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/Momentum/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/RMSprop/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/RMSprop/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/梯度优化方法/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/梯度优化方法/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/正则化/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/正则化/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/激活函数/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/激活函数/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/assets/css/temp-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/_site/assets/css/temp-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/data/articles.json" beforeDir="false" afterPath="$PROJECT_DIR$/_site/assets/data/articles.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama-example/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama-example/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama/llama-example/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama/llama-example/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/qwen/quantization-principles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/qwen/quantization-principles/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/qwen/量化的核心原理/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/qwen/量化的核心原理/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/blog/LLM/qwen/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/blog/LLM/qwen/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/series.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/series.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/personal/personal/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/personal/personal/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/quantization-principles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/quantization-principles/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/style-guide.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/style-guide.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/temp-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/temp-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754152968390</updated>
       <workItem from="1754152970404" duration="16477000" />
-      <workItem from="1757169662123" duration="1291000" />
+      <workItem from="1757169662123" duration="2248000" />
     </task>
     <task id="LOCAL-00001" summary="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置">
       <created>1757169692269</created>
@@ -131,7 +77,21 @@
       <option name="project" value="LOCAL" />
       <updated>1757173868819</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="docs(AI-manus): 更新快速入门文档&#10;&#10;- 修改了代码块的显示方式，去除了多余的表格格式&#10;- 更新了文章的发布日期&#10;- 调整了文档中的列表符号使用短横线">
+      <created>1757177220495</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1757177220495</updated>
+    </task>
+    <task id="LOCAL-00005" summary="style(articles): 优化文章页面样式和布局&#10;&#10;- 添加 temp-style.css 文件，修复导航栏、内容区域和代码块样式&#10;- 更新 site-header、main-content、post 和 post-content 类的样式&#10;-重新设计 Markdown 代码块样式，增加背景、边框和阴影效果&#10;- 优化移动设备上的文章页面布局">
+      <created>1757215395846</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1757215395846</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,6 +112,8 @@
     <MESSAGE value="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置" />
     <MESSAGE value="feat:重构网站布局和样式&#10;&#10;- 更新了基础样式，使网站看起来更现代化&#10;- 改进了响应式设计，优化了移动端体验&#10;- 添加了加载动画和菜单切换效果&#10;- 调整了字体和颜色方案，提高了可读性&#10;- 优化了页面结构，提高了内容的可访问性" />
     <MESSAGE value="feat(personal): 优化个人页面样式和布局&#10;&#10;- 重新设计了个人页面的英雄部分，增加了更多视觉元素和交互效果&#10;- 优化了响应式布局，确保在不同设备上都有良好的阅读体验&#10;- 调整了颜色方案和字体样式，提升了页面的整体美感&#10;- 增加了一些新的 CSS 动画和过渡效果，使页面更加生动" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(personal): 优化个人页面样式和布局&#10;&#10;- 重新设计了个人页面的英雄部分，增加了更多视觉元素和交互效果&#10;- 优化了响应式布局，确保在不同设备上都有良好的阅读体验&#10;- 调整了颜色方案和字体样式，提升了页面的整体美感&#10;- 增加了一些新的 CSS 动画和过渡效果，使页面更加生动" />
+    <MESSAGE value="docs(AI-manus): 更新快速入门文档&#10;&#10;- 修改了代码块的显示方式，去除了多余的表格格式&#10;- 更新了文章的发布日期&#10;- 调整了文档中的列表符号使用短横线" />
+    <MESSAGE value="style(articles): 优化文章页面样式和布局&#10;&#10;- 添加 temp-style.css 文件，修复导航栏、内容区域和代码块样式&#10;- 更新 site-header、main-content、post 和 post-content 类的样式&#10;-重新设计 Markdown 代码块样式，增加背景、边框和阴影效果&#10;- 优化移动设备上的文章页面布局" />
+    <option name="LAST_COMMIT_MESSAGE" value="style(articles): 优化文章页面样式和布局&#10;&#10;- 添加 temp-style.css 文件，修复导航栏、内容区域和代码块样式&#10;- 更新 site-header、main-content、post 和 post-content 类的样式&#10;-重新设计 Markdown 代码块样式，增加背景、边框和阴影效果&#10;- 优化移动设备上的文章页面布局" />
   </component>
 </project>
