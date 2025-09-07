@@ -1,13 +1,13 @@
-I"$<blockquote>
+I"�<blockquote>
   <p><strong>梯度优化算法发展历史</strong></p>
 
-  <p><code class="highlighter-rouge">SGD -&gt; SGDM -&gt;NAG -&gt; AdaGrad -&gt; AdaDelta -&gt; Adam -&gt; Nadam</code></p>
+  <p><code class="language-plaintext highlighter-rouge">SGD -&gt; SGDM -&gt;NAG -&gt; AdaGrad -&gt; AdaDelta -&gt; Adam -&gt; Nadam</code></p>
 
   <ul>
-    <li><code class="highlighter-rouge">SGD</code>：利用参数梯度和学习率调整梯度</li>
-    <li><code class="highlighter-rouge">Momentum</code>：加入了历史梯度信息，将使用之前梯度的加权平均来更新当前的参数</li>
-    <li><code class="highlighter-rouge">RMSprop</code>：通过梯度的平方的均值（梯度的波动情况）来调整每个参数的学习率</li>
-    <li><code class="highlighter-rouge">Adam</code>: 将<code class="highlighter-rouge">Momentum</code>和<code class="highlighter-rouge">RMSprop</code>优点结合</li>
+    <li><code class="language-plaintext highlighter-rouge">SGD</code>：利用参数梯度和学习率调整梯度</li>
+    <li><code class="language-plaintext highlighter-rouge">Momentum</code>：加入了历史梯度信息，将使用之前梯度的加权平均来更新当前的参数</li>
+    <li><code class="language-plaintext highlighter-rouge">RMSprop</code>：通过梯度的平方的均值（梯度的波动情况）来调整每个参数的学习率</li>
+    <li><code class="language-plaintext highlighter-rouge">Adam</code>: 将<code class="language-plaintext highlighter-rouge">Momentum</code>和<code class="language-plaintext highlighter-rouge">RMSprop</code>优点结合</li>
   </ul>
 </blockquote>
 

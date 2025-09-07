@@ -1,4 +1,4 @@
-I"M<hr />
+I"dM<hr />
 <p>title: “完整Markdown语法示例”
 description: “展示所有支持的Markdown语法功能，包括数学公式、代码块、图表等”
 date: 2024-08-05
@@ -13,7 +13,7 @@ tags: [“Markdown”, “语法”, “示例”, “数学”, “代码”]
 
 <p>这是 <strong>粗体文本</strong> 和 <em>斜体文本</em>，还有 <del>删除线文本</del>。</p>
 
-<p>你也可以使用 <code class="highlighter-rouge">行内代码</code> 来突出显示代码片段。</p>
+<p>你也可以使用 <code class="language-plaintext highlighter-rouge">行内代码</code> 来突出显示代码片段。</p>
 
 <h2 id="2-数学公式">2. 数学公式</h2>
 
@@ -44,73 +44,73 @@ a^{(l)} &amp;= \sigma(z^{(l)})
 
 <h3 id="python代码">Python代码</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="n">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="k">def</span> <span class="nf">neural_network_forward</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     神经网络前向传播
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="c1"># 第一层
-</span>    <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W1</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span>
-    <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>  <span class="c1"># 激活函数
+</span>    <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W1</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">tanh</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>  <span class="c1"># 激活函数
 </span>    
     <span class="c1"># 第二层
-</span>    <span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">W2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span>
-    <span class="n">a2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z2</span><span class="p">))</span>  <span class="c1"># Sigmoid激活函数
+</span>    <span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">W2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z2</span><span class="p">))</span>  <span class="c1"># Sigmoid激活函数
 </span>    
     <span class="k">return</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span>
 
 <span class="c1"># 生成示例数据
-</span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">).</span><span class="nf">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"数据形状: X=</span><span class="si">{</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="s">, y=</span><span class="si">{</span><span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">数据形状: X=</span><span class="si">{</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="s">, y=</span><span class="si">{</span><span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="javascript代码">JavaScript代码</h3>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 深度学习框架的简单实现</span>
-<span class="kd">class</span> <span class="nx">NeuralNetwork</span> <span class="p">{</span>
-    <span class="kd">constructor</span><span class="p">(</span><span class="nx">layers</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">class</span> <span class="nc">NeuralNetwork</span> <span class="p">{</span>
+    <span class="nf">constructor</span><span class="p">(</span><span class="nx">layers</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">layers</span> <span class="o">=</span> <span class="nx">layers</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">weights</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">initializeWeights</span><span class="p">();</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">biases</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">initializeBiases</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">weights</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nf">initializeWeights</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">biases</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nf">initializeBiases</span><span class="p">();</span>
     <span class="p">}</span>
     
-    <span class="nx">initializeWeights</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">initializeWeights</span><span class="p">()</span> <span class="p">{</span>
         <span class="kd">const</span> <span class="nx">weights</span> <span class="o">=</span> <span class="p">[];</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">const</span> <span class="nx">weight</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">layers</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
-                <span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
-                <span class="p">.</span><span class="nx">map</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nb">Array</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">layers</span><span class="p">[</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-                    <span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
-                    <span class="p">.</span><span class="nx">map</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">weight</span> <span class="o">=</span> <span class="nc">Array</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">layers</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+                <span class="p">.</span><span class="nf">fill</span><span class="p">()</span>
+                <span class="p">.</span><span class="nf">map</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nc">Array</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">layers</span><span class="p">[</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                    <span class="p">.</span><span class="nf">fill</span><span class="p">()</span>
+                    <span class="p">.</span><span class="nf">map</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
                 <span class="p">);</span>
-            <span class="nx">weights</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">weight</span><span class="p">);</span>
+            <span class="nx">weights</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">weight</span><span class="p">);</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="nx">weights</span><span class="p">;</span>
     <span class="p">}</span>
     
-    <span class="nx">forward</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">forward</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">let</span> <span class="nx">activation</span> <span class="o">=</span> <span class="nx">input</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">weights</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">activation</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">matrixMultiply</span><span class="p">(</span><span class="nx">activation</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">weights</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-            <span class="nx">activation</span> <span class="o">=</span> <span class="nx">activation</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">sigmoid</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+        <span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">weights</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">activation</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nf">matrixMultiply</span><span class="p">(</span><span class="nx">activation</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">weights</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+            <span class="nx">activation</span> <span class="o">=</span> <span class="nx">activation</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nf">sigmoid</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="nx">activation</span><span class="p">;</span>
     <span class="p">}</span>
     
-    <span class="nx">sigmoid</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">exp</span><span class="p">(</span><span class="o">-</span><span class="nx">x</span><span class="p">));</span>
+    <span class="nf">sigmoid</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="nx">x</span><span class="p">));</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 使用示例</span>
-<span class="kd">const</span> <span class="nx">nn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NeuralNetwork</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">nn</span><span class="p">.</span><span class="nx">forward</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">预测结果:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">nn</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NeuralNetwork</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">nn</span><span class="p">.</span><span class="nf">forward</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">预测结果:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h3 id="shell脚本">Shell脚本</h3>

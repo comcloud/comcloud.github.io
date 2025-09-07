@@ -1,4 +1,4 @@
-I"�$<h2 id="项目文档分析与-readme-撰写指南"><strong>项目文档分析与 README 撰写指南</strong></h2>
+I"F&<h2 id="项目文档分析与-readme-撰写指南"><strong>项目文档分析与 README 撰写指南</strong></h2>
 
 <h3 id="第一步项目概览与定位"><strong>第一步：项目概览与定位</strong></h3>
 
@@ -7,8 +7,8 @@
 <p><strong>执行指令：</strong></p>
 
 <ul>
-  <li><strong>文件扫描：</strong> 首先，全面阅读项目根目录下的 <code class="highlighter-rouge">README.md</code>（如果有）、<code class="highlighter-rouge">package.json</code> 以及 <code class="highlighter-rouge">package-lock.json</code>。</li>
-  <li><strong>目标识别：</strong> 根据 <code class="highlighter-rouge">description</code> 字段、依赖项和项目结构，提炼出项目的核心目的和主要功能。</li>
+  <li><strong>文件扫描：</strong> 首先，全面阅读项目根目录下的 <code class="language-plaintext highlighter-rouge">README.md</code>（如果有）、<code class="language-plaintext highlighter-rouge">package.json</code> 以及 <code class="language-plaintext highlighter-rouge">package-lock.json</code>。</li>
+  <li><strong>目标识别：</strong> 根据 <code class="language-plaintext highlighter-rouge">description</code> 字段、依赖项和项目结构，提炼出项目的核心目的和主要功能。</li>
   <li><strong>撰写摘要：</strong> 用一到两句话的高度概括性语言，描述项目是什么以及它的主要作用，作为 README 的引言部分。</li>
 </ul>
 
@@ -19,7 +19,7 @@
 <p><strong>执行指令：</strong></p>
 
 <ul>
-  <li><strong>依赖分析：</strong> 详细列出 <code class="highlighter-rouge">package.json</code> 中的所有 <code class="highlighter-rouge">dependencies</code> 和 <code class="highlighter-rouge">devDependencies</code>，并简要说明它们在项目中的作用（例如，React 用于构建 UI，Express 用于后端）。</li>
+  <li><strong>依赖分析：</strong> 详细列出 <code class="language-plaintext highlighter-rouge">package.json</code> 中的所有 <code class="language-plaintext highlighter-rouge">dependencies</code> 和 <code class="language-plaintext highlighter-rouge">devDependencies</code>，并简要说明它们在项目中的作用（例如，React 用于构建 UI，Express 用于后端）。</li>
   <li><strong>文件结构解读：</strong> 根据项目目录结构，推断出是单体应用还是微服务架构，是前端项目还是全栈项目。</li>
   <li><strong>架构图生成：</strong> 如果项目复杂，尝试生成一个简化的 ASCII 文本架构图或 Mermaid 代码块，直观地展示各组件之间的关系。</li>
 </ul>
@@ -33,7 +33,7 @@
 <ul>
   <li><strong>前提条件：</strong> 列出所有必要的软件依赖（如 Node.js 版本、数据库）。</li>
   <li><strong>安装步骤：</strong> 提供详细的命令行步骤，包括克隆仓库、安装依赖和启动服务。</li>
-  <li><strong>配置说明：</strong> 指出任何需要手动配置的文件（如 <code class="highlighter-rouge">.env</code>），并提供一个 <code class="highlighter-rouge">.env.example</code> 文件的内容，以供参考。</li>
+  <li><strong>配置说明：</strong> 指出任何需要手动配置的文件（如 <code class="language-plaintext highlighter-rouge">.env</code>），并提供一个 <code class="language-plaintext highlighter-rouge">.env.example</code> 文件的内容，以供参考。</li>
 </ul>
 
 <h3 id="第四步核心功能与特性"><strong>第四步：核心功能与特性</strong></h3>
@@ -63,7 +63,7 @@
 
 <p><strong>最终输出要求：</strong></p>
 
-<p>将以上所有内容整合为一个完整的 <code class="highlighter-rouge">README.md</code> 文件。文件必须采用标准的 Markdown 格式，包含清晰的标题、列表、代码块和粗体等元素，以确保内容的可读性和专业性。</p>
+<p>将以上所有内容整合为一个完整的 <code class="language-plaintext highlighter-rouge">README.md</code> 文件。文件必须采用标准的 Markdown 格式，包含清晰的标题、列表、代码块和粗体等元素，以确保内容的可读性和专业性。</p>
 
 <blockquote>
   <p>Here’s the professional English translation above Markdown document while preserving all formatting and structure:</p>
@@ -79,8 +79,8 @@
 
 <p><strong>Execution Instructions:</strong></p>
 <ul>
-  <li><strong>File Scan:</strong> Start by thoroughly reading the project’s root directory files, including <code class="highlighter-rouge">README.md</code> (if available), <code class="highlighter-rouge">package.json</code>, and <code class="highlighter-rouge">package-lock.json</code>.</li>
-  <li><strong>Goal Identification:</strong> Extract the project’s core purpose and main features based on the <code class="highlighter-rouge">description</code> field, dependencies, and project structure.</li>
+  <li><strong>File Scan:</strong> Start by thoroughly reading the project’s root directory files, including <code class="language-plaintext highlighter-rouge">README.md</code> (if available), <code class="language-plaintext highlighter-rouge">package.json</code>, and <code class="language-plaintext highlighter-rouge">package-lock.json</code>.</li>
+  <li><strong>Goal Identification:</strong> Extract the project’s core purpose and main features based on the <code class="language-plaintext highlighter-rouge">description</code> field, dependencies, and project structure.</li>
   <li><strong>Write a Summary:</strong> Provide a one-to-two-sentence high-level summary describing what the project is and its primary function. This will serve as the introduction in the README.</li>
 </ul>
 
@@ -92,7 +92,7 @@
 
 <p><strong>Execution Instructions:</strong></p>
 <ul>
-  <li><strong>Dependency Analysis:</strong> List all <code class="highlighter-rouge">dependencies</code> and <code class="highlighter-rouge">devDependencies</code> from <code class="highlighter-rouge">package.json</code>, along with a brief explanation of their roles (e.g., React for UI, Express for backend).</li>
+  <li><strong>Dependency Analysis:</strong> List all <code class="language-plaintext highlighter-rouge">dependencies</code> and <code class="language-plaintext highlighter-rouge">devDependencies</code> from <code class="language-plaintext highlighter-rouge">package.json</code>, along with a brief explanation of their roles (e.g., React for UI, Express for backend).</li>
   <li><strong>File Structure Interpretation:</strong> Infer whether the project follows a monolithic or microservices architecture, and whether it’s frontend, backend, or full-stack.</li>
   <li><strong>Architecture Diagram:</strong> For complex projects, generate a simplified ASCII text diagram or Mermaid code block to visually represent component relationships.</li>
 </ul>
@@ -107,7 +107,7 @@
 <ul>
   <li><strong>Prerequisites:</strong> List all required software dependencies (e.g., Node.js version, database).</li>
   <li><strong>Installation Steps:</strong> Provide detailed CLI commands for cloning the repo, installing dependencies, and launching the service.</li>
-  <li><strong>Configuration Notes:</strong> Highlight any files requiring manual configuration (e.g., <code class="highlighter-rouge">.env</code>) and include a reference <code class="highlighter-rouge">.env.example</code> file.</li>
+  <li><strong>Configuration Notes:</strong> Highlight any files requiring manual configuration (e.g., <code class="language-plaintext highlighter-rouge">.env</code>) and include a reference <code class="language-plaintext highlighter-rouge">.env.example</code> file.</li>
 </ul>
 
 <hr />
@@ -138,6 +138,6 @@
 <hr />
 
 <p><strong>Final Output Requirements:</strong><br />
-Compile all the above into a complete <code class="highlighter-rouge">README.md</code> file. The document must use standard Markdown formatting (headings, lists, code blocks, bold text, etc.) to ensure readability and professionalism.</p>
+Compile all the above into a complete <code class="language-plaintext highlighter-rouge">README.md</code> file. The document must use standard Markdown formatting (headings, lists, code blocks, bold text, etc.) to ensure readability and professionalism.</p>
 
 :ET

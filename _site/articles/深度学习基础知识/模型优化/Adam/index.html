@@ -73,7 +73,7 @@
           </header>
           <div class="post-content">
             <blockquote>
-  <p><strong>Adam</strong>（<code class="highlighter-rouge">Adaptive Moment Estimation</code>）是深度学习中广泛使用的一种优化算法，它结合了 <strong>Momentum</strong> 和 <strong>RMSprop</strong> 的优点，旨在提高梯度下降法的训练效率和稳定性。<strong>Adam 不仅考虑了梯度的平均值（动量），还考虑了梯度的平方的均值（自适应学习率）</strong>。它非常适用于大规模数据和参数的训练，能够自动调整学习率，减少人工调参的工作。</p>
+  <p><strong>Adam</strong>（<code class="language-plaintext highlighter-rouge">Adaptive Moment Estimation</code>）是深度学习中广泛使用的一种优化算法，它结合了 <strong>Momentum</strong> 和 <strong>RMSprop</strong> 的优点，旨在提高梯度下降法的训练效率和稳定性。<strong>Adam 不仅考虑了梯度的平均值（动量），还考虑了梯度的平方的均值（自适应学习率）</strong>。它非常适用于大规模数据和参数的训练，能够自动调整学习率，减少人工调参的工作。</p>
 </blockquote>
 
 <h3 id="adam-的核心原理">Adam 的核心原理</h3>
@@ -159,7 +159,7 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Adam
 </span><span class="n">m</span> <span class="o">=</span> <span class="n">beta1</span><span class="o">*</span><span class="n">m</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta1</span><span class="p">)</span><span class="o">*</span><span class="n">dx</span>
 <span class="n">v</span> <span class="o">=</span> <span class="n">beta2</span><span class="o">*</span><span class="n">v</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">+=</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">m</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">+=</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">m</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="adam-的优点">Adam 的优点</h3>

@@ -1,4 +1,4 @@
-I"�.<p>This is a pragraph. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+I"N/<p>This is a pragraph. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
 
 <h1 id="heading-1">Heading 1</h1>
 
@@ -44,14 +44,14 @@
   <p>“Creativity is allowing yourself to make mistakes. Design is knowing which ones to keep.”</p>
 </blockquote>
 
-<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
+<p>Lorem ipsum dolor sit amet, <code class="language-plaintext highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
 
 <hr />
 
 <h2 id="code-blocks">Code Blocks</h2>
 
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#header</span> <span class="nt">h1</span> <span class="p">{</span> 
-  <span class="nl">color</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">#fff</span><span class="p">;</span>
   <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">1.5em</span><span class="p">;</span> 
 <span class="p">}</span>
 
@@ -66,8 +66,8 @@
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simple map</span>
 <span class="kd">var</span> <span class="nx">map</span><span class="p">;</span>
-<span class="kd">function</span> <span class="nx">initMap</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nb">Map</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">map</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="nf">initMap</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">google</span><span class="p">.</span><span class="nx">maps</span><span class="p">.</span><span class="nc">Map</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">map</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span>
     <span class="na">center</span><span class="p">:</span> <span class="p">{</span><span class="na">lat</span><span class="p">:</span> <span class="o">-</span><span class="mf">34.397</span><span class="p">,</span> <span class="na">lng</span><span class="p">:</span> <span class="mf">150.644</span><span class="p">},</span>
     <span class="na">zoom</span><span class="p">:</span> <span class="mi">8</span>
   <span class="p">});</span>
@@ -95,10 +95,10 @@
   <span class="na">precision</span><span class="pi">:</span> <span class="m">10</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No language indicated, so no syntax highlighting. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No language indicated, so no syntax highlighting. 
 </code></pre></div></div>
 
-<p>Inline <code class="highlighter-rouge">code</code> has <code class="highlighter-rouge">back-ticks around</code> it.</p>
+<p>Inline <code class="language-plaintext highlighter-rouge">code</code> has <code class="language-plaintext highlighter-rouge">back-ticks around</code> it.</p>
 
 <h2 id="videos">Videos</h2>
 
@@ -117,7 +117,7 @@
   
 </figure>
 
-<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
+<p>Lorem ipsum dolor sit amet, <code class="language-plaintext highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
 
 <h2 id="regular-image">Regular Image</h2>
 
@@ -128,7 +128,7 @@
   
 </figure>
 
-<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Lorem ipsum dolor sit amet, <code class="highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
+<p>Lorem ipsum dolor sit amet, <code class="language-plaintext highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Lorem ipsum dolor sit amet, <code class="language-plaintext highlighter-rouge">consectetuer adipiscing</code> elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.</p>
 
 <h2 id="lists">Lists</h2>
 

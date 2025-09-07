@@ -1,4 +1,4 @@
-I"�t<h2 id="核心指导原则"><strong>核心指导原则</strong></h2>
+I"z<h2 id="核心指导原则"><strong>核心指导原则</strong></h2>
 
 <p>这些提示词将引导大模型扮演一个<strong>“PPT内容规划师和智能撰稿人”</strong>的角色，其核心任务是：</p>
 
@@ -71,14 +71,14 @@ flowchart LR
 
 <p><strong>可调用工具：</strong></p>
 <ul>
-  <li><strong>工具名称：</strong> <code class="highlighter-rouge">python_pptx_parser</code>
+  <li><strong>工具名称：</strong> <code class="language-plaintext highlighter-rouge">python_pptx_parser</code>
     <ul>
       <li><strong>描述：</strong> 一个Python库封装，能够加载PPTX文件，访问其主题、母版页、幻灯片布局和占位符属性。提供以下核心功能：
         <ul>
-          <li><code class="highlighter-rouge">get_template_theme_info(file_path)</code>: 获取模板的颜色方案和字体方案。</li>
-          <li><code class="highlighter-rouge">list_slide_layouts(file_path)</code>: 列出所有可用的幻灯片布局及其基本信息。</li>
-          <li><code class="highlighter-rouge">get_layout_details(file_path, layout_id)</code>: 获取特定布局的详细信息，包括所有占位符的类型、位置、大小和默认文本/语义线索。</li>
-          <li><code class="highlighter-rouge">infer_placeholder_semantic(placeholder_data)</code>: (内部辅助函数) 根据占位符的属性（如默认文本、位置、大小）推断其更具体的语义（例如：’主标题’, ‘图片占位’, ‘两列内容-左’）。</li>
+          <li><code class="language-plaintext highlighter-rouge">get_template_theme_info(file_path)</code>: 获取模板的颜色方案和字体方案。</li>
+          <li><code class="language-plaintext highlighter-rouge">list_slide_layouts(file_path)</code>: 列出所有可用的幻灯片布局及其基本信息。</li>
+          <li><code class="language-plaintext highlighter-rouge">get_layout_details(file_path, layout_id)</code>: 获取特定布局的详细信息，包括所有占位符的类型、位置、大小和默认文本/语义线索。</li>
+          <li><code class="language-plaintext highlighter-rouge">infer_placeholder_semantic(placeholder_data)</code>: (内部辅助函数) 根据占位符的属性（如默认文本、位置、大小）推断其更具体的语义（例如：’主标题’, ‘图片占位’, ‘两列内容-左’）。</li>
         </ul>
       </li>
     </ul>
@@ -87,19 +87,19 @@ flowchart LR
 
 <p><strong>输入参数：</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">ppt_template_file_path</code>: 待解析的PPTX文件的本地路径。</li>
+  <li><code class="language-plaintext highlighter-rouge">ppt_template_file_path</code>: 待解析的PPTX文件的本地路径。</li>
 </ul>
 
 <p><strong>输出：</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">template_description_json</code>: 解析后的结构化JSON字符串，包含模板所有元数据。</li>
-  <li><code class="highlighter-rouge">status</code>: “success” 或 “failure”。</li>
-  <li><code class="highlighter-rouge">message</code>: 成功或失败的详细信息。</li>
+  <li><code class="language-plaintext highlighter-rouge">template_description_json</code>: 解析后的结构化JSON字符串，包含模板所有元数据。</li>
+  <li><code class="language-plaintext highlighter-rouge">status</code>: “success” 或 “failure”。</li>
+  <li><code class="language-plaintext highlighter-rouge">message</code>: 成功或失败的详细信息。</li>
 </ul>
 
 <p><strong>持久化操作：</strong></p>
 <ul>
-  <li>成功解析后，将<code class="highlighter-rouge">template_description_json</code>保存到指定目录，文件名为<code class="highlighter-rouge">template_id.json</code>。</li>
+  <li>成功解析后，将<code class="language-plaintext highlighter-rouge">template_description_json</code>保存到指定目录，文件名为<code class="language-plaintext highlighter-rouge">template_id.json</code>。</li>
 </ul>
 
 <hr />
@@ -115,12 +115,12 @@ flowchart LR
 <p><strong>可调用工具：</strong></p>
 
 <ul>
-  <li><strong>工具名称：</strong> <code class="highlighter-rouge">template_info_loader</code>
+  <li><strong>工具名称：</strong> <code class="language-plaintext highlighter-rouge">template_info_loader</code>
     <ul>
       <li><strong>描述：</strong> 从预先解析并存储的JSON文件中加载指定PPT模板的详细结构化描述。</li>
-      <li><strong>功能：</strong> <code class="highlighter-rouge">load_template_description(template_id)</code></li>
-      <li><strong>输入：</strong> <code class="highlighter-rouge">template_id</code> (字符串，唯一标识一个PPT模板)</li>
-      <li><strong>输出：</strong> JSON对象，包含模板的 <code class="highlighter-rouge">color_scheme</code>, <code class="highlighter-rouge">font_scheme</code>, 和 <code class="highlighter-rouge">layouts</code> 列表 (每个布局包含 <code class="highlighter-rouge">layout_name</code>, <code class="highlighter-rouge">layout_id</code>, <code class="highlighter-rouge">description</code>, <code class="highlighter-rouge">placeholders</code> 及其 <code class="highlighter-rouge">semantic</code>, <code class="highlighter-rouge">max_length</code>, <code class="highlighter-rouge">style_hint</code> 等)。</li>
+      <li><strong>功能：</strong> <code class="language-plaintext highlighter-rouge">load_template_description(template_id)</code></li>
+      <li><strong>输入：</strong> <code class="language-plaintext highlighter-rouge">template_id</code> (字符串，唯一标识一个PPT模板)</li>
+      <li><strong>输出：</strong> JSON对象，包含模板的 <code class="language-plaintext highlighter-rouge">color_scheme</code>, <code class="language-plaintext highlighter-rouge">font_scheme</code>, 和 <code class="language-plaintext highlighter-rouge">layouts</code> 列表 (每个布局包含 <code class="language-plaintext highlighter-rouge">layout_name</code>, <code class="language-plaintext highlighter-rouge">layout_id</code>, <code class="language-plaintext highlighter-rouge">description</code>, <code class="language-plaintext highlighter-rouge">placeholders</code> 及其 <code class="language-plaintext highlighter-rouge">semantic</code>, <code class="language-plaintext highlighter-rouge">max_length</code>, <code class="language-plaintext highlighter-rouge">style_hint</code> 等)。</li>
     </ul>
   </li>
 </ul>
@@ -134,14 +134,14 @@ flowchart LR
 
 <p><strong>任务步骤：</strong></p>
 <ol>
-  <li><strong>调用 <code class="highlighter-rouge">template_info_loader.load_template_description(PPT模板ID)</code> 工具</strong>，获取所选模板的完整结构化描述。</li>
+  <li><strong>调用 <code class="language-plaintext highlighter-rouge">template_info_loader.load_template_description(PPT模板ID)</code> 工具</strong>，获取所选模板的完整结构化描述。</li>
   <li><strong>仔细阅读并内化</strong>工具返回的模板信息，理解所有可用布局、占位符的语义、长度限制以及视觉风格（字体、配色）。</li>
   <li><strong>结合用户需求，智能规划</strong>整个PPT的结构和内容。
     <ul>
       <li>确定合适的幻灯片数量和逻辑顺序。</li>
-      <li>为每张幻灯片选择最匹配的<code class="highlighter-rouge">layout_id</code>。</li>
-      <li>为每张幻灯片拟定一个简洁明了的<code class="highlighter-rouge">slide_title</code>。</li>
-      <li>为每张幻灯片规划主要内容点，并基于模板占位符的语义，指示每个占位符应该填充什么类型的内容（例如：文本、列表、图片描述、图表数据结构等），并遵守其<code class="highlighter-rouge">max_length</code>和<code class="highlighter-rouge">style_hint</code>。</li>
+      <li>为每张幻灯片选择最匹配的<code class="language-plaintext highlighter-rouge">layout_id</code>。</li>
+      <li>为每张幻灯片拟定一个简洁明了的<code class="language-plaintext highlighter-rouge">slide_title</code>。</li>
+      <li>为每张幻灯片规划主要内容点，并基于模板占位符的语义，指示每个占位符应该填充什么类型的内容（例如：文本、列表、图片描述、图表数据结构等），并遵守其<code class="language-plaintext highlighter-rouge">max_length</code>和<code class="language-plaintext highlighter-rouge">style_hint</code>。</li>
     </ul>
   </li>
 </ol>
@@ -186,7 +186,7 @@ flowchart LR
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p><strong>保存为临时文件：</strong> 这一阶段的JSON输出将被保存为<code class="highlighter-rouge">session_id_outline.json</code>。</p>
+<p><strong>保存为临时文件：</strong> 这一阶段的JSON输出将被保存为<code class="language-plaintext highlighter-rouge">session_id_outline.json</code>。</p>
 
 <hr />
 
@@ -203,20 +203,20 @@ flowchart LR
 <p><strong>可调用工具：</strong></p>
 
 <ul>
-  <li><strong>工具名称：</strong> <code class="highlighter-rouge">template_info_loader</code>
+  <li><strong>工具名称：</strong> <code class="language-plaintext highlighter-rouge">template_info_loader</code>
     <ul>
       <li><strong>描述：</strong> 从预先解析并存储的JSON文件中加载指定PPT模板的详细结构化描述。</li>
-      <li><strong>功能：</strong> <code class="highlighter-rouge">load_template_description(template_id)</code></li>
-      <li><strong>输入：</strong> <code class="highlighter-rouge">template_id</code> (字符串)</li>
-      <li><strong>输出：</strong> JSON对象，包含模板的 <code class="highlighter-rouge">layouts</code> 列表及其占位符详情。</li>
+      <li><strong>功能：</strong> <code class="language-plaintext highlighter-rouge">load_template_description(template_id)</code></li>
+      <li><strong>输入：</strong> <code class="language-plaintext highlighter-rouge">template_id</code> (字符串)</li>
+      <li><strong>输出：</strong> JSON对象，包含模板的 <code class="language-plaintext highlighter-rouge">layouts</code> 列表及其占位符详情。</li>
     </ul>
   </li>
-  <li><strong>工具名称：</strong> <code class="highlighter-rouge">image_generator_api</code> (假设有此工具)
+  <li><strong>工具名称：</strong> <code class="language-plaintext highlighter-rouge">image_generator_api</code> (假设有此工具)
     <ul>
       <li><strong>描述：</strong> 根据文本描述生成一张相关的图片，并返回图片URL。</li>
-      <li><strong>功能：</strong> <code class="highlighter-rouge">generate_image(description)</code></li>
-      <li><strong>输入：</strong> <code class="highlighter-rouge">description</code> (字符串，对所需图片的详细描述)</li>
-      <li><strong>输出：</strong> <code class="highlighter-rouge">image_url</code> (字符串，生成的图片URL) 或 <code class="highlighter-rouge">error</code>。</li>
+      <li><strong>功能：</strong> <code class="language-plaintext highlighter-rouge">generate_image(description)</code></li>
+      <li><strong>输入：</strong> <code class="language-plaintext highlighter-rouge">description</code> (字符串，对所需图片的详细描述)</li>
+      <li><strong>输出：</strong> <code class="language-plaintext highlighter-rouge">image_url</code> (字符串，生成的图片URL) 或 <code class="language-plaintext highlighter-rouge">error</code>。</li>
     </ul>
   </li>
 </ul>
@@ -225,7 +225,7 @@ flowchart LR
 
 <ol>
   <li>
-    <p><strong>当前幻灯片的大纲信息：</strong> [从<code class="highlighter-rouge">session_id_outline.json</code>中读取的单页JSON对象，例如：]</p>
+    <p><strong>当前幻灯片的大纲信息：</strong> [从<code class="language-plaintext highlighter-rouge">session_id_outline.json</code>中读取的单页JSON对象，例如：]</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"slide_number"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
@@ -251,12 +251,12 @@ flowchart LR
 <p><strong>任务步骤：</strong></p>
 
 <ol>
-  <li><strong>调用 <code class="highlighter-rouge">template_info_loader.load_template_description(PPT模板ID)</code> 工具</strong>，获取所选模板的完整结构化描述，以便精确匹配占位符细节。</li>
-  <li><strong>根据“当前幻灯片的大纲信息”</strong>，为每个<code class="highlighter-rouge">placeholder_semantic</code>撰写具体内容。
+  <li><strong>调用 <code class="language-plaintext highlighter-rouge">template_info_loader.load_template_description(PPT模板ID)</code> 工具</strong>，获取所选模板的完整结构化描述，以便精确匹配占位符细节。</li>
+  <li><strong>根据“当前幻灯片的大纲信息”</strong>，为每个<code class="language-plaintext highlighter-rouge">placeholder_semantic</code>撰写具体内容。
     <ul>
-      <li><strong>文本内容：</strong> 严格遵守<code class="highlighter-rouge">max_length</code>和<code class="highlighter-rouge">style_hint</code>（如列表格式）。</li>
-      <li><strong>图片内容：</strong> 如果<code class="highlighter-rouge">type</code>是<code class="highlighter-rouge">image_description</code>，调用<strong><code class="highlighter-rouge">image_generator_api.generate_image(description)</code>工具</strong>，将生成的<code class="highlighter-rouge">image_url</code>作为内容返回。如果工具调用失败，提供备用文本描述。</li>
-      <li><strong>图表内容：</strong> 如果<code class="highlighter-rouge">type</code>是<code class="highlighter-rouge">chart_data</code>，生成JSON格式的图表类型、标题、系列数据等。</li>
+      <li><strong>文本内容：</strong> 严格遵守<code class="language-plaintext highlighter-rouge">max_length</code>和<code class="language-plaintext highlighter-rouge">style_hint</code>（如列表格式）。</li>
+      <li><strong>图片内容：</strong> 如果<code class="language-plaintext highlighter-rouge">type</code>是<code class="language-plaintext highlighter-rouge">image_description</code>，调用<strong><code class="language-plaintext highlighter-rouge">image_generator_api.generate_image(description)</code>工具</strong>，将生成的<code class="language-plaintext highlighter-rouge">image_url</code>作为内容返回。如果工具调用失败，提供备用文本描述。</li>
+      <li><strong>图表内容：</strong> 如果<code class="language-plaintext highlighter-rouge">type</code>是<code class="language-plaintext highlighter-rouge">chart_data</code>，生成JSON格式的图表类型、标题、系列数据等。</li>
     </ul>
   </li>
 </ol>
@@ -277,7 +277,7 @@ flowchart LR
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p><strong>保存为临时文件：</strong> 这一阶段的JSON输出（每页一个文件或一个包含所有页的列表）将被保存为<code class="highlighter-rouge">session_id_slide_contents_pageX.json</code> 或 <code class="highlighter-rouge">session_id_slide_contents_all.json</code>。</p>
+<p><strong>保存为临时文件：</strong> 这一阶段的JSON输出（每页一个文件或一个包含所有页的列表）将被保存为<code class="language-plaintext highlighter-rouge">session_id_slide_contents_pageX.json</code> 或 <code class="language-plaintext highlighter-rouge">session_id_slide_contents_all.json</code>。</p>
 
 <hr />
 
@@ -289,16 +289,16 @@ flowchart LR
 
 <p><strong>可调用工具：</strong></p>
 <ul>
-  <li><strong>工具名称：</strong> <code class="highlighter-rouge">python_pptx_generator</code>
+  <li><strong>工具名称：</strong> <code class="language-plaintext highlighter-rouge">python_pptx_generator</code>
     <ul>
       <li><strong>描述：</strong> 一个Python库封装，用于基于模板创建和修改PPTX文件。提供以下核心功能：
         <ul>
-          <li><code class="highlighter-rouge">load_template(template_file_path)</code>: 加载一个PPTX模板文件。</li>
-          <li><code class="highlighter-rouge">add_slide(layout_id)</code>: 根据布局ID添加新幻灯片。</li>
-          <li><code class="highlighter-rouge">fill_placeholder(slide, placeholder_semantic, content)</code>: 根据语义填充文本、图片、表格或图表数据。自动处理文本样式继承、图片插入、表格/图表创建。</li>
-          <li><code class="highlighter-rouge">save_ppt(output_file_path)</code>: 保存生成的PPTX文件。</li>
-          <li>(内部辅助函数) <code class="highlighter-rouge">get_placeholder_by_semantic(slide_layout, semantic)</code>: 根据语义查找对应的占位符对象。</li>
-          <li>(内部辅助函数) <code class="highlighter-rouge">apply_text_style(text_frame, style_hint)</code>: 根据大模型提供的<code class="highlighter-rouge">style_hint</code>或模板默认样式调整文本。</li>
+          <li><code class="language-plaintext highlighter-rouge">load_template(template_file_path)</code>: 加载一个PPTX模板文件。</li>
+          <li><code class="language-plaintext highlighter-rouge">add_slide(layout_id)</code>: 根据布局ID添加新幻灯片。</li>
+          <li><code class="language-plaintext highlighter-rouge">fill_placeholder(slide, placeholder_semantic, content)</code>: 根据语义填充文本、图片、表格或图表数据。自动处理文本样式继承、图片插入、表格/图表创建。</li>
+          <li><code class="language-plaintext highlighter-rouge">save_ppt(output_file_path)</code>: 保存生成的PPTX文件。</li>
+          <li>(内部辅助函数) <code class="language-plaintext highlighter-rouge">get_placeholder_by_semantic(slide_layout, semantic)</code>: 根据语义查找对应的占位符对象。</li>
+          <li>(内部辅助函数) <code class="language-plaintext highlighter-rouge">apply_text_style(text_frame, style_hint)</code>: 根据大模型提供的<code class="language-plaintext highlighter-rouge">style_hint</code>或模板默认样式调整文本。</li>
         </ul>
       </li>
     </ul>
@@ -307,17 +307,17 @@ flowchart LR
 
 <p><strong>输入参数：</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">physical_template_path</code>: 模板文件的实际路径。</li>
-  <li><code class="highlighter-rouge">template_description_json</code>: 节点1生成的模板结构化描述（加载）。</li>
-  <li><code class="highlighter-rouge">ppt_page_contents_json</code>: 节点3生成的所有页面的结构化内容（加载）。</li>
-  <li><code class="highlighter-rouge">output_file_path</code>: 最终PPT的保存路径。</li>
+  <li><code class="language-plaintext highlighter-rouge">physical_template_path</code>: 模板文件的实际路径。</li>
+  <li><code class="language-plaintext highlighter-rouge">template_description_json</code>: 节点1生成的模板结构化描述（加载）。</li>
+  <li><code class="language-plaintext highlighter-rouge">ppt_page_contents_json</code>: 节点3生成的所有页面的结构化内容（加载）。</li>
+  <li><code class="language-plaintext highlighter-rouge">output_file_path</code>: 最终PPT的保存路径。</li>
 </ul>
 
 <p><strong>输出：</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">final_ppt_file_path</code>: 生成的PPT文件的路径。</li>
-  <li><code class="highlighter-rouge">status</code>: “success” 或 “failure”。</li>
-  <li><code class="highlighter-rouge">message</code>: 成功或失败的详细信息。</li>
+  <li><code class="language-plaintext highlighter-rouge">final_ppt_file_path</code>: 生成的PPT文件的路径。</li>
+  <li><code class="language-plaintext highlighter-rouge">status</code>: “success” 或 “failure”。</li>
+  <li><code class="language-plaintext highlighter-rouge">message</code>: 成功或失败的详细信息。</li>
 </ul>
 
 <hr />
@@ -325,7 +325,7 @@ flowchart LR
 <p><strong>核心理念：</strong></p>
 
 <ul>
-  <li><strong>清晰的工具接口：</strong> 大模型不必了解<code class="highlighter-rouge">python-pptx</code>的内部细节，它只需要知道<code class="highlighter-rouge">template_info_loader</code>可以提供模板信息，<code class="highlighter-rouge">image_generator_api</code>可以生成图片。后端服务负责封装和调用这些底层工具。</li>
+  <li><strong>清晰的工具接口：</strong> 大模型不必了解<code class="language-plaintext highlighter-rouge">python-pptx</code>的内部细节，它只需要知道<code class="language-plaintext highlighter-rouge">template_info_loader</code>可以提供模板信息，<code class="language-plaintext highlighter-rouge">image_generator_api</code>可以生成图片。后端服务负责封装和调用这些底层工具。</li>
   <li><strong>大模型专注于高层逻辑：</strong> 大模型的主要任务是“思考”和“创作”，即理解需求、规划结构、撰写内容。</li>
   <li><strong>后端服务负责执行：</strong> 后端服务根据大模型的输出和内置的工具指令，执行具体的PPT文件操作、图片生成等。</li>
   <li><strong>分阶段持久化：</strong> 每一步的关键输出都保存为临时文件，增强了系统的健壮性和可调试性。</li>

@@ -118,12 +118,23 @@ kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     line_numbers: false
+  toc_levels: "1,2,3,4"
 
 # Include markdown files in processing
 include: ["blog/**/*.md", "personal/**/*.md"]
 
 # Enable processing of all markdown files
 keep_files: [".git", ".svn"]
+
+# Add webrick as default server
+webrick:
+  headers:
+    Cache-Control: no-cache
+
+# Compatibility with newer Ruby versions
+require:
+  - csv
+  - logger
 
 # Exclude unnecessary files
 exclude:
