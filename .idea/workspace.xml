@@ -1,7 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="fix(deployment): 修复 GitHub Pages 部署时的文章加载问题&#10;&#10;- 添加静态回退机制，在动态数据加载失败时使用预定义文章列表&#10;- 实现 GitHub Actions 工作流，自动化构建和部署 Jekyll 网站- 更新 Gemfile，管理依赖并确保在 GitHub Actions 中正确构建- 添加部署问题排查指南和长期维护建议" />
+    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="ci: 更新 GitHub Actions 工作流并修复部署问题&#10;&#10;-将 actions/checkout 从 v2 升级到 v4&#10;- 将 peaceiris/actions-gh-pages 从 v3 升级到 v4&#10;- 将 actions/configure-pages 从 v3 升级到 v5&#10;- 将 actions/upload-pages-artifact 从 v2 升级到 v3- 将 actions/deploy-pages从 v2 升级到 v4&#10;- 更新了多个工作流中的动作版本，以提高构建和部署的可靠性">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/2a/6664d3ac45a12965bd26d1d13aece679179c0a97c656fecb5a1e314f91e8a1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/72/ae8b79ac1f55a292643ed3268c136a8a3f552164ad074bc17c326c7c695b29" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/ce/847dbe8c1f141a3f0689b83a1dca5e6c3ff483004c9c8876e59fe0375d2007" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/01/01/the-advantages-and-disadvantages-of-working-from-home.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/01/01/the-advantages-and-disadvantages-of-working-from-home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/01/02/set-up-your-new-iphone-6-the-Right-Way.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/01/02/set-up-your-new-iphone-6-the-Right-Way.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/01/03/basic-rules-for-walking-in-the-mountains.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/01/03/basic-rules-for-walking-in-the-mountains.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2019/01/04/a-week-with-the-apple-watch.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2019/01/04/a-week-with-the-apple-watch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/2022/01/05/Graphic-Designer-On-The-Road.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/2022/01/05/Graphic-Designer-On-The-Road.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/AI-manus/plan-act弊端/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/AI-manus/plan-act弊端/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/AI-manus/快速入门/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/AI-manus/快速入门/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/chatppt/提示词及工作流设计/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/chatppt/提示词及工作流设计/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/example/markdown-syntax/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/example/markdown-syntax/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/deepseek/intro.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/deepseek/intro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/deepseek/intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/deepseek/intro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/llama/llama-example/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/llama/llama-example/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/llama/总览.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/llama/总览.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/llama/总览/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/llama/总览/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/llm/qwen/量化的核心原理/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/提示词/项目文档分析与 README 撰写指南/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/提示词/项目文档分析与 README 撰写指南/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/MAE/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/MAE/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/MSE/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/MSE/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/损失函数总览/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/损失函数总览/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/相对熵与交叉熵/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/损失函数/相对熵与交叉熵/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/Adam/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/Adam/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/Momentum/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/Momentum/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/RMSprop/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/RMSprop/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/SGD/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/SGD/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/梯度优化方法/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/梯度优化方法/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/正则化/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/模型优化/正则化/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/深度学习基础知识/激活函数/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/深度学习基础知识/激活函数/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/deepseek/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/deepseek/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/deepseek/intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/deepseek/intro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama-example/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama-example/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama-overview/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama-overview/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama/llama-example/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama/llama-example/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/llama/总览/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/llama/总览/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/qwen/quantization-principles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/qwen/quantization-principles/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/LLM/qwen/量化的核心原理/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/LLM/qwen/量化的核心原理/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/blog/LLM/deepseek/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/blog/LLM/deepseek/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/blog/LLM/llama/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/blog/LLM/llama/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/blog/LLM/qwen/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/blog/LLM/qwen/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/deepseek/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/deepseek/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/llama/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/llama/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/series.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/series.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/deepseek-intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/deepseek-intro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/llama-series/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/llama-series/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/personal/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/personal/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/personal/personal/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/personal/personal/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/personal/resume.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/personal/resume.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/quantization-principles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/quantization-principles/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/_site/robots.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/sitemap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/style-guide.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/style-guide.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/tags.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/tags.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +112,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754152968390</updated>
       <workItem from="1754152970404" duration="16477000" />
-      <workItem from="1757169662123" duration="4297000" />
+      <workItem from="1757169662123" duration="5878000" />
     </task>
     <task id="LOCAL-00001" summary="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置">
       <created>1757169692269</created>
@@ -117,11 +184,28 @@
       <option name="project" value="LOCAL" />
       <updated>1757239297202</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="ci: 更新 GitHub Actions 工作流并修复部署问题&#10;&#10;-将 actions/checkout 从 v2 升级到 v4&#10;- 将 peaceiris/actions-gh-pages 从 v3 升级到 v4&#10;- 将 actions/configure-pages 从 v3 升级到 v5&#10;- 将 actions/upload-pages-artifact 从 v2 升级到 v3- 将 actions/deploy-pages从 v2 升级到 v4&#10;- 更新了多个工作流中的动作版本，以提高构建和部署的可靠性">
+      <created>1757239957239</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1757239957239</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -144,6 +228,7 @@
     <MESSAGE value="fix(site): 修复 GitHub Pages 上文章加载失败的问题&#10;&#10;-增加了对多个数据源路径的尝试，提高兼容性&#10;- 添加了对 blog-data.json 格式的支持和自动转换&#10;-优化了错误处理，提供了更友好的提示信息&#10;- 调整了 _config.yml 中的 URL 配置，适应 GitHub Pages- 新增 GITHUB_PAGES_FIX.md 文件，提供详细的修复指南" />
     <MESSAGE value="refactor: 更新网站链接为 localhost&#10;&#10;- 将所有页面中的 http://0.0.0.0:4000 替换为 http://localhost:4000&#10;- 更新了多个 HTML 文件中的 canonical 链接、RSS 链接和社交媒体分享链接&#10;- 此更改统一了网站链接格式，有助于提高网站的可访问性和维护性" />
     <MESSAGE value="fix(deployment): 修复 GitHub Pages 部署时的文章加载问题&#10;&#10;- 添加静态回退机制，在动态数据加载失败时使用预定义文章列表&#10;- 实现 GitHub Actions 工作流，自动化构建和部署 Jekyll 网站- 更新 Gemfile，管理依赖并确保在 GitHub Actions 中正确构建- 添加部署问题排查指南和长期维护建议" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(deployment): 修复 GitHub Pages 部署时的文章加载问题&#10;&#10;- 添加静态回退机制，在动态数据加载失败时使用预定义文章列表&#10;- 实现 GitHub Actions 工作流，自动化构建和部署 Jekyll 网站- 更新 Gemfile，管理依赖并确保在 GitHub Actions 中正确构建- 添加部署问题排查指南和长期维护建议" />
+    <MESSAGE value="ci: 更新 GitHub Actions 工作流并修复部署问题&#10;&#10;-将 actions/checkout 从 v2 升级到 v4&#10;- 将 peaceiris/actions-gh-pages 从 v3 升级到 v4&#10;- 将 actions/configure-pages 从 v3 升级到 v5&#10;- 将 actions/upload-pages-artifact 从 v2 升级到 v3- 将 actions/deploy-pages从 v2 升级到 v4&#10;- 更新了多个工作流中的动作版本，以提高构建和部署的可靠性" />
+    <option name="LAST_COMMIT_MESSAGE" value="ci: 更新 GitHub Actions 工作流并修复部署问题&#10;&#10;-将 actions/checkout 从 v2 升级到 v4&#10;- 将 peaceiris/actions-gh-pages 从 v3 升级到 v4&#10;- 将 actions/configure-pages 从 v3 升级到 v5&#10;- 将 actions/upload-pages-artifact 从 v2 升级到 v3- 将 actions/deploy-pages从 v2 升级到 v4&#10;- 更新了多个工作流中的动作版本，以提高构建和部署的可靠性" />
   </component>
 </project>
