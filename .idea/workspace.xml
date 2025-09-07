@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="refactor: 更新网站链接为 localhost&#10;&#10;- 将所有页面中的 http://0.0.0.0:4000 替换为 http://localhost:4000&#10;- 更新了多个 HTML 文件中的 canonical 链接、RSS 链接和社交媒体分享链接&#10;- 此更改统一了网站链接格式，有助于提高网站的可访问性和维护性" />
+    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="refactor: 更新网站链接为 localhost&#10;&#10;- 将所有页面中的 http://0.0.0.0:4000 替换为 http://localhost:4000&#10;- 更新了多个 HTML 文件中的 canonical 链接、RSS 链接和社交媒体分享链接&#10;- 此更改统一了网站链接格式，有助于提高网站的可访问性和维护性">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/articles/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/articles/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/series.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/series.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/sitemap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/articles.md" beforeDir="false" afterPath="$PROJECT_DIR$/articles.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754152968390</updated>
       <workItem from="1754152970404" duration="16477000" />
-      <workItem from="1757169662123" duration="3329000" />
+      <workItem from="1757169662123" duration="3979000" />
     </task>
     <task id="LOCAL-00001" summary="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置">
       <created>1757169692269</created>
@@ -103,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1757238426821</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="refactor: 更新网站链接为 localhost&#10;&#10;- 将所有页面中的 http://0.0.0.0:4000 替换为 http://localhost:4000&#10;- 更新了多个 HTML 文件中的 canonical 链接、RSS 链接和社交媒体分享链接&#10;- 此更改统一了网站链接格式，有助于提高网站的可访问性和维护性">
+      <created>1757238560558</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1757238560558</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

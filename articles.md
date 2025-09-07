@@ -108,9 +108,8 @@ permalink: /articles/
           updateStats();
         }
       } else {
-        console.error('❌ 所有数据源都加载失败');
-        document.getElementById('articlesContainer').innerHTML = 
-          '<div class="error">❌ 文章加载失败，请稍后重试。<br><small>如果问题持续存在，请联系管理员。</small></div>';
+        console.error('❌ 所有数据源都加载失败，尝试使用静态回退方案');
+        loadStaticFallback();
       }
     } catch (error) {
       console.error('❌ 文章数据加载异常:', error);
@@ -149,6 +148,78 @@ permalink: /articles/
     
     blogData.forEach(item => extractFiles(item));
     return articles;
+  }
+
+  // 静态回退方案 - 手动编写的文章数据
+  function loadStaticFallback() {
+    console.log('🔄 使用静态回退数据...');
+    
+    articles = [
+      {
+        title: '激活函数',
+        url: '{{ site.baseurl }}/articles/深度学习基础知识/激活函数/',
+        type: 'markdown',
+        category: '深度学习基础',
+        date: '2024-01-01',
+        tags: ['深度学习', '激活函数', '神经网络'],
+        description: '深度学习中常用激活函数的原理和应用'
+      },
+      {
+        title: '损失函数总览',
+        url: '{{ site.baseurl }}/articles/深度学习基础知识/损失函数/损失函数总览/',
+        type: 'markdown',
+        category: '深度学习基础',
+        date: '2024-01-02',
+        tags: ['深度学习', '损失函数', '机器学习'],
+        description: '常见损失函数的原理、特点和使用场景'
+      },
+      {
+        title: 'Llama 总览',
+        url: '{{ site.baseurl }}/articles/llm/llama/总览/',
+        type: 'markdown',
+        category: 'LLM',
+        date: '2024-01-05',
+        tags: ['LLM', 'Llama', '大模型'],
+        description: 'Llama系列大模型全面解析'
+      },
+      {
+        title: '量化的核心原理',
+        url: '{{ site.baseurl }}/articles/llm/qwen/量化的核心原理/',
+        type: 'markdown',
+        category: 'LLM',
+        date: '2024-01-03',
+        tags: ['LLM', 'Qwen', '量化'],
+        description: '神经网络量化的数学原理和实现机制'
+      },
+      {
+        title: 'DeepSeek 介绍',
+        url: '{{ site.baseurl }}/articles/llm/deepseek/intro/',
+        type: 'markdown',
+        category: 'LLM',
+        date: '2024-01-04',
+        tags: ['LLM', 'DeepSeek', '代码生成'],
+        description: '技术特点和应用场景介绍'
+      },
+      {
+        title: 'Markdown 语法示例',
+        url: '{{ site.baseurl }}/articles/example/markdown-syntax/',
+        type: 'markdown',
+        category: '示例',
+        date: '2024-01-06',
+        tags: ['示例', 'Markdown'],
+        description: '展示所有支持的Markdown语法功能'
+      }
+    ];
+    
+    renderArticles();
+    updateStats();
+    
+    // 显示静态模式提示
+    const container = document.getElementById('articlesContainer');
+    const notice = document.createElement('div');
+    notice.className = 'static-mode-notice';
+    notice.innerHTML = '📌 当前使用静态模式，部分文章可能未展示。建议刺新页面再试。';
+    container.insertBefore(notice, container.firstChild);
   }
   
   // 按分类组织文章
@@ -670,6 +741,17 @@ permalink: /articles/
   
   .error {
     color: #e74c3c;
+  }
+  
+  .static-mode-notice {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+    text-align: center;
+    font-size: 0.9em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   /* 响应式优化 */
