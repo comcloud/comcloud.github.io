@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="build: 更新 Jekyll 版本并优化网站构建流程&#10;&#10;-将 Jekyll 版本从4.0.1 升级到 4.3.4- 添加 Webrick 作为默认服务器&#10;- 更新 Ruby 依赖版本- 优化 GitHub Actions 构建流程&#10;- 调整网站配置和构建设置" />
+    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="ci: 更新 Ruby 版本并修复链接&#10;&#10;- 将 Ruby版本从 3.0升级到 3.1- 修复了多个页面中的 canonical 链接和社交媒体分享链接&#10;- 更新了 RSS feed 中的链接&#10;- 调整了 Gemfile 中的 gem 引用格式" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +45,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754152968390</updated>
       <workItem from="1754152970404" duration="16477000" />
-      <workItem from="1757169662123" duration="9290000" />
+      <workItem from="1757169662123" duration="9694000" />
     </task>
     <task id="LOCAL-00001" summary="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置">
       <created>1757169692269</created>
@@ -138,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1757255589110</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="ci: 更新 Ruby 版本并修复链接&#10;&#10;- 将 Ruby版本从 3.0升级到 3.1- 修复了多个页面中的 canonical 链接和社交媒体分享链接&#10;- 更新了 RSS feed 中的链接&#10;- 调整了 Gemfile 中的 gem 引用格式">
+      <created>1757256152193</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1757256152193</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +185,7 @@
     <MESSAGE value="ci: 更新 GitHub Actions 工作流并修复部署问题&#10;&#10;-将 actions/checkout 从 v2 升级到 v4&#10;- 将 peaceiris/actions-gh-pages 从 v3 升级到 v4&#10;- 将 actions/configure-pages 从 v3 升级到 v5&#10;- 将 actions/upload-pages-artifact 从 v2 升级到 v3- 将 actions/deploy-pages从 v2 升级到 v4&#10;- 更新了多个工作流中的动作版本，以提高构建和部署的可靠性" />
     <MESSAGE value="build: 更新网站构建配置&#10;&#10;- 修改了多个 HTML 文件中的 canonical链接和社交媒体分享链接，将 localhost 替换为 0.0.0.0&#10;- 更新了 Gemfile 和 Gemfile.lock，调整了 Jekyll 版本和相关依赖&#10;- 修改了 RSS feed 文件中的链接地址" />
     <MESSAGE value="build: 更新 Jekyll 版本并优化网站构建流程&#10;&#10;-将 Jekyll 版本从4.0.1 升级到 4.3.4- 添加 Webrick 作为默认服务器&#10;- 更新 Ruby 依赖版本- 优化 GitHub Actions 构建流程&#10;- 调整网站配置和构建设置" />
-    <option name="LAST_COMMIT_MESSAGE" value="build: 更新 Jekyll 版本并优化网站构建流程&#10;&#10;-将 Jekyll 版本从4.0.1 升级到 4.3.4- 添加 Webrick 作为默认服务器&#10;- 更新 Ruby 依赖版本- 优化 GitHub Actions 构建流程&#10;- 调整网站配置和构建设置" />
+    <MESSAGE value="ci: 更新 Ruby 版本并修复链接&#10;&#10;- 将 Ruby版本从 3.0升级到 3.1- 修复了多个页面中的 canonical 链接和社交媒体分享链接&#10;- 更新了 RSS feed 中的链接&#10;- 调整了 Gemfile 中的 gem 引用格式" />
+    <option name="LAST_COMMIT_MESSAGE" value="ci: 更新 Ruby 版本并修复链接&#10;&#10;- 将 Ruby版本从 3.0升级到 3.1- 修复了多个页面中的 canonical 链接和社交媒体分享链接&#10;- 更新了 RSS feed 中的链接&#10;- 调整了 Gemfile 中的 gem 引用格式" />
   </component>
 </project>
