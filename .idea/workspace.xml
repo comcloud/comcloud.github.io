@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="style(articles): 优化文章页面样式和布局&#10;&#10;- 添加 temp-style.css 文件，修复导航栏、内容区域和代码块样式&#10;- 更新 site-header、main-content、post 和 post-content 类的样式&#10;-重新设计 Markdown 代码块样式，增加背景、边框和阴影效果&#10;- 优化移动设备上的文章页面布局">
+    <list default="true" id="ed9c7e39-7de0-4caa-88de-5f55cda30476" name="Default Changelist" comment="refactor(site): 更新网站加载动画并调整样式&#10;&#10;- 移除复杂的云层拨开动画，改为简单的云门推开动画&#10;-调整云门容器和云门样式，优化动画效果&#10;- 更新字体大小和间距变量，提高可读性&#10;- 简化卡片组件样式，提升视觉一致性">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/css/temp-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/_site/assets/css/temp-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/feed.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/_site/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/temp-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/temp-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +48,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754152968390</updated>
       <workItem from="1754152970404" duration="16477000" />
-      <workItem from="1757169662123" duration="2248000" />
+      <workItem from="1757169662123" duration="2998000" />
     </task>
     <task id="LOCAL-00001" summary="feat(site): 重构网站布局并添加新功能&#10;&#10;- 重新设计了首页布局，增加了英雄区域和精选文章部分&#10;- 添加了最新博客文章列表和分页导航- 优化了文章卡片样式，增加了标签和日期显示&#10;- 添加了动态加载文章的功能，支持随机选择和排序&#10;- 重构了CSS样式，增加了更多视觉元素和动画效果&#10;- 更新了网站配置，增加了Jekyll插件和优化了SEO设置">
       <created>1757169692269</created>
@@ -91,7 +85,14 @@
       <option name="project" value="LOCAL" />
       <updated>1757215395846</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="refactor(site): 更新网站加载动画并调整样式&#10;&#10;- 移除复杂的云层拨开动画，改为简单的云门推开动画&#10;-调整云门容器和云门样式，优化动画效果&#10;- 更新字体大小和间距变量，提高可读性&#10;- 简化卡片组件样式，提升视觉一致性">
+      <created>1757215811976</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1757215811976</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,6 +115,7 @@
     <MESSAGE value="feat(personal): 优化个人页面样式和布局&#10;&#10;- 重新设计了个人页面的英雄部分，增加了更多视觉元素和交互效果&#10;- 优化了响应式布局，确保在不同设备上都有良好的阅读体验&#10;- 调整了颜色方案和字体样式，提升了页面的整体美感&#10;- 增加了一些新的 CSS 动画和过渡效果，使页面更加生动" />
     <MESSAGE value="docs(AI-manus): 更新快速入门文档&#10;&#10;- 修改了代码块的显示方式，去除了多余的表格格式&#10;- 更新了文章的发布日期&#10;- 调整了文档中的列表符号使用短横线" />
     <MESSAGE value="style(articles): 优化文章页面样式和布局&#10;&#10;- 添加 temp-style.css 文件，修复导航栏、内容区域和代码块样式&#10;- 更新 site-header、main-content、post 和 post-content 类的样式&#10;-重新设计 Markdown 代码块样式，增加背景、边框和阴影效果&#10;- 优化移动设备上的文章页面布局" />
-    <option name="LAST_COMMIT_MESSAGE" value="style(articles): 优化文章页面样式和布局&#10;&#10;- 添加 temp-style.css 文件，修复导航栏、内容区域和代码块样式&#10;- 更新 site-header、main-content、post 和 post-content 类的样式&#10;-重新设计 Markdown 代码块样式，增加背景、边框和阴影效果&#10;- 优化移动设备上的文章页面布局" />
+    <MESSAGE value="refactor(site): 更新网站加载动画并调整样式&#10;&#10;- 移除复杂的云层拨开动画，改为简单的云门推开动画&#10;-调整云门容器和云门样式，优化动画效果&#10;- 更新字体大小和间距变量，提高可读性&#10;- 简化卡片组件样式，提升视觉一致性" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(site): 更新网站加载动画并调整样式&#10;&#10;- 移除复杂的云层拨开动画，改为简单的云门推开动画&#10;-调整云门容器和云门样式，优化动画效果&#10;- 更新字体大小和间距变量，提高可读性&#10;- 简化卡片组件样式，提升视觉一致性" />
   </component>
 </project>

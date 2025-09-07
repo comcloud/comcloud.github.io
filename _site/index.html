@@ -336,14 +336,42 @@ async function loadFeaturedArticles() {
   if (!container) return;
   
   try {
-    const response = await fetch('/assets/data/articles.json?t=' + Date.now());
-    let articles = [];
+    // 尝试多个可能的数据源
+    const possiblePaths = [
+      '/assets/data/articles.json',
+      '/assets/blog-data.json',
+      '/assets/data/articles.json',
+      '/assets/blog-data.json'
+    ];
     
-    if (response.ok) {
-      articles = await response.json();
+    let articles = [];
+    let loaded = false;
+    
+    for (const path of possiblePaths) {
+      try {
+        const response = await fetch(path + '?t=' + Date.now());
+        
+        if (response.ok) {
+          const data = await response.json();
+          
+          if (Array.isArray(data) && data.length > 0) {
+            if (data[0].files) {
+              // blog-data.json格式，转换为articles格式
+              articles = convertBlogDataToArticles(data);
+            } else {
+              // articles.json格式
+              articles = data;
+            }
+            loaded = true;
+            break;
+          }
+        }
+      } catch (err) {
+        console.warn(`从 ${path} 加载失败:`, err.message);
+      }
     }
     
-    if (articles.length === 0) {
+    if (!loaded || articles.length === 0) {
       container.innerHTML = '
         <div class="text-center" style="grid-column: 1 / -1;">
           <p style="color: var(--text-muted); font-style: italic;">
@@ -367,6 +395,36 @@ async function loadFeaturedArticles() {
         </p>
       </div>';
   }
+}
+
+// 转换blog-data.json格式为articles格式
+function convertBlogDataToArticles(blogData) {
+  const articles = [];
+  
+  function extractFiles(item, basePath = '') {
+    if (item.files && Array.isArray(item.files)) {
+      item.files.forEach(file => {
+        if (file.url && file.title) {
+          articles.push({
+            title: file.title,
+            url: file.url,
+            type: file.type || 'markdown',
+            category: item.title || item.name || '未分类',
+            date: file.date || new Date().toISOString().split('T')[0],
+            tags: file.tags || [],
+            description: file.description || item.description || '无描述信息'
+          });
+        }
+      });
+    }
+    
+    if (item.children && Array.isArray(item.children)) {
+      item.children.forEach(child => extractFiles(child, basePath));
+    }
+  }
+  
+  blogData.forEach(item => extractFiles(item));
+  return articles;
 }
 
 function renderFeaturedArticles(container, articles) {
@@ -406,10 +464,42 @@ async function loadSiteStats() {
   if (!articlesCount || !seriesCount) return;
   
   try {
-    const response = await fetch('/assets/data/articles.json?t=' + Date.now());
+    // 尝试多个数据源
+    const possiblePaths = [
+      '/assets/data/articles.json',
+      '/assets/blog-data.json',
+      '/assets/data/articles.json',
+      '/assets/blog-data.json'
+    ];
     
-    if (response.ok) {
-      const articles = await response.json();
+    let articles = [];
+    let loaded = false;
+    
+    for (const path of possiblePaths) {
+      try {
+        const response = await fetch(path + '?t=' + Date.now());
+        
+        if (response.ok) {
+          const data = await response.json();
+          
+          if (Array.isArray(data) && data.length > 0) {
+            if (data[0].files) {
+              // blog-data.json格式
+              articles = convertBlogDataToArticles(data);
+            } else {
+              // articles.json格式
+              articles = data;
+            }
+            loaded = true;
+            break;
+          }
+        }
+      } catch (err) {
+        console.warn(`加载统计数据失败 ${path}:`, err.message);
+      }
+    }
+    
+    if (loaded && articles.length > 0) {
       const categories = [...new Set(articles.map(a => a.category).filter(Boolean))];
       
       articlesCount.textContent = articles.length;

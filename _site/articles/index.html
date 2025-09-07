@@ -168,28 +168,93 @@
   async function loadArticles() {
     try {
       console.log('🔄 开始检测文章更新...');
-      const response = await fetch('/assets/data/articles.json?t=' + Date.now());
       
-      if (response.ok) {
-        const newArticles = await response.json();
-        
+      // 尝试多个可能的路径
+      const possiblePaths = [
+        '/assets/data/articles.json',
+        '/assets/blog-data.json',
+        '/assets/data/articles.json',
+        '/assets/blog-data.json'
+      ];
+      
+      let articlesData = [];
+      let loaded = false;
+      
+      for (const path of possiblePaths) {
+        try {
+          console.log(`尝试加载: ${path}`);
+          const response = await fetch(path + '?t=' + Date.now());
+          
+          if (response.ok) {
+            const data = await response.json();
+            // 检查数据格式，转换blog-data.json格式为articles格式
+            if (Array.isArray(data) && data.length > 0) {
+              if (data[0].files) {
+                // 这是blog-data.json格式，需要转换
+                articlesData = convertBlogDataToArticles(data);
+              } else {
+                // 这是articles.json格式
+                articlesData = data;
+              }
+              loaded = true;
+              console.log(`✅ 成功从 ${path} 加载了 ${articlesData.length} 篇文章`);
+              break;
+            }
+          }
+        } catch (err) {
+          console.warn(`从 ${path} 加载失败:`, err.message);
+        }
+      }
+      
+      if (loaded) {
         // 检查是否有更新
-        if (JSON.stringify(newArticles) !== JSON.stringify(articles)) {
-          articles = newArticles;
-          console.log(`✅ 动态加载了 ${articles.length} 篇文章`);
+        if (JSON.stringify(articlesData) !== JSON.stringify(articles)) {
+          articles = articlesData;
           renderArticles();
           updateStats();
         }
       } else {
-        console.error('❌ 文章数据加载失败:', response.status);
+        console.error('❌ 所有数据源都加载失败');
         document.getElementById('articlesContainer').innerHTML = 
-          '<div class="error">❌ 文章加载失败，请稍后重试</div>';
+          '<div class="error">❌ 文章加载失败，请稍后重试。<br><small>如果问题持续存在，请联系管理员。</small></div>';
       }
     } catch (error) {
       console.error('❌ 文章数据加载异常:', error);
       document.getElementById('articlesContainer').innerHTML = 
-        '<div class="error">❌ 网络连接异常，请检查网络</div>';
+        '<div class="error">❌ 网络连接异常，请检查网络连接</div>';
     }
+  }
+  
+  // 转换blog-data.json格式为articles格式
+  function convertBlogDataToArticles(blogData) {
+    const articles = [];
+    
+    function extractFiles(item, basePath = '') {
+      if (item.files && Array.isArray(item.files)) {
+        item.files.forEach(file => {
+          if (file.url && file.title) {
+            articles.push({
+              title: file.title,
+              url: file.url,
+              type: file.type || 'markdown',
+              category: item.title || item.name || '未分类',
+              date: file.date || new Date().toISOString().split('T')[0],
+              tags: file.tags || [],
+              description: file.description || item.description || '无描述信息',
+              path: file.path || basePath
+            });
+          }
+        });
+      }
+      
+      // 递归处理嵌套文件
+      if (item.children && Array.isArray(item.children)) {
+        item.children.forEach(child => extractFiles(child, basePath));
+      }
+    }
+    
+    blogData.forEach(item => extractFiles(item));
+    return articles;
   }
   
   // 按分类组织文章
