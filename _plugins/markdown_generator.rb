@@ -1,5 +1,7 @@
 require 'fileutils'
 require 'yaml'
+require 'find'
+require 'pathname'
 
 Jekyll::Hooks.register :site, :post_write do |site|
   # 扫描blog目录下的所有markdown文件，为它们创建对应的HTML页面
