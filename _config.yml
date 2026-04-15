@@ -135,6 +135,7 @@ webrick:
 require:
   - csv
   - logger
+  - date
 
 # Exclude unnecessary files
 exclude:

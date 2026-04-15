@@ -1,6 +1,6 @@
 ---
-title: "DeepSeek Series"
-permalink: /blog/deepseek/
+title: "Qwen Series"
+permalink: /blog/qwen/
 ---
 
 系列介绍：qwen 是由阿里巴巴开发的一系列大型语言模型，具有强大的代码生成和理解能力。
