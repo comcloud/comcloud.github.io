@@ -10,6 +10,9 @@
 2. 到 [新建 Issue](https://github.com/comcloud/comcloud.github.io/issues/new) 建一条 issue，**打上「发文章」标签**，正文整段粘贴；
 3. 提交。`.github/workflows/publish-from-issue.yml` 会生成 md、推到 `main`、直接上线，并在 issue 下面回复结果。
 
+想连"粘贴到 issue"这一步也省掉，给 ChatGPT 装一个发文按钮（Custom GPT Actions 直接打 GitHub API），
+见 [`docs/chatgpt-发文按钮/README.md`](docs/chatgpt-发文按钮/README.md)。
+
 不合规（slug 写了中文、正文太短像没粘全、slug 撞车）时**不会发布**，机器人会在 issue 里说清哪一行的问题；改完 issue 正文会自动重试。同一条 issue 反复编辑 = 反复更新同一篇文章。
 
 ### 方式二：本地新建
