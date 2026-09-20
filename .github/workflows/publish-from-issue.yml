@@ -25,6 +25,7 @@ jobs:
         outputs:
             path: ${{ steps.generate.outputs.path }}
             changed: ${{ steps.commit.outputs.changed }}
+            sha: ${{ steps.commit.outputs.sha }}
         steps:
             - uses: actions/checkout@v5
               with:
@@ -65,6 +66,7 @@ jobs:
                       commit -F commit-msg.txt -- "$POST_PATH"
                   git push origin HEAD:main
                   printf 'changed=true\n' >> "$GITHUB_OUTPUT"
+                  printf 'sha=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
             - name: 在 issue 下回报上线
               if: success()
@@ -108,6 +110,9 @@ jobs:
         needs: publish
         if: needs.publish.outputs.changed == 'true'
         uses: ./.github/workflows/deploy.yml
+        with:
+            # 不传的话部署会去构建 issue 触发时的旧 commit，文章就上不去了
+            ref: ${{ needs.publish.outputs.sha }}
         permissions:
             contents: read
             pages: write
