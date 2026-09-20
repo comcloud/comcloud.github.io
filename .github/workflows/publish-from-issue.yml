@@ -1,0 +1,114 @@
+name: 从 Issue 发文章
+
+# 用法：新建一个 issue，打上「发文章」标签，正文按 docs/给chatgpt的写作规范.md 的格式粘进来。
+# 这个工作流负责生成 md、提交到 main、在 issue 下回报结果，然后调用 deploy.yml 上线。
+
+on:
+    issues:
+        types: [opened, edited]
+
+permissions:
+    contents: write
+    issues: write
+    pages: write
+    id-token: write
+
+# 两个 issue 同时发文时排队，避免推送互相打架
+concurrency:
+    group: publish-from-issue
+    cancel-in-progress: false
+
+jobs:
+    publish:
+        if: ${{ !github.event.issue.pull_request && contains(github.event.issue.labels.*.name, '发文章') }}
+        runs-on: ubuntu-latest
+        outputs:
+            path: ${{ steps.generate.outputs.path }}
+            changed: ${{ steps.commit.outputs.changed }}
+        steps:
+            - uses: actions/checkout@v5
+              with:
+                  ref: main
+
+            - name: 生成文章
+              id: generate
+              env:
+                  ISSUE_BODY: ${{ github.event.issue.body }}
+                  ISSUE_NUMBER: ${{ github.event.issue.number }}
+              run: |
+                  node scripts/issue-to-post.mjs >stdout.txt 2>stderr.txt
+                  status=$?
+                  if [ "$status" -ne 0 ]; then
+                      sed 's/^/::error::/' stderr.txt
+                      exit "$status"
+                  fi
+                  head -n 1 stdout.txt
+                  printf 'path=%s\n' "$(head -n 1 stdout.txt)" >> "$GITHUB_OUTPUT"
+
+            - name: 提交并推送到 main
+              id: commit
+              env:
+                  POST_PATH: ${{ steps.generate.outputs.path }}
+                  ISSUE_NUMBER: ${{ github.event.issue.number }}
+              run: |
+                  set -euo pipefail
+                  git add -- "$POST_PATH"
+                  if git diff --cached --quiet; then
+                      echo "内容没有变化"
+                      printf 'changed=false\n' >> "$GITHUB_OUTPUT"
+                      exit 0
+                  fi
+                  title=$(sed -n 's/^title: "\(.*\)"$/\1/p' "$POST_PATH" | head -n 1)
+                  printf '发布《%s》\n\n来自 issue #%s\n' "$title" "$ISSUE_NUMBER" > commit-msg.txt
+                  git -c user.name='github-actions[bot]' \
+                      -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+                      commit -F commit-msg.txt -- "$POST_PATH"
+                  git push origin HEAD:main
+                  printf 'changed=true\n' >> "$GITHUB_OUTPUT"
+
+            - name: 在 issue 下回报上线
+              if: success()
+              uses: actions/github-script@v9
+              env:
+                  POST_PATH: ${{ steps.generate.outputs.path }}
+                  CHANGED: ${{ steps.commit.outputs.changed }}
+              with:
+                  script: |
+                      const changed = process.env.CHANGED === 'true';
+                      const body = changed
+                          ? `已生成 \`${process.env.POST_PATH}\` 并推送到 main，站点马上重新构建。约一分钟后出现在 https://comcloud.github.io/`
+                          : `内容跟仓库里现有的文件一模一样，这次没有产生提交。`;
+                      await github.rest.issues.createComment({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          issue_number: context.issue.number,
+                          body
+                      });
+
+            - name: 在 issue 下回报失败
+              if: failure()
+              uses: actions/github-script@v9
+              with:
+                  script: |
+                      let reason = '';
+                      try {
+                          reason = require('fs').readFileSync('stderr.txt', 'utf8').trim();
+                      } catch {}
+                      const body = reason
+                          ? `这次没能发文，改完 issue 正文会自动重试：\n\n> ${reason.replace(/\n/g, '\n> ')}`
+                          : '发文流程在生成之后的某一步失败了，请看这次运行的日志。';
+                      await github.rest.issues.createComment({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          issue_number: context.issue.number,
+                          body
+                      });
+
+    deploy:
+        needs: publish
+        if: needs.publish.outputs.changed == 'true'
+        uses: ./.github/workflows/deploy.yml
+        permissions:
+            contents: read
+            pages: write
+            id-token: write

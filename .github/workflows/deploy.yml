@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # 被 publish-from-issue.yml 复用：GITHUB_TOKEN 提交的推送不会再触发工作流，
+  # 所以发文那条链路要在同一次运行里显式调用部署。
+  workflow_call:
 
 permissions:
   contents: read

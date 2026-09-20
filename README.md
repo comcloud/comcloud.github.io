@@ -4,6 +4,16 @@
 
 ## 写一篇文章
 
+### 方式一：开一个 Issue（推荐给手机/不想碰 git 的场景）
+
+1. 让 ChatGPT 按 [`docs/给chatgpt的写作规范.md`](docs/给chatgpt的写作规范.md) 出一篇稿；
+2. 到 [新建 Issue](https://github.com/comcloud/comcloud.github.io/issues/new) 建一条 issue，**打上「发文章」标签**，正文整段粘贴；
+3. 提交。`.github/workflows/publish-from-issue.yml` 会生成 md、推到 `main`、直接上线，并在 issue 下面回复结果。
+
+不合规（slug 写了中文、正文太短像没粘全、slug 撞车）时**不会发布**，机器人会在 issue 里说清哪一行的问题；改完 issue 正文会自动重试。同一条 issue 反复编辑 = 反复更新同一篇文章。
+
+### 方式二：本地新建
+
 ```bash
 npm run new silver-economy "银发经济不是老年人生意" "银发经济,消费"
 ```
@@ -44,14 +54,16 @@ git push
 
 ## 常用改动位置
 
-| 想改什么                                  | 文件                                                      |
-| ----------------------------------------- | --------------------------------------------------------- |
-| 站点标题、简介、导航、社交链接、首页导语  | `src/data/site-config.ts`                                 |
-| 配色（浅色/深色变量，文件里附了几套备选） | `src/styles/global.css`                                   |
-| 中文字体栈                                | `src/styles/global.css` 的 `--font-sans` / `--font-serif` |
-| 「关于」「联系」页                        | `src/content/pages/`                                      |
-| 图标                                      | `public/favicon.svg`                                      |
-| 每页显示多少篇文章                        | `src/data/site-config.ts` 的 `postsPerPage`               |
+| 想改什么                                  | 文件                                                                     |
+| ----------------------------------------- | ------------------------------------------------------------------------ |
+| 站点标题、简介、导航、社交链接、首页导语  | `src/data/site-config.ts`                                                |
+| 首页那张大图                              | 覆盖 `src/assets/hero-desk.jpg`，或在 `site-config.ts` 里换 `hero.image` |
+| 头像（当前是空的）                        | `site-config.ts` 的 `avatar`，需要 `src` + `alt`，方图                   |
+| 配色（浅色/深色变量，文件里附了几套备选） | `src/styles/global.css`                                                  |
+| 中文字体栈                                | `src/styles/global.css` 的 `--font-sans` / `--font-serif`                |
+| 「关于」「联系」页                        | `src/content/pages/`                                                     |
+| 图标                                      | `public/favicon.svg`                                                     |
+| 每页显示多少篇文章                        | `src/data/site-config.ts` 的 `postsPerPage`                              |
 
 改完记得同步 `src/data/site-config.ts` 里的 `website` 字段，它决定 RSS 和分享链接用的域名。
 
