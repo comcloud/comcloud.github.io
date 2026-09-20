@@ -9,15 +9,21 @@ import { sortItemsByDateDesc } from '../utils/data-utils';
 
 const posts = (await getCollection('blog')).sort(sortItemsByDateDesc);
 const featuredPosts = posts.filter(({ data }) => data.isFeatured);
+
+// 精选不足 3 篇时按时间补齐，否则刚开站的首屏只有一条内容
+const hasEnoughFeatured = featuredPosts.length >= 3;
+const highlights = hasEnoughFeatured
+    ? featuredPosts
+    : [...featuredPosts, ...posts.filter(({ data }) => !data.isFeatured)].slice(0, 3);
 ---
 
 <BaseLayout description={siteConfig.description}>
     <Hero {...siteConfig.hero} />
     {
-        featuredPosts?.length > 0 && (
+        highlights.length > 0 && (
             <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 font-serif text-xl sm:mb-16 sm:text-2xl">精选</h2>
-                {featuredPosts.map((post) => (
+                <h2 class="mb-12 font-serif text-xl sm:mb-16 sm:text-2xl">{hasEnoughFeatured ? '精选' : '最近写的'}</h2>
+                {highlights.map((post) => (
                     <PostPreview post={post} class="mb-10 sm:mb-12" headingLevel="h3" />
                 ))}
                 <div class="mt-12 sm:mt-16">
@@ -27,7 +33,7 @@ const featuredPosts = posts.filter(({ data }) => data.isFeatured);
         )
     }
     {
-        featuredPosts?.length === 0 && (
+        highlights.length === 0 && (
             <div class="flex flex-wrap gap-4">
                 <Button href="/blog">开始阅读</Button>
             </div>

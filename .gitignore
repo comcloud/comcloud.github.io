@@ -19,3 +19,7 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# 生成图片的原始大图，仓库里只留 src/assets 下裁切压缩后的
+vibe_images/
+.shots/

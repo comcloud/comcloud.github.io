@@ -1,3 +1,4 @@
+import heroDesk from '../assets/hero-desk.jpg';
 import type { SiteConfig } from '../types';
 
 const siteConfig: SiteConfig = {
@@ -22,6 +23,7 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         title: '这里记录我的一些想法。',
+        image: { src: heroDesk, alt: '桌上摊开的笔记本、钢笔、眼镜和一杯茶，窗边的光斜照进来' },
         text: '我是**成都犀牛**。不定期更新，看到值得琢磨的事就写一篇——**银发经济**、**大模型**、消费与技术范式的长期变化。\n\n不追求及时，只追求把一件事想到自己满意为止。'
     },
     subscribe: { enabled: false },
