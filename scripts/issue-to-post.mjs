@@ -44,9 +44,15 @@ function deriveExcerpt(body) {
     return `${clean.slice(0, 120).replace(/[，。、；：,.;:]\s*$/, '')}……`;
 }
 
+// ChatGPT 经常把 tags 写成 [a, b, c] 或 ["a", "b"]，方括号和引号都得吃掉
 function splitTags(raw) {
     if (!raw) return [];
-    return [...new Set(raw.split(/[,，]/).map((t) => t.trim()).filter(Boolean))];
+    const inner = raw.trim().replace(/^\[(.*)\]$/, '$1');
+    const items = inner
+        .split(/[,，]/)
+        .map((t) => t.trim().replace(/^["'`](.*)["'`]$/, '$1').trim())
+        .filter(Boolean);
+    return [...new Set(items)];
 }
 
 function parseMetadata(block) {
