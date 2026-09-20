@@ -24,14 +24,20 @@ export async function getStaticPaths() {
 type Props = { post: CollectionEntry<'blog'>; prevPost: CollectionEntry<'blog'>; nextPost: CollectionEntry<'blog'> };
 
 const { post, prevPost, nextPost } = Astro.props;
-const { title, publishDate, updatedDate, excerpt, tags = [], seo } = post.data;
+const { title, publishDate, updatedDate, excerpt, tags = [], coverImage, seo } = post.data;
 const { Content } = await render(post);
 
-// Use the configured `site` to generate an absolute URL
 const shareUrl = new URL(Astro.url.pathname, Astro.site).href;
+const socialImage = seo?.image ?? (coverImage ? { src: coverImage, alt: title } : undefined);
 ---
 
-<BaseLayout title={seo?.title ?? title} description={seo?.description ?? excerpt} image={seo?.image} pageType={seo?.pageType ?? 'article'} showHeader={false}>
+<BaseLayout
+    title={seo?.title ?? title}
+    description={seo?.description ?? excerpt}
+    image={socialImage}
+    pageType={seo?.pageType ?? 'article'}
+    showHeader={false}
+>
     <article class="mb-16 sm:mb-24">
         <header class="mb-8">
             <h1 class="font-serif text-3xl leading-tight font-medium sm:text-5xl sm:leading-tight">{title}</h1>
@@ -49,9 +55,19 @@ const shareUrl = new URL(Astro.url.pathname, Astro.site).href;
                 }
             </div>
         </header>
+
+        {
+            coverImage && (
+                <div class="mb-10 aspect-[16/9] overflow-hidden rounded-2xl bg-black/5 dark:bg-white/5">
+                    <img src={coverImage} alt={title} decoding="async" class="h-full w-full object-cover" />
+                </div>
+            )
+        }
+
         <div class="prose sm:prose-lg max-w-none">
             <Content />
         </div>
+
         <div class="mt-8 flex flex-wrap items-center justify-between gap-6 text-sm sm:mt-12 sm:text-base">
             {
                 tags.length > 0 && (

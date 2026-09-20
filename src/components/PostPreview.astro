@@ -6,12 +6,19 @@ import FormattedDate from './FormattedDate.astro';
 type Props = { post: CollectionEntry<'blog'>; class?: string; headingLevel?: 'h2' | 'h3' };
 
 const { post, class: className, headingLevel = 'h2' } = Astro.props;
-const { title, publishDate, updatedDate, excerpt } = post.data;
+const { title, publishDate, updatedDate, excerpt, coverImage } = post.data;
 const TitleTag = headingLevel;
 ---
 
-<a class:list={['group flex items-start justify-between gap-8', className]} href={`/blog/${post.id}/`}>
-    <div class="grow">
+<a
+    class:list={[
+        'group grid items-start gap-5',
+        coverImage && 'sm:grid-cols-[minmax(0,1fr)_11rem]',
+        className
+    ]}
+    href={`/blog/${post.id}/`}
+>
+    <div class="min-w-0">
         <TitleTag
             class="font-serif text-xl leading-tight font-medium group-hover:underline group-hover:decoration-dashed group-hover:decoration-1 group-hover:underline-offset-4 sm:text-2xl"
         >
@@ -31,8 +38,22 @@ const TitleTag = headingLevel;
             }
         </div>
         {excerpt && <div class="mt-3 text-sm leading-normal">{excerpt}</div>}
+        <div class="mt-4 hidden items-center gap-1 text-sm opacity-0 transition group-hover:opacity-100 sm:inline-flex">
+            阅读全文 <ArrowRight class="h-4 w-4 fill-current" />
+        </div>
     </div>
-    <div class="hidden opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:shrink-0 sm:items-center sm:gap-1">
-        阅读全文 <ArrowRight class="h-4 w-4 fill-current" />
-    </div>
+
+    {
+        coverImage && (
+            <div class="order-first aspect-[16/9] overflow-hidden rounded-xl bg-black/5 sm:order-none dark:bg-white/5">
+                <img
+                    src={coverImage}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                />
+            </div>
+        )
+    }
 </a>

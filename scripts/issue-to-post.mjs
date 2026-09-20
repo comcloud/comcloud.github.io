@@ -16,13 +16,14 @@ function fail(message) {
     throw new PostError(message);
 }
 
-// 只认 ASCII 日期，避免 CI 的 UTC 和北京差一天
+// 只认 ASCII 日期，避免 CI 的 UTC 和北京时间差一天
 function todayInShanghai() {
     return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' });
 }
 
 function parseBlockquoteless(text) {
     return text
+        .replace(/!\[([^\]]*)\]\([^)]*\)/g, '')
         .replace(/`([^`]*)`/g, '$1')
         .replace(/\*\*([^*]*)\*\*/g, '$1')
         .replace(/\*([^*]*)\*/g, '$1')
@@ -30,12 +31,12 @@ function parseBlockquoteless(text) {
         .replace(/[*_~>]/g, '');
 }
 
-// 缺 excerpt 时拿第一段正文顶上，它同时是 og description 的来源
+// 缺 excerpt 时拿第一段真正的文字正文顶上；纯图片段落跳过。
 function deriveExcerpt(body) {
     const paragraph = body
         .split(/\n\s*\n/)
         .map((p) => p.trim())
-        .find((p) => p && !/^([#>|`-]|\d+\.)/.test(p));
+        .find((p) => p && !/^(!?\[[^\]]*\]\([^)]*\)|[#>|`-]|\d+\.)/.test(p));
 
     if (!paragraph) return '';
 
@@ -85,10 +86,11 @@ function quote(value) {
     return JSON.stringify(value);
 }
 
-function frontmatter({ title, date, isFeatured, tags, excerpt, issue }) {
+function frontmatter({ title, date, isFeatured, tags, excerpt, coverImage, issue }) {
     const featured = isFeatured ? 'true' : 'false';
     const excerptLine = excerpt ? `excerpt: ${quote(excerpt)}` : 'excerpt: ""';
-    return `---\ntitle: ${quote(title)}\n${excerptLine}\npublishDate: ${quote(date)}\nisFeatured: ${featured}\ntags: ${yamlList(tags)}\nissue: ${issue}\n---\n`;
+    const coverLine = coverImage ? `coverImage: ${quote(coverImage)}\n` : '';
+    return `---\ntitle: ${quote(title)}\n${excerptLine}\n${coverLine}publishDate: ${quote(date)}\nisFeatured: ${featured}\ntags: ${yamlList(tags)}\nissue: ${issue}\n---\n`;
 }
 
 function assertSlugFree(path, slug, issue) {
@@ -121,11 +123,16 @@ function buildFile(body, issue) {
     const date = meta.date || todayInShanghai();
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) fail(`date "${date}" 不是 YYYY-MM-DD。`);
 
+    const coverImage = meta.coverimage || '';
+    if (coverImage && !/^(\/|https?:\/\/)/.test(coverImage)) {
+        fail(`coverImage "${coverImage}" 不合法。请使用 / 开头的站内路径或 http(s) URL。`);
+    }
+
     const isFeatured = /^(true|yes|y|1|是)$/i.test(meta.featured || '');
     const excerpt = meta.excerpt || deriveExcerpt(content);
     const tags = splitTags(meta.tags);
 
-    const yaml = frontmatter({ title, date, isFeatured, tags, excerpt, issue });
+    const yaml = frontmatter({ title, date, isFeatured, tags, excerpt, coverImage, issue });
     return { slug, title, content: `${yaml}\n${content}` };
 }
 
