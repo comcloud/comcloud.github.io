@@ -1,16 +1,15 @@
 ---
 title: "Agent 安全真正的边界，不在模型，而在权限"
-excerpt: "!Agent 安全真正的边界，不在模型，而在权限"
+excerpt: "我越来越觉得，Agent 安全真正的边界，不在于模型“会不会突然变坏”，而在于我们到底给了它什么权限。"
+coverImage: "/blog-images/2026-09-21-agent-permission-boundary.jpg"
 publishDate: "2026-09-21"
 isFeatured: false
-tags: 
+tags:
   - "AI Agent"
   - "安全"
   - "权限系统"
 issue: 6
 ---
-
-![Agent 安全真正的边界，不在模型，而在权限](/blog-images/2026-09-21-agent-permission-boundary.jpg)
 
 我越来越觉得，Agent 安全真正的边界，不在于模型“会不会突然变坏”，而在于我们到底给了它什么权限。模型越能自主行动，这件事越不能继续按聊天机器人来理解：回答错一句话和拿着凭据进入一个系统，根本不是同一种风险。
 
