@@ -36,14 +36,14 @@ jobs:
                   ISSUE_BODY: ${{ github.event.issue.body }}
                   ISSUE_NUMBER: ${{ github.event.issue.number }}
               run: |
-                  node scripts/issue-to-post.mjs >stdout.txt 2>stderr.txt
-                  status=$?
-                  if [ "$status" -ne 0 ]; then
+                  # Actions 默认 bash -e，node 非零退出会直接掐断整步，所以判断必须写在 if 里
+                  if node scripts/issue-to-post.mjs >stdout.txt 2>stderr.txt; then
+                      head -n 1 stdout.txt
+                      printf 'path=%s\n' "$(head -n 1 stdout.txt)" >> "$GITHUB_OUTPUT"
+                  else
                       sed 's/^/::error::/' stderr.txt
-                      exit "$status"
+                      exit 1
                   fi
-                  head -n 1 stdout.txt
-                  printf 'path=%s\n' "$(head -n 1 stdout.txt)" >> "$GITHUB_OUTPUT"
 
             - name: 提交并推送到 main
               id: commit
