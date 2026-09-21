@@ -88,11 +88,38 @@ html.dark {
         @apply font-serif font-medium;
     }
 
-    .prose :where(code, strong) {
+    .prose :where(strong) {
         @apply font-medium;
+    }
+
+    /* typography 插件会在行内代码两侧渲染出真正的反引号字符，看起来就像 markdown 没被解析 */
+    .prose :where(code)::before,
+    .prose :where(code)::after {
+        content: none;
+    }
+
+    .prose :not(pre) > code {
+        @apply rounded px-[0.4em] py-[0.15em] font-medium;
+        font-size: 0.875em;
+        background-color: color-mix(in srgb, var(--text-main) 9%, transparent);
+    }
+
+    .prose pre {
+        @apply rounded-xl;
+        border: 1px solid color-mix(in srgb, var(--text-main) 14%, transparent);
     }
 
     .prose blockquote {
         @apply border-none pl-0 font-serif text-[1.375em] leading-snug font-medium sm:text-[1.66667em];
     }
+}
+
+/* Shiki 的双主题默认靠 prefers-color-scheme 切换，本站深色是 html.dark，只能自己接上 */
+html.dark .astro-code,
+html.dark .astro-code span {
+    color: var(--shiki-dark) !important;
+}
+
+html.dark .astro-code {
+    background-color: var(--shiki-dark-bg) !important;
 }
