@@ -117,4 +117,115 @@ const socialImage = seo?.image ?? (coverImage ? { src: coverImage, alt: title } 
             }, 2500);
         }
     });
+
+    const PALETTE = {
+        light: {
+            background: '#f2f1ec',
+            primaryColor: '#e5e2d8',
+            primaryBorderColor: '#171717',
+            primaryTextColor: '#171717',
+            secondaryColor: '#d9d5c8',
+            tertiaryColor: '#eeece4',
+            lineColor: '#171717',
+            clusterBkg: 'rgba(23, 23, 23, 0.05)',
+            edgeLabelBackground: '#f2f1ec',
+            actorBkg: '#e5e2d8',
+            actorBorder: '#171717',
+            actorTextColor: '#171717',
+            actorLineColor: 'rgba(23, 23, 23, 0.35)',
+            signalColor: '#171717',
+            signalTextColor: '#171717',
+            labelBoxBkgColor: '#e5e2d8',
+            labelBoxBorderColor: '#171717',
+            noteBkgColor: '#efe9d6',
+            noteBorderColor: '#171717',
+            noteTextColor: '#171717',
+            activationBkgColor: '#dcd8cb',
+            activationBorderColor: '#171717',
+            sequenceNumberColor: '#f2f1ec',
+            labelColor: '#171717',
+            altBackground: 'rgba(23, 23, 23, 0.04)'
+        },
+        dark: {
+            background: '#171717',
+            primaryColor: '#2c2c2c',
+            primaryBorderColor: '#f2f1ec',
+            primaryTextColor: '#f2f1ec',
+            secondaryColor: '#3a3a3a',
+            tertiaryColor: '#242424',
+            lineColor: '#f2f1ec',
+            clusterBkg: 'rgba(242, 241, 236, 0.06)',
+            edgeLabelBackground: '#171717',
+            actorBkg: '#2c2c2c',
+            actorBorder: '#f2f1ec',
+            actorTextColor: '#f2f1ec',
+            actorLineColor: 'rgba(242, 241, 236, 0.35)',
+            signalColor: '#f2f1ec',
+            signalTextColor: '#f2f1ec',
+            labelBoxBkgColor: '#2c2c2c',
+            labelBoxBorderColor: '#f2f1ec',
+            noteBkgColor: '#33301f',
+            noteBorderColor: '#f2f1ec',
+            noteTextColor: '#f2f1ec',
+            activationBkgColor: '#3a3a3a',
+            activationBorderColor: '#f2f1ec',
+            sequenceNumberColor: '#171717',
+            labelColor: '#f2f1ec',
+            altBackground: 'rgba(242, 241, 236, 0.05)'
+        }
+    } as const;
+
+    let renderSeq = 0;
+    let themeWatcher: MutationObserver | undefined;
+
+    async function renderDiagrams(nodes: HTMLElement[]) {
+        // 首次渲染前把源码留在 dataset 上，切主题时要靠它重画
+        for (const node of nodes) {
+            if (!node.dataset.source) node.dataset.source = node.textContent || '';
+        }
+
+        const { default: mermaid } = await import('mermaid');
+        const dark = document.documentElement.classList.contains('dark');
+        mermaid.initialize({
+            startOnLoad: false,
+            securityLevel: 'loose',
+            theme: 'base',
+            fontFamily: getComputedStyle(document.body).fontFamily,
+            flowchart: { useMaxWidth: false, htmlLabels: true, curve: 'basis' },
+            sequence: { useMaxWidth: false, showSequenceNumbers: false },
+            gantt: { useMaxWidth: false },
+            themeVariables: { ...(dark ? PALETTE.dark : PALETTE.light) } as Record<string, string>
+        });
+
+        for (const node of nodes) {
+            const id = `mermaid-${renderSeq++}`;
+            try {
+                const { svg } = await mermaid.render(id, node.dataset.source || '');
+                node.innerHTML = svg;
+                node.dataset.rendered = 'true';
+                node.removeAttribute('data-processed');
+            } catch (error) {
+                // 画不出来就退回源码，别让整篇文章出现空白方块
+                node.textContent = node.dataset.source || '';
+                node.dataset.rendered = 'false';
+                console.error(`[mermaid] ${id} 渲染失败：`, error);
+            }
+        }
+    }
+
+    document.addEventListener('astro:page-load', () => {
+        const nodes = [...document.querySelectorAll<HTMLElement>('pre.mermaid')];
+        // 换页时旧节点已脱离文档，先断开上一篇文章留下的观察器
+        themeWatcher?.disconnect();
+        if (nodes.length === 0) return;
+
+        void renderDiagrams(nodes);
+
+        // 主题切换是 public/theme-toggle.js 直接改 html 的 class，这里观察它重画一次
+        themeWatcher = new MutationObserver(() => void renderDiagrams(nodes));
+        themeWatcher.observe(document.documentElement, {
+            attributeFilter: ['class'],
+            attributes: true
+        });
+    });
 </script>

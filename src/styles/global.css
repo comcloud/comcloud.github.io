@@ -109,6 +109,36 @@ html.dark {
         border: 1px solid color-mix(in srgb, var(--text-main) 14%, transparent);
     }
 
+    /* 渲染成功后不再是代码块，去掉等宽底色；失败时保留原样，读源码而不是看空白 */
+    .prose pre.mermaid[data-rendered='true'] {
+        @apply overflow-x-auto rounded-none border-0 bg-transparent p-0;
+        width: fit-content;
+        max-width: 100%;
+        margin-inline: auto;
+        font-size: 1em;
+    }
+
+    /* 渲染失败时退回源码：typography 默认给 pre 配的是深色代码底，浅色主题下要跟着主题走 */
+    .prose pre.mermaid:not([data-rendered='true']) {
+        background-color: color-mix(in srgb, var(--text-main) 6%, transparent);
+        color: var(--text-main);
+    }
+
+    /* 复杂流程图缩进栏宽会让字小到看不清，宁可让它横向滚动 */
+    .prose pre.mermaid svg {
+        @apply block;
+        max-width: none;
+        height: auto;
+    }
+
+    /* 图注的样式原本写在正文粘进来的 <style> 里，正文标签被清掉后由站点接管 */
+    .prose .agent-mermaid-caption {
+        margin-top: -0.75rem;
+        text-align: center;
+        opacity: 0.68;
+        font-size: 0.88em;
+    }
+
     .prose blockquote {
         @apply border-none pl-0 font-serif text-[1.375em] leading-snug font-medium sm:text-[1.66667em];
     }
