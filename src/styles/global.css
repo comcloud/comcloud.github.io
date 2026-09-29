@@ -62,6 +62,11 @@ html.dark {
 }
 
 @layer utilities {
+    /* 点目录跳到标题时平滑滚过去，而不是硬切 */
+    html {
+        scroll-behavior: smooth;
+    }
+
     .prose {
         --tw-prose-body: var(--text-color-main);
         --tw-prose-headings: var(--text-color-main);
@@ -142,6 +147,282 @@ html.dark {
     .prose blockquote {
         @apply border-none pl-0 font-serif text-[1.375em] leading-snug font-medium sm:text-[1.66667em];
     }
+
+    /* 代码块卡片：围栏信息里的 title 和语言放在表头，复制按钮靠右 */
+    .prose figure.code-block {
+        @apply my-6;
+    }
+
+    .prose .code-block-head {
+        @apply flex items-center gap-3 rounded-t-xl px-4 py-2 text-xs;
+        border: 1px solid color-mix(in srgb, var(--text-main) 14%, transparent);
+        border-bottom: none;
+        background-color: color-mix(in srgb, var(--text-main) 6%, transparent);
+        color: color-mix(in srgb, var(--text-main) 72%, transparent);
+    }
+
+    .prose .code-block-name {
+        @apply mr-auto font-medium;
+    }
+
+    .prose .code-block-lang {
+        @apply text-[0.625rem] tracking-[0.12em] uppercase opacity-65;
+    }
+
+    .prose .code-block-copy {
+        @apply cursor-pointer rounded-md border px-2 py-0.5 text-xs;
+        border-color: color-mix(in srgb, var(--text-main) 20%, transparent);
+        color: color-mix(in srgb, var(--text-main) 70%, transparent);
+    }
+
+    .prose .code-block-copy:hover {
+        @apply text-main;
+        background-color: color-mix(in srgb, var(--text-main) 10%, transparent);
+    }
+
+    .prose .code-block pre {
+        @apply m-0 rounded-t-none rounded-b-xl;
+    }
+
+    /* 行内块才吃得住整行底色，换行仍由 Shiki 输出里的 \n 负责 */
+    .prose .code-block .line {
+        @apply inline-block;
+        min-width: 100%;
+    }
+
+    .prose .code-block .line-active {
+        background-color: color-mix(in srgb, var(--text-main) 11%, transparent);
+    }
+
+    /* GitHub 风格提示块：> [!NOTE] 之类。配色靠 --alert 一个变量，深浅色各给一档 */
+    .prose .markdown-alert-note {
+        --alert-light: #4a7aa8;
+        --alert-dark: #85aede;
+        --alert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 11v5M12 7.5h.01'/%3E%3C/svg%3E");
+    }
+    .prose .markdown-alert-tip {
+        --alert-light: #4a8556;
+        --alert-dark: #8bbd95;
+        --alert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000' stroke='none'%3E%3Cpath d='M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z'/%3E%3C/svg%3E");
+    }
+    .prose .markdown-alert-important {
+        --alert-light: #7a5aa5;
+        --alert-dark: #b39ad6;
+        --alert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.5v5M12 16.5h.01'/%3E%3C/svg%3E");
+    }
+    .prose .markdown-alert-warning {
+        --alert-light: #a2762a;
+        --alert-dark: #dcb46a;
+        --alert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4 3 19h18z'/%3E%3Cpath d='M12 10v4M12 17h.01'/%3E%3C/svg%3E");
+    }
+    .prose .markdown-alert-caution {
+        --alert-light: #ab4b45;
+        --alert-dark: #e39188;
+        --alert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 3h7L21 8.5v7L15.5 21h-7L3 15.5v-7z'/%3E%3Cpath d='M9 12h6'/%3E%3C/svg%3E");
+    }
+
+    .prose .markdown-alert {
+        --alert: var(--alert-light);
+    }
+    html.dark .prose .markdown-alert {
+        --alert: var(--alert-dark);
+    }
+
+    /* 提示块有两种写法：引用块 > [!NOTE]，以及 :::note 容器（后者是普通 div） */
+    .prose :is(blockquote, div).markdown-alert {
+        @apply my-6 rounded-r-lg px-5 py-4 font-sans text-base font-normal;
+        quotes: none;
+        border-left: 3px solid var(--alert);
+        background-color: color-mix(in srgb, var(--alert) 9%, transparent);
+        color: var(--text-main);
+    }
+
+    /* typography 给引用块配的花引号要在提示块里关掉，标题图标自己补回来 */
+    .prose :is(blockquote, div).markdown-alert::before,
+    .prose :is(blockquote, div).markdown-alert::after,
+    .prose :is(blockquote, div).markdown-alert p::before,
+    .prose :is(blockquote, div).markdown-alert p::after {
+        content: none;
+    }
+
+    .prose :is(blockquote, div).markdown-alert > p {
+        @apply my-0 leading-relaxed not-italic;
+        font-size: 1em;
+    }
+
+    /* 容器里可以放多段和列表，块之间自己撑开，不吃正文那套 1.25em */
+    .prose div.markdown-alert > :not(:first-child) {
+        margin-top: 0.75em;
+    }
+
+    .prose :is(blockquote, div).markdown-alert > p.markdown-alert-title {
+        @apply mt-0 mb-2 flex items-center gap-[0.45em] text-sm font-medium;
+        color: var(--alert);
+    }
+
+    .prose :is(blockquote, div).markdown-alert > p.markdown-alert-title::before {
+        @apply inline-block h-4 w-4 shrink-0;
+        content: '';
+        background-color: var(--alert);
+        -webkit-mask: var(--alert-icon) no-repeat center / contain;
+        mask: var(--alert-icon) no-repeat center / contain;
+    }
+
+    /* 宽表在窄栏里横向滚动，撑破版心的代价比滚动条大 */
+    .prose .table-scroll {
+        @apply my-6 overflow-x-auto;
+    }
+
+    .prose .table-scroll > table {
+        @apply my-0;
+    }
+
+    /* 站外链接补一个小箭头，提示会跳出本站 */
+    .prose a.external-link::after {
+        @apply inline-block align-[-0.125em];
+        width: 0.85em;
+        height: 0.85em;
+        margin-left: 0.25em;
+        content: '';
+        opacity: 0.55;
+        background-color: currentColor;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-9 9'/%3E%3Cpath d='M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5'/%3E%3C/svg%3E") no-repeat center / contain;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-9 9'/%3E%3Cpath d='M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5'/%3E%3C/svg%3E") no-repeat center / contain;
+    }
+
+    /* 正文图片点开放大，图注来自 ![说明](图 "图注") 里的那个标题 */
+    .prose a.prose-image {
+        @apply block no-underline;
+        cursor: zoom-in;
+    }
+
+    .prose a.prose-image img {
+        @apply my-0 rounded-xl;
+    }
+
+    .prose figure.prose-figure {
+        @apply my-8;
+    }
+
+    .prose figure.prose-figure figcaption {
+        @apply mt-3 text-center text-sm;
+        opacity: 0.6;
+    }
+
+    .image-lightbox {
+        @apply fixed inset-0 z-50 flex items-center justify-center p-6;
+        background-color: rgb(0 0 0 / 0.86);
+        cursor: zoom-out;
+    }
+
+    .image-lightbox img {
+        @apply h-auto max-h-full w-auto max-w-full rounded-lg object-contain;
+    }
+
+    /* 正文标题的锚点由脚本插入，默认藏起来，悬停到标题上才出现 */
+    .prose .heading-anchor {
+        @apply ml-[0.35em] align-middle no-underline;
+        font-size: 0.75em;
+        opacity: 0;
+        transition: opacity 0.15s;
+    }
+
+    .prose :is(h2, h3, h4):hover .heading-anchor,
+    .prose .heading-anchor:focus-visible {
+        opacity: 0.45;
+    }
+
+    .prose .heading-anchor:hover {
+        opacity: 1;
+    }
+
+    /* 大纲只在 ≥1280px 出现，窄屏改用正文里的折叠目录 */
+    .post-outline {
+        display: none;
+    }
+
+    @media (min-width: 80rem) {
+        /* 挂在正文右栏的空白里，正文本身一个像素都不挪 */
+        .post-layout {
+            position: relative;
+        }
+
+        .post-outline {
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: calc(100% + 2rem);
+            width: 12rem;
+        }
+
+        .post-outline-inner {
+            position: sticky;
+            top: 5.5rem;
+            max-height: calc(100vh - 8rem);
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+    }
+
+    .post-outline-title {
+        @apply mb-3 text-xs font-medium tracking-[0.18em] uppercase;
+        opacity: 0.55;
+    }
+
+    .post-outline-list {
+        @apply m-0 list-none p-0;
+    }
+
+    .post-outline-list li {
+        @apply my-0;
+    }
+
+    .post-outline-list .is-sub {
+        @apply pl-3;
+    }
+
+    .post-outline-list a {
+        @apply block py-1 pl-3 text-sm leading-snug no-underline;
+        border-left: 1px solid color-mix(in srgb, var(--text-main) 14%, transparent);
+        color: inherit;
+        opacity: 0.55;
+        transition:
+            opacity 0.15s,
+            border-color 0.15s;
+    }
+
+    .post-outline-list a:hover {
+        opacity: 0.9;
+    }
+
+    .post-outline-list a.is-active {
+        @apply font-medium;
+        border-color: var(--text-main);
+        opacity: 1;
+    }
+
+    .post-toc {
+        @apply rounded-xl;
+        border: 1px dashed color-mix(in srgb, var(--text-main) 25%, transparent);
+        background-color: color-mix(in srgb, var(--text-main) 4%, transparent);
+    }
+
+    .post-toc summary {
+        @apply cursor-pointer px-4 py-2.5 text-sm font-medium select-none;
+    }
+
+    .post-toc .post-outline-list {
+        @apply px-4 pb-3;
+    }
+
+    .post-toc .post-outline-list a {
+        @apply border-none pl-0;
+    }
+
+    .post-toc .post-outline-list .is-sub {
+        @apply pl-4;
+    }
 }
 
 /* Shiki 的双主题默认靠 prefers-color-scheme 切换，本站深色是 html.dark，只能自己接上 */
@@ -152,4 +433,19 @@ html.dark .astro-code span {
 
 html.dark .astro-code {
     background-color: var(--shiki-dark-bg) !important;
+}
+
+/* katex.min.css 自己没进 cascade layer，优先级高于 @layer 里的规则，只能在同层覆盖 */
+.prose .katex-display {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    text-align: left;
+}
+
+/* 长公式比正文栏宽，宁可横向滚动也不要撑破版心 */
+.prose .katex-display > .katex {
+    padding-block: 0.25rem;
+    text-align: left;
+    white-space: nowrap;
 }

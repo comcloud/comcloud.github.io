@@ -1,0 +1,18 @@
+---
+type OutlineItem = { depth: number; slug: string; text: string };
+type Props = { items: OutlineItem[] };
+
+const { items } = Astro.props;
+---
+
+<ul class="post-outline-list">
+    {
+        items.map((item) => (
+            <li class:list={[item.depth > 2 && 'is-sub']}>
+                <a href={`#${item.slug}`} data-outline={item.slug}>
+                    {item.text}
+                </a>
+            </li>
+        ))
+    }
+</ul>

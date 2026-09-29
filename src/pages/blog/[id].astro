@@ -3,10 +3,12 @@ import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/Button.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
+import PostOutline from '../../components/PostOutline.astro';
 import PostPreview from '../../components/PostPreview.astro';
 import Subscribe from '../../components/Subscribe.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 import { slugify } from '../../utils/common-utils';
+import 'katex/dist/katex.min.css';
 
 export async function getStaticPaths() {
     const posts = (await getCollection('blog')).sort(sortItemsByDateDesc);
@@ -25,66 +27,84 @@ type Props = { post: CollectionEntry<'blog'>; prevPost: CollectionEntry<'blog'>;
 
 const { post, prevPost, nextPost } = Astro.props;
 const { title, publishDate, updatedDate, excerpt, tags = [], coverImage, seo } = post.data;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+
+// 正文里自带的「目录」小节是给人读的清单，不该再进一次大纲
+const outline = headings.filter((h) => h.depth >= 2 && h.depth <= 3 && !/^(目录|contents?|toc)$/i.test(h.text.trim()));
 
 const shareUrl = new URL(Astro.url.pathname, Astro.site).href;
 const socialImage = seo?.image ?? (coverImage ? { src: coverImage, alt: title } : undefined);
 ---
 
-<BaseLayout
-    title={seo?.title ?? title}
-    description={seo?.description ?? excerpt}
-    image={socialImage}
-    pageType={seo?.pageType ?? 'article'}
-    showHeader={false}
->
-    <article class="mb-16 sm:mb-24">
-        <header class="mb-8">
-            <h1 class="font-serif text-3xl leading-tight font-medium sm:text-5xl sm:leading-tight">{title}</h1>
-            <div class="mt-4 text-sm">
-                <FormattedDate date={publishDate} />
-                {
-                    updatedDate && (
-                        <>
-                            {' '}
-                            <span>
-                                （更新于 <FormattedDate date={updatedDate} />）
-                            </span>
-                        </>
-                    )
-                }
-            </div>
-        </header>
-
+<BaseLayout title={seo?.title ?? title} description={seo?.description ?? excerpt} image={socialImage} pageType={seo?.pageType ?? 'article'} showHeader={false}>
+    <div class="post-layout">
         {
-            coverImage && (
-                <div class="mb-10 aspect-[16/9] overflow-hidden rounded-2xl bg-black/5 dark:bg-white/5">
-                    <img src={coverImage} alt={title} decoding="async" class="h-full w-full object-cover" />
-                </div>
+            outline.length >= 3 && (
+                <nav class="post-outline" aria-label="文章大纲">
+                    <div class="post-outline-inner">
+                        <p class="post-outline-title">目录</p>
+                        <PostOutline items={outline} />
+                    </div>
+                </nav>
             )
         }
+        <article class="mb-16 sm:mb-24">
+            <header class="mb-8">
+                <h1 class="font-serif text-3xl leading-tight font-medium sm:text-5xl sm:leading-tight">{title}</h1>
+                <div class="mt-4 text-sm">
+                    <FormattedDate date={publishDate} />
+                    {
+                        updatedDate && (
+                            <>
+                                {' '}
+                                <span>
+                                    （更新于 <FormattedDate date={updatedDate} />）
+                                </span>
+                            </>
+                        )
+                    }
+                </div>
+            </header>
 
-        <div class="prose sm:prose-lg max-w-none">
-            <Content />
-        </div>
-
-        <div class="mt-8 flex flex-wrap items-center justify-between gap-6 text-sm sm:mt-12 sm:text-base">
             {
-                tags.length > 0 && (
-                    <div class="flex flex-wrap gap-x-5 gap-y-1 text-sm">
-                        {tags.map((tag) => (
-                            <a class="text-main hover:underline" href={`/tags/${slugify(tag)}`}>
-                                #{tag}
-                            </a>
-                        ))}
+                coverImage && (
+                    <div class="mb-10 aspect-[16/9] overflow-hidden rounded-2xl bg-black/5 dark:bg-white/5">
+                        <img src={coverImage} alt={title} decoding="async" class="h-full w-full object-cover" />
                     </div>
                 )
             }
-            <Button class="copy-url-button" aria-label="复制本页链接" data-url={shareUrl} data-tooltip-default="复制链接" data-tooltip-success="已复制"
-                >分享</Button
-            >
-        </div>
-    </article>
+
+            {
+                outline.length >= 3 && (
+                    <details class="post-toc mb-10 xl:hidden">
+                        <summary>目录</summary>
+                        <PostOutline items={outline} />
+                    </details>
+                )
+            }
+
+            <div class="prose sm:prose-lg max-w-none">
+                <Content />
+            </div>
+
+            <div class="mt-8 flex flex-wrap items-center justify-between gap-6 text-sm sm:mt-12 sm:text-base">
+                {
+                    tags.length > 0 && (
+                        <div class="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                            {tags.map((tag) => (
+                                <a class="text-main hover:underline" href={`/tags/${slugify(tag)}`}>
+                                    #{tag}
+                                </a>
+                            ))}
+                        </div>
+                    )
+                }
+                <Button class="copy-url-button" aria-label="复制本页链接" data-url={shareUrl} data-tooltip-default="复制链接" data-tooltip-success="已复制"
+                    >分享</Button
+                >
+            </div>
+        </article>
+    </div>
     {
         (prevPost || nextPost) && (
             <div class="my-16 sm:my-24">
@@ -116,7 +136,109 @@ const socialImage = seo?.image ?? (coverImage ? { src: coverImage, alt: title } 
                 button.innerText = label;
             }, 2500);
         }
+
+        for (const button of document.querySelectorAll<HTMLButtonElement>('.code-block-copy')) {
+            button.addEventListener('click', async () => {
+                const label = button.innerText;
+                // 用 textContent 而不是 innerText：行内块的换行是 Shiki 输出里的 \n，innerText 会按渲染结果重新折
+                const code = button.closest('.code-block')?.querySelector('pre')?.textContent || '';
+
+                await navigator.clipboard.writeText(code);
+
+                button.innerText = '已复制';
+
+                setTimeout(() => {
+                    button.innerText = label;
+                }, 2000);
+            });
+        }
+
+        addHeadingAnchors();
+        watchOutline();
+        watchImages();
     });
+
+    function addHeadingAnchors() {
+        for (const heading of document.querySelectorAll<HTMLElement>('.prose :is(h2, h3, h4)[id]')) {
+            if (heading.querySelector('.heading-anchor')) continue;
+
+            const link = document.createElement('a');
+            link.className = 'heading-anchor';
+            link.href = `#${heading.id}`;
+            link.setAttribute('aria-label', '定位到本节');
+            link.textContent = '#';
+            heading.appendChild(link);
+        }
+    }
+
+    let outlineCleanup: (() => void) | undefined;
+
+    function watchOutline() {
+        outlineCleanup?.();
+
+        const links = new Map([...document.querySelectorAll<HTMLElement>('.post-outline a[data-outline]')].map((link) => [link.dataset.outline, link]));
+        if (links.size === 0) return;
+
+        const headings = [...document.querySelectorAll<HTMLElement>('.prose :is(h2, h3)[id]')].filter((h) => links.has(h.id));
+        if (headings.length === 0) return;
+
+        // scroll 事件本身每帧最多一次，不需要再自己节流
+        const mark = () => {
+            let active = '';
+            for (const heading of headings) {
+                if (heading.getBoundingClientRect().top > 96) break;
+                active = heading.id;
+            }
+            for (const [id, link] of links) link.classList.toggle('is-active', id === active);
+        };
+
+        window.addEventListener('scroll', mark, { passive: true });
+        outlineCleanup = () => window.removeEventListener('scroll', mark);
+        mark();
+    }
+
+    let imageCleanup: (() => void) | undefined;
+
+    function watchImages() {
+        imageCleanup?.();
+
+        const shots = [...document.querySelectorAll<HTMLAnchorElement>('.prose a.prose-image')];
+        if (shots.length === 0) return;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'image-lightbox';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', '查看大图');
+        const enlarged = document.createElement('img');
+        overlay.append(enlarged);
+
+        const close = () => {
+            overlay.remove();
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', onKey);
+        };
+        const onKey = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') close();
+        };
+        overlay.addEventListener('click', close);
+
+        for (const shot of shots) {
+            shot.addEventListener('click', (event) => {
+                // 带修饰键的点击是新窗口打开的手势，别抢
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return;
+                event.preventDefault();
+
+                enlarged.src = shot.href;
+                enlarged.alt = shot.querySelector('img')?.alt || '';
+                document.body.style.overflow = 'hidden';
+                document.body.append(overlay);
+                document.addEventListener('keydown', onKey);
+            });
+        }
+
+        imageCleanup = close;
+    }
 
     const PALETTE = {
         light: {
